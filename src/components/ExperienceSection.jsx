@@ -96,7 +96,7 @@ function EraCard({ era, delay }) {
       <h3
         style={{
           fontSize: '20px',
-          fontWeight: 650,
+          fontWeight: 400,
           letterSpacing: '-0.02em',
           color: '#111',
           marginBottom: '12px',
@@ -167,7 +167,7 @@ export default function ExperienceSection() {
             <h2
               style={{
                 fontSize: 'clamp(30px, 3.5vw, 48px)',
-                fontWeight: 650,
+                fontWeight: 400,
                 letterSpacing: '-0.03em',
                 lineHeight: 1.1,
                 color: '#111',
