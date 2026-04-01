@@ -1,0 +1,731 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - link "Rupesh" [ref=e6] [cursor=pointer]:
+        - /url: "#"
+        - text: Rupesh
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "About me" [ref=e10] [cursor=pointer]:
+            - /url: "#intro"
+        - listitem [ref=e11]:
+          - link "Achievements" [ref=e12] [cursor=pointer]:
+            - /url: "#achievements"
+        - listitem [ref=e13]:
+          - link "Experience" [ref=e14] [cursor=pointer]:
+            - /url: "#experience"
+        - listitem [ref=e15]:
+          - link "Projects" [ref=e16] [cursor=pointer]:
+            - /url: "#projects"
+        - listitem [ref=e17]:
+          - link "Design Process" [ref=e18] [cursor=pointer]:
+            - /url: "#design-process"
+        - listitem [ref=e19]:
+          - link "Contact" [ref=e20] [cursor=pointer]:
+            - /url: "#contact"
+      - generic [ref=e21]:
+        - link "Resume" [ref=e22] [cursor=pointer]:
+          - /url: https://drive.google.com/file/d/1KYs4Cow6IVj9G5wGh_EP0jkjD-6-cwfu/view?usp=sharing
+        - button "Toggle menu" [ref=e23] [cursor=pointer]
+  - list [ref=e28]:
+    - listitem [ref=e29]:
+      - link "About me" [ref=e30] [cursor=pointer]:
+        - /url: "#intro"
+    - listitem [ref=e31]:
+      - link "Achievements" [ref=e32] [cursor=pointer]:
+        - /url: "#achievements"
+    - listitem [ref=e33]:
+      - link "Experience" [ref=e34] [cursor=pointer]:
+        - /url: "#experience"
+    - listitem [ref=e35]:
+      - link "Projects" [ref=e36] [cursor=pointer]:
+        - /url: "#projects"
+    - listitem [ref=e37]:
+      - link "Design Process" [ref=e38] [cursor=pointer]:
+        - /url: "#design-process"
+    - listitem [ref=e39]:
+      - link "Contact" [ref=e40] [cursor=pointer]:
+        - /url: "#contact"
+    - listitem [ref=e41]:
+      - link "Resume ↗" [ref=e42] [cursor=pointer]:
+        - /url: https://drive.google.com/file/d/1KYs4Cow6IVj9G5wGh_EP0jkjD-6-cwfu/view?usp=sharing
+  - main [ref=e43]:
+    - generic [ref=e44]:
+      - generic [ref=e47]:
+        - generic [ref=e50]: Product Designer with 10+ years Experience
+        - heading "Rupesh Pamaihgari" [level=1] [ref=e51]
+        - paragraph [ref=e53]: Staff Product Designer @SenseHQ, Specialized in Automation products and AI Agents
+        - paragraph [ref=e54]: 10+ years bridging code and experience — productizing AI Agents, SaaS tools from 0→1, and leading end-to-end design across 10+ platforms.
+        - generic [ref=e55]:
+          - link "See Work ›" [ref=e56] [cursor=pointer]:
+            - /url: "#projects"
+            - generic [ref=e57]: See Work
+            - generic [ref=e58]: ›
+          - link "Contact" [ref=e59] [cursor=pointer]:
+            - /url: "#contact"
+            - generic [ref=e60]: Contact
+      - generic [ref=e64]:
+        - paragraph [ref=e65]: Tools which I use on a daily basis.
+        - generic [ref=e67]:
+          - generic [ref=e69]:
+            - generic [ref=e70]: 🎨
+            - generic [ref=e71]: Figma
+          - generic [ref=e73]:
+            - generic [ref=e74]: ⚡
+            - generic [ref=e75]: Framer
+          - generic [ref=e77]:
+            - generic [ref=e78]: 📝
+            - generic [ref=e79]: Notion
+          - generic [ref=e81]:
+            - generic [ref=e82]: 🌊
+            - generic [ref=e83]: Webflow
+          - generic [ref=e85]:
+            - generic [ref=e86]: 🔥
+            - generic [ref=e87]: Hotjar
+          - generic [ref=e89]:
+            - generic [ref=e90]: 💎
+            - generic [ref=e91]: Sketch
+          - generic [ref=e93]:
+            - generic [ref=e94]: 🗺️
+            - generic [ref=e95]: Miro
+          - generic [ref=e97]:
+            - generic [ref=e98]: 🔧
+            - generic [ref=e99]: Zeplin
+          - generic [ref=e101]:
+            - generic [ref=e102]: ✏️
+            - generic [ref=e103]: Adobe XD
+          - generic [ref=e105]:
+            - generic [ref=e106]: 🎨
+            - generic [ref=e107]: Figma
+          - generic [ref=e109]:
+            - generic [ref=e110]: ⚡
+            - generic [ref=e111]: Framer
+          - generic [ref=e113]:
+            - generic [ref=e114]: 📝
+            - generic [ref=e115]: Notion
+          - generic [ref=e117]:
+            - generic [ref=e118]: 🌊
+            - generic [ref=e119]: Webflow
+          - generic [ref=e121]:
+            - generic [ref=e122]: 🔥
+            - generic [ref=e123]: Hotjar
+          - generic [ref=e125]:
+            - generic [ref=e126]: 💎
+            - generic [ref=e127]: Sketch
+          - generic [ref=e129]:
+            - generic [ref=e130]: 🗺️
+            - generic [ref=e131]: Miro
+          - generic [ref=e133]:
+            - generic [ref=e134]: 🔧
+            - generic [ref=e135]: Zeplin
+          - generic [ref=e137]:
+            - generic [ref=e138]: ✏️
+            - generic [ref=e139]: Adobe XD
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - paragraph [ref=e144]: Achievements
+        - heading "International Awards & Recognitions" [level=2] [ref=e145]
+        - paragraph [ref=e146]: Beyond these, I have been a runner-up and finalist in several other innovation challenges, constantly pushing boundaries.
+      - generic [ref=e147]:
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - generic [ref=e150]:
+              - generic [ref=e151]: 🏆
+              - generic [ref=e152]: 2019 · Boston, MA
+            - 'heading "Winner: MIT \"Reality Virtually\" Hackathon" [level=3] [ref=e153]'
+            - paragraph [ref=e154]: "Challenge: How can we make roads safer?"
+            - paragraph [ref=e155]: "AR/VR solution to solve high-demand use cases: helping people drive better, automating road safety tasks."
+            - link "View on Devpost ↗" [ref=e156] [cursor=pointer]:
+              - /url: https://devpost.com/software/accudrive
+          - generic [ref=e158] [cursor=pointer]:
+            - generic [ref=e159]:
+              - generic [ref=e160]: 🥇
+              - generic [ref=e161]: "2022"
+            - 'heading "Winner: Bayer Integrated Digital Label Hackathon" [level=3] [ref=e162]'
+            - paragraph [ref=e163]: "Challenge: How can we empower farmers with data?"
+            - paragraph [ref=e164]: Accessible digital solution providing farmers with detailed product-specific information.
+            - link "View on HackerEarth ↗" [ref=e165]:
+              - /url: https://www.hackerearth.com/challenges/hackathon/bayer-hackathon-2/
+          - generic [ref=e167] [cursor=pointer]:
+            - generic [ref=e168]:
+              - generic [ref=e169]: 🎮
+              - generic [ref=e170]: "2016"
+            - 'heading "Winner: HackerEarth''s First Game Development Hackathon" [level=3] [ref=e171]'
+            - paragraph [ref=e172]: "Challenge: Stand out among 10,000+ global developers."
+            - paragraph [ref=e173]: Winning this highly competitive event in the early stages of my career was a pivotal moment. It validated my creative ability on the global stage.
+            - link "View Certificate ↗" [ref=e174]:
+              - /url: https://s3-ap-southeast-1.amazonaws.com/he-public-data/IH__Game%20Devac6bcb1.jpg
+          - generic [ref=e176] [cursor=pointer]:
+            - generic [ref=e177]:
+              - generic [ref=e178]: ⭐
+              - generic [ref=e179]: 2× Winner
+            - 'heading "Consecutive Winner: Sense Internal Star Award" [level=3] [ref=e180]'
+            - paragraph [ref=e181]: Awarded for "Best Collaboration and Contribution to Success." A testament to my belief that great products are built through collaboration.
+        - generic [ref=e183]:
+          - button "←" [ref=e184] [cursor=pointer]
+          - button "→" [ref=e190] [cursor=pointer]
+    - generic [ref=e194]:
+      - generic [ref=e195]:
+        - paragraph [ref=e196]: Experience
+        - generic [ref=e197]:
+          - heading "From Game Worlds to Enterprise Ecosystems" [level=2] [ref=e198]
+          - paragraph [ref=e199]: If you're wondering how a game developer participating in AR/VR hackathons evolved into a Staff Product Designer...
+      - generic [ref=e200]:
+        - generic [ref=e201]:
+          - generic [ref=e202]: 2012–2015
+          - generic [ref=e203]: 🎮
+          - 'heading "The Spark: Gaming & Empathy" [level=3] [ref=e204]'
+          - paragraph [ref=e205]: My passion for design began before I even graduated. Leading a team of four, I developed games that built the foundation of empathetic, user-centered thinking.
+        - generic [ref=e207]:
+          - generic [ref=e208]: 2015–2019
+          - generic [ref=e209]: 🌍
+          - heading "Global Scale @ Unisys" [level=3] [ref=e210]
+          - paragraph [ref=e211]: I landed my first role as a UX Designer at Unisys. This was my exposure to the global stage. I had the opportunity to work on enterprise products for international clients.
+        - generic [ref=e213]:
+          - generic [ref=e214]: 2019–2021
+          - generic [ref=e215]: 🤝
+          - heading "Social Impact @ Betterplace" [level=3] [ref=e216]
+          - paragraph [ref=e217]: "Joining Betterplace as a Lead Product Designer offered a humbling challenge: designing for India's blue-collar workforce."
+        - generic [ref=e219]:
+          - generic [ref=e220]: 2021 – Present
+          - generic [ref=e221]: 🤖
+          - heading "AI & Automation @ SenseHQ" [level=3] [ref=e222]
+          - paragraph [ref=e223]: I joined Sense as a Lead Product Designer and grew into a Staff Product Designer. Over the last 4 years, I led end-to-end design across multiple products. Most recently, I have been part of the transformation of these tools into AI Agents, evolving the Sense platform.
+    - generic [ref=e226]:
+      - generic [ref=e227]:
+        - paragraph [ref=e228]: Selected Work
+        - heading "Projects" [level=2] [ref=e229]
+        - generic [ref=e230]:
+          - button "SenseHQ" [ref=e231] [cursor=pointer]
+          - button "Betterplace" [ref=e232] [cursor=pointer]
+          - button "Unisys" [ref=e233] [cursor=pointer]
+          - button "AR/VR" [ref=e234] [cursor=pointer]
+      - generic [ref=e235]:
+        - paragraph [ref=e236]: At Sense, I've had the chance to shape 5 out of the 7 core pods — work that powers roughly 80% of the company's revenue. I started as the first designer in India and helped grow a 7-designer org.
+        - generic [ref=e237]:
+          - generic [ref=e238] [cursor=pointer]:
+            - generic [ref=e239]:
+              - generic [ref=e240]:
+                - generic [ref=e241]: "01"
+                - generic [ref=e242]: AI/Agent Design
+                - generic [ref=e243]: Systems Design
+                - generic [ref=e244]: UX Strategy
+              - heading "Evolution of AI Automation Suites" [level=3] [ref=e245]
+              - paragraph [ref=e246]: I worked on six individual core products, taking each from concept to launch. These weren't just design deliverables — they were full product experiences.
+            - generic [ref=e248]:
+              - text: Read Case Study
+              - generic [ref=e249]: →
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - generic [ref=e252]:
+                - generic [ref=e253]: "02"
+                - generic [ref=e254]: Data Design
+                - generic [ref=e255]: Enterprise UX
+              - heading "Data Management and People Segmentation" [level=3] [ref=e256]
+              - paragraph [ref=e257]: At Sense, data lives in many places — especially across ATS integrations. I helped design tools to tame this complexity.
+            - generic [ref=e259]: Coming Soon
+          - generic [ref=e260]:
+            - generic [ref=e261]:
+              - generic [ref=e262]:
+                - generic [ref=e263]: "03"
+                - generic [ref=e264]: Dashboard Design
+                - generic [ref=e265]: Data Visualization
+              - heading "Platform Analytics" [level=3] [ref=e266]
+              - paragraph [ref=e267]: I've led the design for 15 of Sense's 22 dashboards — from recruitment metrics to campaign performance.
+            - generic [ref=e269]: Coming Soon
+          - generic [ref=e270] [cursor=pointer]:
+            - generic [ref=e271]:
+              - generic [ref=e272]:
+                - generic [ref=e273]: "04"
+                - generic [ref=e274]: Design System
+                - generic [ref=e275]: Component Library
+              - heading "'Genesis' Design System" [level=3] [ref=e276]
+              - paragraph [ref=e277]: I am a key contributor to Genesis — Sense's design system. A shared library of components, tokens, and patterns.
+            - generic [ref=e279]:
+              - text: View Project
+              - generic [ref=e280]: ↗
+          - generic [ref=e281]:
+            - generic [ref=e282]:
+              - generic [ref=e283]:
+                - generic [ref=e284]: "05"
+                - generic [ref=e285]: Website Builder
+                - generic [ref=e286]: Sourcing
+              - heading "Website Builder for Sourcing" [level=3] [ref=e287]
+              - paragraph [ref=e288]: Attracting the right talent starts with a great first impression. Companies needed career sites that reflect their brand.
+            - generic [ref=e290]: Coming Soon
+    - generic [ref=e291]:
+      - generic [ref=e293]:
+        - paragraph [ref=e294]: Testimonials
+        - generic [ref=e295]:
+          - heading "Trusted By Professionals" [level=2] [ref=e296]
+          - paragraph [ref=e297]: Client confidentiality is paramount. These reviews reflect real experiences shared under NDA-protected agreements.
+      - generic [ref=e299]:
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - generic [ref=e302]: ★
+            - generic [ref=e303]: ★
+            - generic [ref=e304]: ★
+            - generic [ref=e305]: ★
+            - generic [ref=e306]: ★
+          - paragraph [ref=e307]: "\"Working with Rupesh has been a game-changer for our app's user experience. The attention to detail and strategic thinking brought our vision to life in ways we hadn't imagined.\""
+          - generic [ref=e308]:
+            - generic [ref=e309]: SH
+            - generic [ref=e310]:
+              - generic [ref=e311]: Sienna Hewitt
+              - generic [ref=e312]: CEO, Tech Innovations
+        - generic [ref=e313]:
+          - generic [ref=e314]:
+            - generic [ref=e315]: ★
+            - generic [ref=e316]: ★
+            - generic [ref=e317]: ★
+            - generic [ref=e318]: ★
+            - generic [ref=e319]: ★
+          - paragraph [ref=e320]: "\"As a fellow UI/UX designer, I'm truly impressed by the ability to create visually stunning interfaces. The design system delivered is both beautiful and highly functional.\""
+          - generic [ref=e321]:
+            - generic [ref=e322]: MS
+            - generic [ref=e323]:
+              - generic [ref=e324]: Maria Septimus
+              - generic [ref=e325]: Lead Designer, Creative Studio
+        - generic [ref=e326]:
+          - generic [ref=e327]:
+            - generic [ref=e328]: ★
+            - generic [ref=e329]: ★
+            - generic [ref=e330]: ★
+            - generic [ref=e331]: ★
+            - generic [ref=e332]: ★
+          - paragraph [ref=e333]: "\"Their innovative UI designs and seamless development have elevated our product to new heights. The process was collaborative, transparent, and delivered on time.\""
+          - generic [ref=e334]:
+            - generic [ref=e335]: JK
+            - generic [ref=e336]:
+              - generic [ref=e337]: Joakim Korsgaard
+              - generic [ref=e338]: CEO, Tech Innovations
+        - generic [ref=e339]:
+          - generic [ref=e340]:
+            - generic [ref=e341]: ★
+            - generic [ref=e342]: ★
+            - generic [ref=e343]: ★
+            - generic [ref=e344]: ★
+            - generic [ref=e345]: ★
+          - paragraph [ref=e346]: "\"Their UI/UX designs not only met but exceeded our expectations. Every interaction feels natural and the visual language perfectly captures our brand identity.\""
+          - generic [ref=e347]:
+            - generic [ref=e348]: GK
+            - generic [ref=e349]:
+              - generic [ref=e350]: Giana Kenter
+              - generic [ref=e351]: Founder, Mobile Dynamics
+        - generic [ref=e352]:
+          - generic [ref=e353]:
+            - generic [ref=e354]: ★
+            - generic [ref=e355]: ★
+            - generic [ref=e356]: ★
+            - generic [ref=e357]: ★
+            - generic [ref=e358]: ★
+          - paragraph [ref=e359]: "\"Working with Rupesh has been a game-changer for our app's user experience. The attention to detail and strategic thinking brought our vision to life in ways we hadn't imagined.\""
+          - generic [ref=e360]:
+            - generic [ref=e361]: SH
+            - generic [ref=e362]:
+              - generic [ref=e363]: Sienna Hewitt
+              - generic [ref=e364]: CEO, Tech Innovations
+        - generic [ref=e365]:
+          - generic [ref=e366]:
+            - generic [ref=e367]: ★
+            - generic [ref=e368]: ★
+            - generic [ref=e369]: ★
+            - generic [ref=e370]: ★
+            - generic [ref=e371]: ★
+          - paragraph [ref=e372]: "\"As a fellow UI/UX designer, I'm truly impressed by the ability to create visually stunning interfaces. The design system delivered is both beautiful and highly functional.\""
+          - generic [ref=e373]:
+            - generic [ref=e374]: MS
+            - generic [ref=e375]:
+              - generic [ref=e376]: Maria Septimus
+              - generic [ref=e377]: Lead Designer, Creative Studio
+        - generic [ref=e378]:
+          - generic [ref=e379]:
+            - generic [ref=e380]: ★
+            - generic [ref=e381]: ★
+            - generic [ref=e382]: ★
+            - generic [ref=e383]: ★
+            - generic [ref=e384]: ★
+          - paragraph [ref=e385]: "\"Their innovative UI designs and seamless development have elevated our product to new heights. The process was collaborative, transparent, and delivered on time.\""
+          - generic [ref=e386]:
+            - generic [ref=e387]: JK
+            - generic [ref=e388]:
+              - generic [ref=e389]: Joakim Korsgaard
+              - generic [ref=e390]: CEO, Tech Innovations
+        - generic [ref=e391]:
+          - generic [ref=e392]:
+            - generic [ref=e393]: ★
+            - generic [ref=e394]: ★
+            - generic [ref=e395]: ★
+            - generic [ref=e396]: ★
+            - generic [ref=e397]: ★
+          - paragraph [ref=e398]: "\"Their UI/UX designs not only met but exceeded our expectations. Every interaction feels natural and the visual language perfectly captures our brand identity.\""
+          - generic [ref=e399]:
+            - generic [ref=e400]: GK
+            - generic [ref=e401]:
+              - generic [ref=e402]: Giana Kenter
+              - generic [ref=e403]: Founder, Mobile Dynamics
+      - generic [ref=e405]:
+        - generic [ref=e406]:
+          - generic [ref=e407]:
+            - generic [ref=e408]: ★
+            - generic [ref=e409]: ★
+            - generic [ref=e410]: ★
+            - generic [ref=e411]: ★
+            - generic [ref=e412]: ★
+          - paragraph [ref=e413]: "\"Working with Rupesh has been a game-changer for our app's user experience. The attention to detail and strategic thinking brought our vision to life in ways we hadn't imagined.\""
+          - generic [ref=e414]:
+            - generic [ref=e415]: SH
+            - generic [ref=e416]:
+              - generic [ref=e417]: Sienna Hewitt
+              - generic [ref=e418]: CEO, Tech Innovations
+        - generic [ref=e419]:
+          - generic [ref=e420]:
+            - generic [ref=e421]: ★
+            - generic [ref=e422]: ★
+            - generic [ref=e423]: ★
+            - generic [ref=e424]: ★
+            - generic [ref=e425]: ★
+          - paragraph [ref=e426]: "\"As a fellow UI/UX designer, I'm truly impressed by the ability to create visually stunning interfaces. The design system delivered is both beautiful and highly functional.\""
+          - generic [ref=e427]:
+            - generic [ref=e428]: MS
+            - generic [ref=e429]:
+              - generic [ref=e430]: Maria Septimus
+              - generic [ref=e431]: Lead Designer, Creative Studio
+        - generic [ref=e432]:
+          - generic [ref=e433]:
+            - generic [ref=e434]: ★
+            - generic [ref=e435]: ★
+            - generic [ref=e436]: ★
+            - generic [ref=e437]: ★
+            - generic [ref=e438]: ★
+          - paragraph [ref=e439]: "\"Their innovative UI designs and seamless development have elevated our product to new heights. The process was collaborative, transparent, and delivered on time.\""
+          - generic [ref=e440]:
+            - generic [ref=e441]: JK
+            - generic [ref=e442]:
+              - generic [ref=e443]: Joakim Korsgaard
+              - generic [ref=e444]: CEO, Tech Innovations
+        - generic [ref=e445]:
+          - generic [ref=e446]:
+            - generic [ref=e447]: ★
+            - generic [ref=e448]: ★
+            - generic [ref=e449]: ★
+            - generic [ref=e450]: ★
+            - generic [ref=e451]: ★
+          - paragraph [ref=e452]: "\"Their UI/UX designs not only met but exceeded our expectations. Every interaction feels natural and the visual language perfectly captures our brand identity.\""
+          - generic [ref=e453]:
+            - generic [ref=e454]: GK
+            - generic [ref=e455]:
+              - generic [ref=e456]: Giana Kenter
+              - generic [ref=e457]: Founder, Mobile Dynamics
+        - generic [ref=e458]:
+          - generic [ref=e459]:
+            - generic [ref=e460]: ★
+            - generic [ref=e461]: ★
+            - generic [ref=e462]: ★
+            - generic [ref=e463]: ★
+            - generic [ref=e464]: ★
+          - paragraph [ref=e465]: "\"Working with Rupesh has been a game-changer for our app's user experience. The attention to detail and strategic thinking brought our vision to life in ways we hadn't imagined.\""
+          - generic [ref=e466]:
+            - generic [ref=e467]: SH
+            - generic [ref=e468]:
+              - generic [ref=e469]: Sienna Hewitt
+              - generic [ref=e470]: CEO, Tech Innovations
+        - generic [ref=e471]:
+          - generic [ref=e472]:
+            - generic [ref=e473]: ★
+            - generic [ref=e474]: ★
+            - generic [ref=e475]: ★
+            - generic [ref=e476]: ★
+            - generic [ref=e477]: ★
+          - paragraph [ref=e478]: "\"As a fellow UI/UX designer, I'm truly impressed by the ability to create visually stunning interfaces. The design system delivered is both beautiful and highly functional.\""
+          - generic [ref=e479]:
+            - generic [ref=e480]: MS
+            - generic [ref=e481]:
+              - generic [ref=e482]: Maria Septimus
+              - generic [ref=e483]: Lead Designer, Creative Studio
+        - generic [ref=e484]:
+          - generic [ref=e485]:
+            - generic [ref=e486]: ★
+            - generic [ref=e487]: ★
+            - generic [ref=e488]: ★
+            - generic [ref=e489]: ★
+            - generic [ref=e490]: ★
+          - paragraph [ref=e491]: "\"Their innovative UI designs and seamless development have elevated our product to new heights. The process was collaborative, transparent, and delivered on time.\""
+          - generic [ref=e492]:
+            - generic [ref=e493]: JK
+            - generic [ref=e494]:
+              - generic [ref=e495]: Joakim Korsgaard
+              - generic [ref=e496]: CEO, Tech Innovations
+        - generic [ref=e497]:
+          - generic [ref=e498]:
+            - generic [ref=e499]: ★
+            - generic [ref=e500]: ★
+            - generic [ref=e501]: ★
+            - generic [ref=e502]: ★
+            - generic [ref=e503]: ★
+          - paragraph [ref=e504]: "\"Their UI/UX designs not only met but exceeded our expectations. Every interaction feels natural and the visual language perfectly captures our brand identity.\""
+          - generic [ref=e505]:
+            - generic [ref=e506]: GK
+            - generic [ref=e507]:
+              - generic [ref=e508]: Giana Kenter
+              - generic [ref=e509]: Founder, Mobile Dynamics
+    - generic [ref=e511]:
+      - generic [ref=e512]:
+        - paragraph [ref=e513]: How I Work
+        - heading "Design Process & Principles" [level=2] [ref=e514]
+      - generic [ref=e515]:
+        - paragraph [ref=e516]: Design Process
+        - generic [ref=e517]:
+          - generic [ref=e518]:
+            - generic [ref=e519]:
+              - generic [ref=e520]: 🔍
+              - generic [ref=e521]:
+                - generic [ref=e522]: "01"
+                - text: Research
+            - generic [ref=e523]: →
+          - generic [ref=e524]:
+            - generic [ref=e525]:
+              - generic [ref=e526]: 📐
+              - generic [ref=e527]:
+                - generic [ref=e528]: "02"
+                - text: Define
+            - generic [ref=e529]: →
+          - generic [ref=e530]:
+            - generic [ref=e531]:
+              - generic [ref=e532]: ✅
+              - generic [ref=e533]:
+                - generic [ref=e534]: "03"
+                - text: Validate
+            - generic [ref=e535]: →
+          - generic [ref=e536]:
+            - generic [ref=e537]:
+              - generic [ref=e538]: 🎨
+              - generic [ref=e539]:
+                - generic [ref=e540]: "04"
+                - text: Design
+            - generic [ref=e541]: →
+          - generic [ref=e542]:
+            - generic [ref=e543]:
+              - generic [ref=e544]: ⚡
+              - generic [ref=e545]:
+                - generic [ref=e546]: "05"
+                - text: Prototype
+            - generic [ref=e547]: →
+          - generic [ref=e548]:
+            - generic [ref=e549]:
+              - generic [ref=e550]: 🛠️
+              - generic [ref=e551]:
+                - generic [ref=e552]: "06"
+                - text: Build
+            - generic [ref=e553]: →
+          - generic [ref=e554]:
+            - generic [ref=e555]:
+              - generic [ref=e556]: 🧪
+              - generic [ref=e557]:
+                - generic [ref=e558]: "07"
+                - text: QA Test
+            - generic [ref=e559]: →
+          - generic [ref=e561]:
+            - generic [ref=e562]: 🚀
+            - generic [ref=e563]:
+              - generic [ref=e564]: "08"
+              - text: Launch
+        - paragraph [ref=e565]: ↻ Iterative — revisit any step as insights evolve
+      - paragraph [ref=e566]: Design Principles
+      - generic [ref=e567]:
+        - generic [ref=e568]:
+          - generic [ref=e569]: 💡
+          - heading "Thoughtful" [level=3] [ref=e570]
+          - paragraph [ref=e571]: Innovate with intention. Build simple, delightful experiences through deep user understanding.
+        - generic [ref=e573]:
+          - generic [ref=e574]: 🤝
+          - heading "Collaborative" [level=3] [ref=e575]
+          - paragraph [ref=e576]: Design thrives through teamwork and critique. Collective intelligence builds better solutions.
+        - generic [ref=e578]:
+          - generic [ref=e579]: 📐
+          - heading "Scalable" [level=3] [ref=e580]
+          - paragraph [ref=e581]: Design systems, not pages. Build frameworks that adapt from simple tasks to complex workflows.
+        - generic [ref=e583]:
+          - generic [ref=e584]: ❤️
+          - heading "Empathetic" [level=3] [ref=e585]
+          - paragraph [ref=e586]: Focus on the "Why." Understand users' goals, motivations, and emotional connections.
+    - generic [ref=e589]:
+      - generic [ref=e590]:
+        - paragraph [ref=e591]: Services
+        - heading "What I Bring to the Table" [level=2] [ref=e592]
+        - generic [ref=e593]:
+          - button "Product Design" [ref=e594] [cursor=pointer]
+          - button "UX Research" [ref=e595] [cursor=pointer]
+          - button "Leadership" [ref=e596] [cursor=pointer]
+          - button "Design System" [ref=e597] [cursor=pointer]
+      - generic [ref=e598]:
+        - generic [ref=e599]:
+          - heading "Crafting products people love to use" [level=3] [ref=e600]
+          - paragraph [ref=e601]: From initial concept to pixel-perfect execution, I design intuitive product experiences that balance business goals with genuine user needs.
+          - list [ref=e602]:
+            - listitem [ref=e603]:
+              - generic [ref=e604]: ✓
+              - text: End-to-end product design
+            - listitem [ref=e605]:
+              - generic [ref=e606]: ✓
+              - text: Information architecture
+            - listitem [ref=e607]:
+              - generic [ref=e608]: ✓
+              - text: Interaction design patterns
+            - listitem [ref=e609]:
+              - generic [ref=e610]: ✓
+              - text: Usability testing
+            - listitem [ref=e611]:
+              - generic [ref=e612]: ✓
+              - text: Design documentation
+        - generic [ref=e614]:
+          - generic [ref=e615]: 🎨
+          - generic [ref=e626]: Product Design
+      - generic [ref=e627]:
+        - generic [ref=e628]:
+          - generic [ref=e629]: "14"
+          - generic [ref=e630]: Years experience
+        - generic [ref=e631]:
+          - generic [ref=e632]: "91"
+          - generic [ref=e633]: Projects completed
+        - generic [ref=e634]:
+          - generic [ref=e635]: $100m
+          - generic [ref=e636]: Startup funding
+        - generic [ref=e637]:
+          - generic [ref=e638]: "10"
+          - generic [ref=e639]: Industries served
+    - generic [ref=e641]:
+      - generic [ref=e642]:
+        - paragraph [ref=e643]: Values
+        - heading "The code I live by" [level=2] [ref=e644]
+      - generic [ref=e645]:
+        - generic [ref=e646]:
+          - generic [ref=e647]: 💪
+          - heading "Embrace Challenges" [level=3] [ref=e648]
+          - paragraph [ref=e649]: I view every obstacle as a challenge to be conquered, never a reason to lose confidence.
+        - generic [ref=e651]:
+          - generic [ref=e652]: 📚
+          - heading "Never Stop Learning" [level=3] [ref=e653]
+          - paragraph [ref=e654]: Growth is a daily habit. I dedicate one hour every day to learning something new.
+        - generic [ref=e656]:
+          - generic [ref=e657]: ✨
+          - heading "Creative Excellence" [level=3] [ref=e658]
+          - paragraph [ref=e659]: I strive to stand out by finding creative solutions to complex problems. My international hackathon wins are proof of that.
+        - generic [ref=e661]:
+          - generic [ref=e662]: 🔍
+          - heading "Be Transparent" [level=3] [ref=e663]
+          - paragraph [ref=e664]: Whether personally or professionally, transparency simplifies life. Clarity creates trust.
+    - generic [ref=e667]:
+      - generic [ref=e668]:
+        - paragraph [ref=e669]: Impact
+        - generic [ref=e670]: 99%
+        - paragraph [ref=e671]: reduction in hiring costs for design talent
+        - paragraph [ref=e672]: Startups and scale-ups that invest in experienced product design early save significantly on costly redesigns, engineering rework, and failed product launches.
+      - generic [ref=e678]:
+        - generic [ref=e681]:
+          - paragraph [ref=e682]: "\"Rupesh completely transformed our approach to design. The quality of work and speed of delivery set a new benchmark for our entire team.\""
+          - generic [ref=e683]:
+            - generic [ref=e684]: NV
+            - generic [ref=e685]:
+              - text: Nolan Vaccaro
+              - generic [ref=e686]: — Director, Continental
+        - generic [ref=e689]:
+          - paragraph [ref=e690]: "\"Exceptional problem-solving capabilities combined with a deep understanding of user needs. The ROI on this collaboration was undeniable.\""
+          - generic [ref=e691]:
+            - generic [ref=e692]: CD
+            - generic [ref=e693]:
+              - text: Carla Dorwart
+              - generic [ref=e694]: — CEO, Levi9
+        - generic [ref=e697]:
+          - paragraph [ref=e698]: "\"The design system delivered by Rupesh became the backbone of our product. It scaled beautifully as we grew from 10 to 200+ engineers.\""
+          - generic [ref=e699]:
+            - generic [ref=e700]: JM
+            - generic [ref=e701]:
+              - text: Justin Rhiel Madsen
+              - generic [ref=e702]: — Design Director, 3Lateral
+    - generic [ref=e705]:
+      - generic [ref=e706]:
+        - paragraph [ref=e707]: FAQ
+        - heading "Common Queries Answered" [level=2] [ref=e708]
+        - paragraph [ref=e709]: Everything you need to know about working together. Can't find an answer? Reach out directly.
+        - link "Get in touch ↗" [ref=e710] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=e711]:
+        - generic [ref=e712]:
+          - button "What is your design process? +" [expanded] [ref=e713] [cursor=pointer]:
+            - generic [ref=e714]: What is your design process?
+            - generic [ref=e715]: +
+          - paragraph [ref=e717]: "My design process involves four key phases: research, design, prototype, and test. In research, I gather deep insights about users through interviews, surveys, and competitive analysis. In design, I create wireframes and high-fidelity visual designs grounded in those insights. In prototype, I build interactive models that simulate the real product experience. In test, I collect user feedback to validate decisions and continually refine the solution until it truly works."
+        - generic [ref=e718]:
+          - button "What tools and software do you use for UX design? +" [ref=e719] [cursor=pointer]:
+            - generic [ref=e720]: What tools and software do you use for UX design?
+            - generic [ref=e721]: +
+          - paragraph [ref=e722]: I use Figma for design, prototyping, and design system management. Notion keeps documentation, research notes, and project plans organized. Hotjar and FullStory provide user analytics and session recordings. Framer powers interactive prototyping and production-quality web development. Miro facilitates remote workshops and journey mapping. The exact toolkit adapts to each project's needs, always prioritizing what best serves the work.
+        - generic [ref=e723]:
+          - button "How do you measure the success of your UX designs? +" [ref=e724] [cursor=pointer]:
+            - generic [ref=e725]: How do you measure the success of your UX designs?
+            - generic [ref=e726]: +
+          - paragraph [ref=e727]: Success is measured through a combination of qualitative and quantitative signals. I conduct moderated usability testing sessions to observe real users interacting with designs. Analytics data tracks task completion rates, drop-off points, and engagement patterns. User satisfaction scores (NPS, SUS, CSAT) provide benchmarks. Ultimately, the north star is whether the design moves meaningful business metrics — conversion rates, retention, and activation — while genuinely improving user satisfaction.
+        - generic [ref=e728]:
+          - button "Do you work with early-stage startups or established companies? +" [ref=e729] [cursor=pointer]:
+            - generic [ref=e730]: Do you work with early-stage startups or established companies?
+            - generic [ref=e731]: +
+          - paragraph [ref=e732]: "Both. With early-stage startups, the focus is often on rapid validation — getting to a testable product quickly without over-designing. With established companies, the work tends to involve deeper design systems, complex workflows, and scaling existing products. In both cases, the goal is the same: solve the right problem in the most user-centered, business-aligned way possible."
+    - generic [ref=e736]:
+      - generic [ref=e737]:
+        - paragraph [ref=e738]: My Studio
+        - generic [ref=e741]: Available for Projects
+        - heading "Product Designer" [level=2] [ref=e742]:
+          - text: Product
+          - text: Designer
+        - paragraph [ref=e743]: Framer Pro Expert & Product Designer
+        - generic [ref=e744]:
+          - link "Book a Call ↗" [ref=e745] [cursor=pointer]:
+            - /url: mailto:hello@rupesh.design
+            - text: Book a Call
+            - generic [ref=e746]: ↗
+          - link "Send Email" [ref=e747] [cursor=pointer]:
+            - /url: mailto:hello@rupesh.design
+      - generic [ref=e748]:
+        - generic [ref=e749]:
+          - paragraph [ref=e750]: Local Time
+          - generic [ref=e751]:
+            - generic [ref=e752]: 08:44:01 PM
+            - generic [ref=e753]: Wed, Apr 1 · GMT+5:30
+        - generic [ref=e754]:
+          - generic [ref=e755]:
+            - paragraph [ref=e756]: Response time
+            - paragraph [ref=e757]: Within 24hrs
+          - generic [ref=e758]: ⚡
+        - generic [ref=e759]:
+          - generic [ref=e760]: 🎨
+          - generic [ref=e761]:
+            - paragraph [ref=e762]: Engagements
+            - paragraph [ref=e763]: Project-based · Retainer · Advisory
+  - contentinfo [ref=e764]:
+    - generic [ref=e765]:
+      - generic [ref=e766]:
+        - heading "Upgrade your web presence" [level=2] [ref=e767]:
+          - text: Upgrade your
+          - text: web presence
+        - link "Start a Project ↗" [ref=e768] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=e770]:
+        - link "Rupesh" [ref=e771] [cursor=pointer]:
+          - /url: "#"
+          - text: Rupesh
+        - navigation [ref=e773]:
+          - list [ref=e774]:
+            - listitem [ref=e775]:
+              - link "LinkedIn" [ref=e776] [cursor=pointer]:
+                - /url: https://linkedin.com
+            - listitem [ref=e777]:
+              - link "Twitter" [ref=e778] [cursor=pointer]:
+                - /url: https://twitter.com
+            - listitem [ref=e779]:
+              - link "Dribbble" [ref=e780] [cursor=pointer]:
+                - /url: https://dribbble.com
+            - listitem [ref=e781]:
+              - link "Behance" [ref=e782] [cursor=pointer]:
+                - /url: https://behance.net
+        - paragraph [ref=e783]: © 2024. Designed with care.

@@ -1,0 +1,348 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================
+   GLOBAL RESET & BASE STYLES
+   ============================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: rgb(234, 232, 225);
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fredoka', sans-serif;
+}
+
+/* ============================
+   KEYFRAME ANIMATIONS
+   ============================ */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marqueeReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.5; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ============================
+   UTILITY CLASSES
+   ============================ */
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 42s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marqueeReverse 24s linear infinite;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-dot {
+  animation: pulseDot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scroll-reveal base state */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.65s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.65s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
+
+/* ============================
+   MARQUEE CONTAINER
+   ============================ */
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+/* ============================
+   ACCORDION
+   ============================ */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.accordion-content.open {
+  max-height: 300px;
+}
+
+/* ============================
+   SCROLLBAR
+   ============================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(234, 232, 225);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5c2b8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a09d92;
+}
+
+/* ============================
+   SELECTION
+   ============================ */
+::selection {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* ============================
+   BUTTON BASE
+   ============================ */
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-dark:hover {
+  transform: translateY(-1px);
+  background: #222222;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.btn-light {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #1a1a1a;
+  border-radius: 999px;
+  padding: 11px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: transform 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  border: 1.5px solid #1a1a1a;
+  text-decoration: none;
+}
+
+.btn-light:hover {
+  transform: translateY(-1px);
+  background: rgba(26,26,26,0.05);
+}
+
+/* ============================
+   CARD BASE
+   ============================ */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+/* ============================
+   SECTION LAYOUT
+   ============================ */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 0 20px;
+  }
+}
+
+/* ============================
+   GRADIENT TEXT
+   ============================ */
+.gradient-text {
+  background: linear-gradient(135deg, #1a1a1a 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================
+   SERVICES TAB BG TRANSITION
+   ============================ */
+.services-section {
+  transition: background 0.8s ease;
+}
+
+/* ============================
+   CASE STUDY ANIMATIONS
+   ============================ */
+@keyframes caseStudyFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes caseStudyBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@keyframes caseStudyPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* Hero stagger animations (main hero) */
+.hero-stagger {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeInUp 0.7s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+.hero-stagger-1 { animation-delay: 0.4s; }
+.hero-stagger-2 { animation-delay: 0.6s; }
+.hero-stagger-3 { animation-delay: 0.8s; }
+.hero-stagger-4 { animation-delay: 1.0s; }
+
+/* Case study hero stagger animations */
+.cs-hero-anim {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: caseStudyFadeIn 0.7s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+.cs-hero-anim-1 { animation-delay: 0.1s; }
+.cs-hero-anim-2 { animation-delay: 0.25s; }
+.cs-hero-anim-3 { animation-delay: 0.4s; }
+.cs-hero-anim-4 { animation-delay: 0.55s; }
+
+/* Scroll indicator fade in */
+.cs-scroll-indicator {
+  animation: caseStudyFadeIn 0.8s 1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  opacity: 0;
+}
+
+/* Interactive element hover transitions */
+.cs-info-card,
+.cs-back-btn,
+.cs-media-frame {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Step content animation */
+.cs-step-content {
+  will-change: opacity, transform;
+}
