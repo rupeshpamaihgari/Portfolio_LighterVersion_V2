@@ -32,8 +32,8 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <AchievementsSection />
         <ExperienceSection />
+        <AchievementsSection />
         <ProjectsSection onOpenCaseStudy={() => setShowCaseStudy(true)} />
         <TestimonialsSection />
         <DesignProcessSection />

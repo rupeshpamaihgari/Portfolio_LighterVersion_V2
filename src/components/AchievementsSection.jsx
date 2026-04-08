@@ -100,19 +100,13 @@ function AchievementCard({ item, trackRef }) {
         cursor: 'default',
       }}
     >
-      {/* Icon + year */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <div style={{
-          width: '32px', height: '32px', borderRadius: '8px',
-          background: item.color + '44',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '15px', flexShrink: 0,
-        }}>
-          {item.icon}
-        </div>
-        <span style={{ fontSize: '10px', fontWeight: 600, color: '#bbb', letterSpacing: '0.03em' }}>
-          {item.year}
-        </span>
+      {/* Award image — centered near top */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+        <img
+          src="/award-symbol.png"
+          alt="award"
+          style={{ width: '90px', height: '90px', objectFit: 'contain' }}
+        />
       </div>
 
       {/* Title */}
@@ -126,30 +120,36 @@ function AchievementCard({ item, trackRef }) {
       {/* Solution */}
       <p style={{
         fontSize: '13px', lineHeight: 1.65, color: '#666',
-        fontWeight: 400, flex: 1, marginBottom: item.link ? '10px' : '0',
+        fontWeight: 400, flex: 1, marginBottom: '12px',
       }}>
         {item.solution}
       </p>
 
-      {/* Link */}
-      {item.link && (
-        <a
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: '3px',
-            fontSize: '10px', fontWeight: 600, color: '#555',
-            textDecoration: 'none', border: '1px solid #e8e8e8',
-            borderRadius: '999px', padding: '4px 10px', width: 'fit-content',
-            transition: 'border-color 0.2s, background 0.2s, color 0.2s',
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#111'; e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#fff' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#555' }}
-        >
-          {item.linkLabel} ↗
-        </a>
-      )}
+      {/* Bottom row — CTA left, year right */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+        {item.link ? (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '3px',
+              fontSize: '10px', fontWeight: 600, color: '#555',
+              textDecoration: 'none', border: '1px solid #e8e8e8',
+              borderRadius: '999px', padding: '4px 10px', width: 'fit-content',
+              transition: 'border-color 0.2s, background 0.2s, color 0.2s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#111'; e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#fff' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#555' }}
+          >
+            {item.linkLabel} ↗
+          </a>
+        ) : <div />}
+        <span style={{ fontSize: '10px', fontWeight: 600, color: '#bbb', letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>
+          {item.year}{item.location ? ` · ${item.location}` : ''}
+        </span>
+      </div>
 
       {/* Bottom accent */}
       <div style={{ height: '2px', borderRadius: '2px', background: item.color, marginTop: '10px', width: '20px' }} />
@@ -186,7 +186,6 @@ export default function AchievementsSection() {
         >
           {/* Left column — heading + marquee */}
           <div
-            ref={headRef}
             style={{
               flex: '1 1 50%',
               display: 'flex',
@@ -197,6 +196,7 @@ export default function AchievementsSection() {
           >
             {/* Heading with padding */}
             <div
+              ref={headRef}
               className="reveal"
               style={{ padding: 'clamp(40px, 5vw, 72px)', paddingBottom: '32px' }}
             >
@@ -246,7 +246,9 @@ export default function AchievementsSection() {
               position: 'relative',
               padding: 'clamp(40px, 5vw, 72px)',
               minHeight: '400px',
-              maxHeight: '560px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
             }}
             className="hidden lg:block"
           >
@@ -258,8 +260,7 @@ export default function AchievementsSection() {
               playsInline
               style={{
                 width: '100%',
-                height: '100%',
-                maxHeight: '420px',
+                height: '416px',
                 borderRadius: '24px',
                 objectFit: 'cover',
                 objectPosition: 'center top',

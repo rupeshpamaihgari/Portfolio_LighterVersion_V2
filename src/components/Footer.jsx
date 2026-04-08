@@ -15,64 +15,6 @@ export default function Footer() {
       }}
     >
       <div className="section-container">
-        {/* Big headline */}
-        <div
-          style={{
-            marginBottom: '60px',
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '24px',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: 'clamp(32px, 4.5vw, 60px)',
-              fontWeight: 700,
-              letterSpacing: '-0.035em',
-              lineHeight: 1.1,
-              color: '#111',
-              maxWidth: '600px',
-            }}
-          >
-            Upgrade your<br />web presence
-          </h2>
-
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
-            }}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: '#111',
-              color: '#fff',
-              borderRadius: '999px',
-              padding: '14px 28px',
-              fontSize: '14px',
-              fontWeight: 500,
-              textDecoration: 'none',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-              letterSpacing: '-0.01em',
-              whiteSpace: 'nowrap',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.15)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
-          >
-            Start a Project ↗
-          </a>
-        </div>
-
         {/* Divider */}
         <div style={{ height: '1px', background: 'rgba(0,0,0,0.08)', marginBottom: '32px' }} />
 

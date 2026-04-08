@@ -1,55 +1,10 @@
-import { useState, useEffect } from 'react'
 import useInView from '../hooks/useInView'
 
-function LiveClock() {
-  const [time, setTime] = useState('')
-  const [date, setDate] = useState('')
-
-  useEffect(() => {
-    const update = () => {
-      const now = new Date()
-      // Convert to IST (GMT+5:30)
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000
-      const ist = new Date(utc + 5.5 * 3600000)
-
-      const h = String(ist.getHours()).padStart(2, '0')
-      const m = String(ist.getMinutes()).padStart(2, '0')
-      const s = String(ist.getSeconds()).padStart(2, '0')
-      const ampm = ist.getHours() < 12 ? 'AM' : 'PM'
-      const h12 = ist.getHours() % 12 || 12
-
-      setTime(`${String(h12).padStart(2, '0')}:${m}:${s} ${ampm}`)
-
-      const days   = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      setDate(`${days[ist.getDay()]}, ${months[ist.getMonth()]} ${ist.getDate()}`)
-    }
-
-    update()
-    const interval = setInterval(update, 1000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div>
-      <div
-        style={{
-          fontSize: 'clamp(28px, 3.5vw, 44px)',
-          fontWeight: 700,
-          letterSpacing: '-0.03em',
-          color: '#ffffff',
-          fontVariantNumeric: 'tabular-nums',
-          lineHeight: 1,
-          marginBottom: '4px',
-        }}
-      >
-        {time}
-      </div>
-      <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>
-        {date} · GMT+5:30
-      </div>
-    </div>
-  )
+const cardStyle = {
+  background: 'rgba(255,255,255,0.05)',
+  borderRadius: '20px',
+  padding: '24px 28px',
+  border: '1px solid rgba(255,255,255,0.06)',
 }
 
 export default function ContactSection() {
@@ -58,10 +13,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      style={{
-        paddingTop: '80px',
-        paddingBottom: '80px',
-      }}
+      style={{ paddingTop: '80px', paddingBottom: '80px' }}
     >
       <div className="section-container">
         <div
@@ -75,31 +27,9 @@ export default function ContactSection() {
             overflow: 'hidden',
           }}
         >
-          {/* Background decorative elements */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '-60px',
-              right: '-60px',
-              width: '300px',
-              height: '300px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
-              pointerEvents: 'none',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-40px',
-              left: '30%',
-              width: '200px',
-              height: '200px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)',
-              pointerEvents: 'none',
-            }}
-          />
+          {/* Background decorative blobs */}
+          <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', bottom: '-40px', left: '30%', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div
             style={{
@@ -111,52 +41,26 @@ export default function ContactSection() {
               zIndex: 1,
             }}
           >
-            {/* Left content */}
+            {/* ── LEFT ── */}
             <div>
-              {/* Studio label */}
-              <p
-                style={{
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.4)',
-                  marginBottom: '20px',
-                }}
-              >
-                My Studio
-              </p>
-
               {/* Availability badge */}
               <div
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'rgba(34,197,94,0.15)',
-                  border: '1px solid rgba(34,197,94,0.3)',
-                  borderRadius: '999px',
-                  padding: '8px 16px 8px 10px',
-                  marginBottom: '28px',
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)',
+                  borderRadius: '999px', padding: '8px 16px 8px 10px', marginBottom: '28px',
                 }}
               >
                 <span
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    background: '#22c55e',
-                    display: 'inline-block',
-                    boxShadow: '0 0 8px rgba(34,197,94,0.6)',
-                  }}
                   className="animate-pulse-dot"
+                  style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', boxShadow: '0 0 8px rgba(34,197,94,0.6)' }}
                 />
                 <span style={{ fontSize: '13px', fontWeight: 500, color: '#22c55e', letterSpacing: '-0.01em' }}>
-                  Available for Projects
+                  Available for Hire
                 </span>
               </div>
 
-              {/* Name / title */}
+              {/* Title */}
               <h2
                 style={{
                   fontSize: 'clamp(36px, 4.5vw, 60px)',
@@ -167,173 +71,68 @@ export default function ContactSection() {
                   marginBottom: '12px',
                 }}
               >
-                Product
+                AI Powered
                 <br />
-                Designer
+                Product Designer
               </h2>
 
-              <p
-                style={{
-                  fontSize: '15px',
-                  color: 'rgba(255,255,255,0.5)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.01em',
-                  marginBottom: '36px',
-                }}
-              >
-                Framer Pro Expert & Product Designer
+              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.5)', fontWeight: 400, letterSpacing: '-0.01em', marginBottom: '36px' }}>
+                Automations & AI Agents Expert
               </p>
 
-              {/* CTA buttons */}
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              {/* Contact info card */}
+              <div style={{ ...cardStyle, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* Email */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ fontSize: '16px', lineHeight: 1, display: 'inline-flex', alignItems: 'center' }}>📧</span>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', letterSpacing: '-0.01em' }}>rupesh.chaitanya@gmail.com</span>
+                </div>
+                {/* Phone */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ fontSize: '16px', lineHeight: 1, color: 'rgba(255,255,255,0.4)', display: 'inline-flex', alignItems: 'center' }}>📞</span>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', letterSpacing: '-0.01em' }}>+91 9945186854</span>
+                </div>
+                {/* Location */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ fontSize: '16px', lineHeight: 1, color: 'rgba(255,255,255,0.4)', display: 'inline-flex', alignItems: 'center' }}>📍</span>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', letterSpacing: '-0.01em' }}>Bangalore, Karnataka, India</span>
+                </div>
+                {/* Divider */}
+                <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+                {/* LinkedIn */}
                 <a
-                  href="mailto:hello@rupesh.design"
+                  href="https://www.linkedin.com/in/rupesh046/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    background: '#ffffff',
-                    color: '#111',
-                    borderRadius: '999px',
-                    padding: '13px 28px',
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    letterSpacing: '-0.01em',
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    display: 'inline-flex', alignItems: 'center', gap: '10px',
+                    background: 'rgba(10,102,194,0.2)', border: '1px solid rgba(10,102,194,0.4)',
+                    borderRadius: '12px', padding: '10px 16px', textDecoration: 'none',
+                    transition: 'background 0.2s, border-color 0.2s', width: 'fit-content',
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)'
-                    e.currentTarget.style.boxShadow = '0 12px 30px rgba(255,255,255,0.2)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = 'none'
-                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(10,102,194,0.35)'; e.currentTarget.style.borderColor = 'rgba(10,102,194,0.7)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(10,102,194,0.2)'; e.currentTarget.style.borderColor = 'rgba(10,102,194,0.4)' }}
                 >
-                  Book a Call <span>↗</span>
-                </a>
-                <a
-                  href="mailto:hello@rupesh.design"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    background: 'transparent',
-                    color: 'rgba(255,255,255,0.7)',
-                    borderRadius: '999px',
-                    padding: '12px 24px',
-                    fontSize: '14px',
-                    fontWeight: 500,
-                    textDecoration: 'none',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    letterSpacing: '-0.01em',
-                    transition: 'color 0.2s ease, border-color 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#fff'
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'rgba(255,255,255,0.7)'
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
-                  }}
-                >
-                  Send Email
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                  <span style={{ fontSize: '13px', fontWeight: 500, color: '#70b5f9' }}>Connect on LinkedIn</span>
                 </a>
               </div>
             </div>
 
-            {/* Right content */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-              {/* Live time */}
-              <div
+            {/* ── RIGHT — illustration ── */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img
+                src="/ContactSection.png"
+                alt="Contact illustration"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  borderRadius: '20px',
-                  padding: '28px',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  width: '100%',
+                  maxWidth: '440px',
+                  objectFit: 'contain',
+                  animation: 'scalePulse 11.82s ease-in-out infinite',
                 }}
-              >
-                <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '12px' }}>
-                  Local Time
-                </p>
-                <LiveClock />
-              </div>
-
-              {/* Response time */}
-              <div
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  borderRadius: '20px',
-                  padding: '24px 28px',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
-                  <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '6px' }}>
-                    Response time
-                  </p>
-                  <p style={{ fontSize: '18px', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>
-                    Within 24hrs
-                  </p>
-                </div>
-                <div
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '50%',
-                    background: 'rgba(34,197,94,0.15)',
-                    border: '1px solid rgba(34,197,94,0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '22px',
-                  }}
-                >
-                  ⚡
-                </div>
-              </div>
-
-              {/* Rate card */}
-              <div
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  borderRadius: '20px',
-                  padding: '24px 28px',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                }}
-              >
-                <div
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '14px',
-                    background: 'linear-gradient(135deg, #F4A58A, #F8D4B8)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '22px',
-                    flexShrink: 0,
-                  }}
-                >
-                  🎨
-                </div>
-                <div>
-                  <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '4px' }}>
-                    Engagements
-                  </p>
-                  <p style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.8)', letterSpacing: '-0.01em' }}>
-                    Project-based · Retainer · Advisory
-                  </p>
-                </div>
-              </div>
+              />
             </div>
           </div>
         </div>

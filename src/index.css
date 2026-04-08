@@ -43,6 +43,11 @@ h1, h2, h3, h4, h5, h6 {
   to   { transform: translateX(0); }
 }
 
+@keyframes scalePulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.2); }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.4; }
@@ -132,6 +137,34 @@ h1, h2, h3, h4, h5, h6 {
 .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
 .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
 .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
+
+/* ============================
+   TIMELINE HORIZONTAL SCROLL
+   ============================ */
+.timeline-track {
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .experience-section-tall {
+    height: auto !important;
+  }
+  .experience-sticky {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .timeline-track {
+    flex-direction: column !important;
+    transform: none !important;
+  }
+  .timeline-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 
 /* ============================
    MARQUEE CONTAINER
