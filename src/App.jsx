@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import AchievementsSection from './components/AchievementsSection'
 import ExperienceSection from './components/ExperienceSection'
 import ProjectsSection from './components/ProjectsSection'
+import ProjectsSection_2 from './components/ProjectsSection_2'
 import TestimonialsSection from './components/TestimonialsSection'
 import DesignProcessSection from './components/DesignProcessSection'
 import AIProcessSection from './components/AIProcessSection'
@@ -33,13 +34,14 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <ExperienceSection />
+        <ServicesSection />
         <AchievementsSection />
+        <ExperienceSection />
         <ProjectsSection onOpenCaseStudy={() => setShowCaseStudy(true)} />
+        <ProjectsSection_2 onOpenCaseStudy={() => setShowCaseStudy(true)} />
         <TestimonialsSection />
         <DesignProcessSection />
         <AIProcessSection />
-        <ServicesSection />
         <ValuesSection />
         <CompanySection />
         <FAQSection />

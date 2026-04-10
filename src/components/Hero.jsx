@@ -29,10 +29,10 @@ export default function Hero() {
     <section
       id="intro"
       style={{
-        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         paddingTop: '132px',
+        paddingBottom: '32px',
       }}
     >
       {/* Hero card container */}

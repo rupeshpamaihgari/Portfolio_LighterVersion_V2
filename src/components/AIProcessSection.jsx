@@ -10,7 +10,13 @@ const phases = [
     what: 'Synthesize user interview notes and spot patterns in minutes. What used to take 3 hours of synthesis now takes 20 minutes.',
     stat: { from: '3 hours', to: '20 min', label: 'of synthesis' },
     color: '#F4A58A',
-    bgTint: 'rgba(244,165,138,0.10)',
+    bgTint: `
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 60%, rgba(244,165,138,0.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 45%, rgba(248,190,160,0.35) 0%, transparent 50%),
+      rgb(234,232,225)
+    `,
   },
   {
     number: '02',
@@ -20,7 +26,13 @@ const phases = [
     what: "Generate initial UI concepts from a brief. I don't use them as finals — I use them to kill bad ideas faster and explore more directions.",
     stat: { from: null, to: 'More directions', label: 'explored faster' },
     color: '#B8D4F8',
-    bgTint: 'rgba(184,212,248,0.12)',
+    bgTint: `
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 50%, rgba(184,212,248,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 72% 70%, rgba(160,175,248,0.35) 0%, transparent 50%),
+      rgb(234,232,225)
+    `,
   },
   {
     number: '03',
@@ -30,7 +42,13 @@ const phases = [
     what: 'For simpler designs, ship frontend code directly to developers. Saves 2–3 hours of frontend development effort per handoff.',
     stat: { from: null, to: '2–3 hrs saved', label: 'per frontend handoff' },
     color: '#B8F4D4',
-    bgTint: 'rgba(184,244,212,0.12)',
+    bgTint: `
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 65%, rgba(184,244,212,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 40%, rgba(150,210,200,0.35) 0%, transparent 50%),
+      rgb(234,232,225)
+    `,
   },
   {
     number: '04',
@@ -40,7 +58,13 @@ const phases = [
     what: 'Design critique, system management, UX writing, accessibility, research synthesis, and developer handoff. My developers say my handoffs have never been clearer.',
     stat: { from: null, to: '8–10 hrs/week', label: 'saved total' },
     color: '#F8E4A0',
-    bgTint: 'rgba(248,228,160,0.12)',
+    bgTint: `
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 60%, rgba(248,228,160,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 68% 38%, rgba(255,205,100,0.3) 0%, transparent 50%),
+      rgb(234,232,225)
+    `,
   },
 ]
 
@@ -136,9 +160,6 @@ function PhaseDot({ phase, phaseIndex, angleDeg, isActive }) {
 
 // ── Left Dial ──────────────────────────────────────────────────────────────
 function CircleDial({ currentPos, hasEntered }) {
-  // Circle rotates counterclockwise to bring next phase to the right (0°)
-  // Phase i starts at angle i * 90°
-  // As currentPos increases, rotation = -currentPos * 90°
   const circleRotation = -currentPos * 90
 
   return (
@@ -149,9 +170,12 @@ function CircleDial({ currentPos, hasEntered }) {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+      // Spin-in: dial rotates -135° and scales from 0.5, then springs into place
       opacity: hasEntered ? 1 : 0,
-      transform: hasEntered ? 'scale(1)' : 'scale(0.85)',
-      transition: 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.33, 1, 0.68, 1)',
+      transform: hasEntered ? 'scale(1) rotate(0deg)' : 'scale(0.5) rotate(-135deg)',
+      transition: hasEntered
+        ? 'opacity 0.8s ease, transform 1.1s cubic-bezier(0.34, 1.4, 0.64, 1)'
+        : 'none',
     }}>
       {/* Circle container — overflow visible so rotating labels extend outside */}
       <div style={{ position: 'relative', width: '340px', height: '340px', overflow: 'visible' }}>
@@ -249,11 +273,14 @@ function CardDial({ currentPos, hasEntered, entranceComplete }) {
         const opacity = Math.max(0, 1 - Math.abs(offset) * 0.8)
         const scale = isActive ? 1 : Math.max(0.75, 1 - Math.abs(offset) * 0.15)
 
-        // Before entrance: all cards start below
-        const entranceY = hasEntered ? y : 80
+        // Entrance: active card slides from right, others stagger from below
+        const entranceX = hasEntered ? x : (i === 0 ? x + 180 : x)
+        const entranceY = hasEntered ? y : (i === 0 ? y : y + 100)
+        const entranceScale = hasEntered ? scale : 0.85
+        const staggerDelay = entranceComplete ? 0 : 0.25 + i * 0.1
         const transition = entranceComplete
           ? 'transform 0.12s linear, opacity 0.15s ease'
-          : 'transform 0.9s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.9s ease'
+          : `transform 0.9s cubic-bezier(0.33, 1, 0.68, 1) ${staggerDelay}s, opacity 0.7s ease ${staggerDelay}s`
 
         return (
           <div
@@ -262,7 +289,7 @@ function CardDial({ currentPos, hasEntered, entranceComplete }) {
               position: 'absolute',
               left: '50%',
               top: '50%',
-              transform: `translate(calc(-50% + ${x}px), calc(-50% + ${entranceY}px)) rotate(${rotZ}deg) scale(${scale})`,
+              transform: `translate(calc(-50% + ${entranceX}px), calc(-50% + ${entranceY}px)) rotate(${rotZ}deg) scale(${entranceScale})`,
               opacity: hasEntered ? opacity : 0,
               transition,
               willChange: 'transform, opacity',
@@ -519,44 +546,69 @@ export default function AIProcessSection() {
 
         {/* Section header */}
         <div style={{
-          padding: '92px 48px 0',
-          opacity: hasEntered ? 1 : 0,
-          transform: hasEntered ? 'translateY(0)' : 'translateY(16px)',
-          transition: 'opacity 0.7s ease, transform 0.7s ease',
+          padding: '92px 24px 0',
+          maxWidth: '1260px',
+          margin: '0 auto',
+          width: '100%',
           zIndex: 6,
           flexShrink: 0,
           position: 'relative',
+          boxSizing: 'border-box',
         }}>
-          <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '8px' }}>
+          <p style={{
+            fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em',
+            textTransform: 'uppercase', color: '#999', marginBottom: '8px',
+            opacity: hasEntered ? 1 : 0,
+            transform: hasEntered ? 'translateY(0)' : 'translateY(12px)',
+            transition: 'opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.33,1,0.68,1) 0.1s',
+          }}>
             AI + Design Process
           </p>
-          <h2 style={{ fontSize: 'clamp(24px, 2.5vw, 34px)', fontWeight: 400, letterSpacing: '-0.03em', color: '#111', lineHeight: 1.2 }}>
+          <h2 style={{
+            fontSize: 'clamp(24px, 2.5vw, 34px)', fontWeight: 400,
+            letterSpacing: '-0.03em', color: '#111', lineHeight: 1.2,
+            opacity: hasEntered ? 1 : 0,
+            transform: hasEntered ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'opacity 0.6s ease 0.25s, transform 0.6s cubic-bezier(0.33,1,0.68,1) 0.25s',
+          }}>
             My Exact AI-Powered Design Stack
           </h2>
         </div>
 
-        {/* Two-dial layout */}
-        <div style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
-          {/* Left dial — rotating circle */}
-          <div style={{ flex: '0 0 45%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <CircleDial currentPos={currentPos} hasEntered={hasEntered} />
-          </div>
+        {/* Two-dial layout — centered, max-width constrained */}
+        <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'center' }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1260px',
+            padding: '0 24px',
+            boxSizing: 'border-box',
+            display: 'flex',
+            height: '100%',
+          }}>
+            {/* Left dial — rotating circle */}
+            <div style={{ flex: '0 0 45%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CircleDial currentPos={currentPos} hasEntered={hasEntered} />
+            </div>
 
-          {/* Right dial — arc cards */}
-          <div style={{ flex: '0 0 55%', position: 'relative', overflow: 'hidden' }}>
-            <CardDial currentPos={currentPos} hasEntered={hasEntered} entranceComplete={entranceComplete} />
+            {/* Right dial — arc cards */}
+            <div style={{ flex: '0 0 55%', position: 'relative', overflow: 'hidden' }}>
+              <CardDial currentPos={currentPos} hasEntered={hasEntered} entranceComplete={entranceComplete} />
+            </div>
           </div>
         </div>
 
-        {/* Closing statement */}
+        {/* Closing statement — centered, max-width constrained */}
         <div style={{
           position: 'absolute',
           bottom: '32px',
-          left: '48px',
-          right: '48px',
+          left: '50%',
+          transform: showClosing
+            ? 'translateX(-50%) translateY(0)'
+            : 'translateX(-50%) translateY(20px)',
+          width: 'calc(100% - 48px)',
+          maxWidth: '1212px',
           zIndex: 10,
           opacity: showClosing ? 1 : 0,
-          transform: showClosing ? 'translateY(0)' : 'translateY(20px)',
           transition: 'opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1), transform 0.7s cubic-bezier(0.33, 1, 0.68, 1)',
           pointerEvents: showClosing ? 'auto' : 'none',
           background: 'linear-gradient(135deg, #111 0%, #2a2a2a 100%)',
@@ -566,6 +618,7 @@ export default function AIProcessSection() {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '32px',
+          boxSizing: 'border-box',
         }}>
           <p style={{ fontSize: 'clamp(14px, 1.5vw, 18px)', fontStyle: 'italic', fontWeight: 400, color: 'rgba(255,255,255,0.9)', lineHeight: 1.5, letterSpacing: '-0.02em' }}>
             "AI didn't replace my design skills. It replaced my{' '}

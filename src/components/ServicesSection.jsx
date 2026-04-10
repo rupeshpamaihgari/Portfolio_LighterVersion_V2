@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import useInView from '../hooks/useInView'
 
 const tabs = [
@@ -15,8 +15,10 @@ const tabs = [
       'Design documentation',
     ],
     background: `
-      radial-gradient(ellipse at 20% 50%, rgba(255,200,150,0.6) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(200,180,255,0.4) 0%, transparent 50%),
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 60%, rgba(255,200,150,0.7) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 40%, rgba(200,180,255,0.45) 0%, transparent 50%),
       rgb(234,232,225)
     `,
     cardBg: 'linear-gradient(135deg, #F4A58A 0%, #F8D4B8 50%, #FFF5EE 100%)',
@@ -35,8 +37,10 @@ const tabs = [
       'Journey mapping',
     ],
     background: `
-      radial-gradient(ellipse at 30% 40%, rgba(150,200,255,0.6) 0%, transparent 60%),
-      radial-gradient(ellipse at 70% 70%, rgba(180,150,255,0.4) 0%, transparent 50%),
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 50%, rgba(150,200,255,0.65) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 75%, rgba(180,150,255,0.4) 0%, transparent 50%),
       rgb(234,232,225)
     `,
     cardBg: 'linear-gradient(135deg, #B8D4F8 0%, #D4C5F8 50%, #F0ECFF 100%)',
@@ -55,8 +59,10 @@ const tabs = [
       'Design strategy & vision',
     ],
     background: `
-      radial-gradient(ellipse at 60% 30%, rgba(255,180,180,0.5) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 70%, rgba(255,220,150,0.4) 0%, transparent 50%),
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 60% 45%, rgba(255,180,180,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 5% 70%, rgba(255,220,150,0.5) 0%, transparent 50%),
       rgb(234,232,225)
     `,
     cardBg: 'linear-gradient(135deg, #FFB8B8 0%, #FFD4A0 50%, #FFF5E8 100%)',
@@ -75,8 +81,10 @@ const tabs = [
       'Multi-platform scaling',
     ],
     background: `
-      radial-gradient(ellipse at 50% 50%, rgba(180,240,220,0.5) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(150,200,255,0.4) 0%, transparent 50%),
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 65%, rgba(180,240,220,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 72% 40%, rgba(150,200,255,0.45) 0%, transparent 50%),
       rgb(234,232,225)
     `,
     cardBg: 'linear-gradient(135deg, #B8F4D4 0%, #B8E8F8 50%, #EDFFF5 100%)',
@@ -190,8 +198,14 @@ function ServiceCard({ tab }) {
 
 export default function ServicesSection() {
   const [activeTab, setActiveTab] = useState(0)
-  const { ref: headRef } = useInView()
+  const [headVisible, setHeadVisible] = useState(false)
   const { ref: contentRef } = useInView()
+
+  // Animate heading in after hero CTA buttons finish (~1800ms from mount)
+  useEffect(() => {
+    const t = setTimeout(() => setHeadVisible(true), 1850)
+    return () => clearTimeout(t)
+  }, [])
 
   const tab = tabs[activeTab]
 
@@ -200,31 +214,22 @@ export default function ServicesSection() {
       id="services"
       className="services-section"
       style={{
-        paddingTop: '120px',
+        paddingTop: '56px',
         paddingBottom: '80px',
         background: tab.background,
         transition: 'background 0.8s ease',
       }}
     >
       <div className="section-container">
-        {/* Section header */}
+        {/* Section header — animates in after hero sequence completes */}
         <div
-          ref={headRef}
-          className="reveal"
-          style={{ marginBottom: '48px' }}
+          style={{
+            marginBottom: '48px',
+            opacity: headVisible ? 1 : 0,
+            transform: headVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1), transform 0.7s cubic-bezier(0.33, 1, 0.68, 1)',
+          }}
         >
-          <p
-            style={{
-              fontSize: '12px',
-              fontWeight: 600,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#999',
-              marginBottom: '12px',
-            }}
-          >
-            Services
-          </p>
           <h2
             style={{
               fontSize: 'clamp(30px, 3.5vw, 48px)',
