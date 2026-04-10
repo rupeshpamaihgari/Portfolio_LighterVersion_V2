@@ -329,8 +329,12 @@ export default function ExperienceSection() {
         }}
       >
         {/* Header */}
-        <div style={{ padding: '48px 24px 0', maxWidth: '1260px', margin: '0 auto', width: '100%' }}>
-          <div ref={headRef} className="reveal">
+        <div style={{ padding: '92px 24px 0', maxWidth: '1260px', margin: '0 auto', width: '100%' }}>
+          <div style={{
+            opacity: hasEntered ? 1 : 0,
+            transform: hasEntered ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'opacity 0.7s ease, transform 0.7s ease',
+          }}>
             <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '12px' }}>Experience</p>
             <h2 style={{ fontSize: 'clamp(30px, 3.5vw, 48px)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.1, color: '#111' }}>From Game Worlds to Enterprise Ecosystems</h2>
           </div>

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 
 const navLinks = [
   { label: 'About me',       href: '#intro' },
-  { label: 'Achievements',   href: '#achievements' },
   { label: 'Experience',     href: '#experience' },
+  { label: 'Achievements',   href: '#achievements' },
   { label: 'Projects',       href: '#projects' },
   { label: 'Design Process', href: '#design-process' },
+  { label: 'AI Process',     href: '#ai-process' },
   { label: 'Contact',        href: '#contact' },
 ]
 
@@ -22,10 +23,39 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Scroll-spy: highlight nav link for whichever section is most visible
+  useEffect(() => {
+    const sectionIds = navLinks.map(l => l.href.replace('#', ''))
+    const observers = []
+
+    // Track intersection ratios per section, pick the highest
+    const ratios = {}
+    const pick = () => {
+      const top = Object.entries(ratios).sort((a, b) => b[1] - a[1])[0]
+      if (top && top[1] > 0) setActiveLink('#' + top[0])
+    }
+
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id)
+      if (!el) return
+      ratios[id] = 0
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          ratios[id] = entry.intersectionRatio
+          pick()
+        },
+        { threshold: Array.from({ length: 21 }, (_, i) => i / 20) }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
+
   const handleNav = (e, href) => {
     e.preventDefault()
     setMenuOpen(false)
-    setActiveLink(href)
     if (href.startsWith('http')) {
       window.open(href, '_blank', 'noopener,noreferrer')
       return

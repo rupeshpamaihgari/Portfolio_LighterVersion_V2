@@ -84,11 +84,12 @@ function AchievementCard({ item, trackRef }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        minWidth: '306px',
-        maxWidth: '306px',
+        minWidth: '338px',
+        maxWidth: '338px',
+        height: '416px',
         background: 'rgba(255,255,255,0.9)',
-        borderRadius: '16px',
-        padding: '16px',
+        borderRadius: '24px',
+        padding: '28px',
         boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
         marginRight: '12px',
         userSelect: 'none',
@@ -111,7 +112,7 @@ function AchievementCard({ item, trackRef }) {
 
       {/* Title */}
       <h3 style={{
-        fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em',
+        fontSize: '15px', fontWeight: 400, letterSpacing: '-0.02em',
         color: '#111', lineHeight: 1.35, marginBottom: '8px',
       }}>
         {item.title}
@@ -135,13 +136,14 @@ function AchievementCard({ item, trackRef }) {
             onClick={(e) => e.stopPropagation()}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '3px',
-              fontSize: '10px', fontWeight: 600, color: '#555',
-              textDecoration: 'none', border: '1px solid #e8e8e8',
-              borderRadius: '999px', padding: '4px 10px', width: 'fit-content',
+              fontSize: '13px', fontWeight: 600, color: '#fff',
+              textDecoration: 'none', border: '1px solid #111',
+              background: '#111',
+              borderRadius: '999px', padding: '8px 18px', width: 'fit-content',
               transition: 'border-color 0.2s, background 0.2s, color 0.2s',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#111'; e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#fff' }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#555' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#333'; e.currentTarget.style.borderColor = '#333' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = '#111'; e.currentTarget.style.borderColor = '#111' }}
           >
             {item.linkLabel} ↗
           </a>
@@ -165,7 +167,8 @@ export default function AchievementsSection() {
     <section
       id="achievements"
       style={{
-        paddingTop: '56px',
+        marginTop: '100px',
+        paddingTop: '80px',
         paddingBottom: '92px',
         overflow: 'hidden',
       }}

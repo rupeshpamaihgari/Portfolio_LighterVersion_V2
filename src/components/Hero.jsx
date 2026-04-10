@@ -32,11 +32,11 @@ export default function Hero() {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        paddingTop: '92px',
+        paddingTop: '132px',
       }}
     >
       {/* Hero card container */}
-      <div style={{ padding: '0 24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <div style={{ padding: '0 24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
         <div
           ref={containerRef}
           style={{

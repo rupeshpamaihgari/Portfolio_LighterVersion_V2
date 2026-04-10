@@ -6,6 +6,7 @@ import ExperienceSection from './components/ExperienceSection'
 import ProjectsSection from './components/ProjectsSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import DesignProcessSection from './components/DesignProcessSection'
+import AIProcessSection from './components/AIProcessSection'
 import ServicesSection from './components/ServicesSection'
 import ValuesSection from './components/ValuesSection'
 import CompanySection from './components/CompanySection'
@@ -37,13 +38,13 @@ function App() {
         <ProjectsSection onOpenCaseStudy={() => setShowCaseStudy(true)} />
         <TestimonialsSection />
         <DesignProcessSection />
+        <AIProcessSection />
         <ServicesSection />
         <ValuesSection />
         <CompanySection />
         <FAQSection />
         <ContactSection />
       </main>
-      <Footer />
     </div>
   )
 }
