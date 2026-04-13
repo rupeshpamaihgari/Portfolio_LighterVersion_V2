@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import useInView from '../hooks/useInView'
 
 const cardStyle = {
@@ -7,8 +8,25 @@ const cardStyle = {
   border: '1px solid rgba(255,255,255,0.06)',
 }
 
+const PRINCIPLES = [
+  { title: 'Embrace Challenges',  icon: '💪', color: '#F4A58A', desc: 'I view every obstacle as a challenge to be conquered, never a reason to lose confidence.' },
+  { title: 'Never Stop Learning', icon: '📚', color: '#B8D4F8', desc: 'Growth is a daily habit. I dedicate one hour every day to learning something new.' },
+  { title: 'Creative Excellence', icon: '✨', color: '#B8F4D4', desc: 'I strive to stand out by finding creative solutions to complex problems.' },
+  { title: 'Be Transparent',      icon: '🔍', color: '#F8E4A0', desc: 'Whether personally or professionally, transparency simplifies life. Clarity creates trust.' },
+]
+
 export default function ContactSection() {
   const { ref } = useInView({ threshold: 0.1 })
+  const cardsRef   = useRef(null)
+  const [cardsIn, setCardsIn] = useState(false)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setCardsIn(true); obs.disconnect() }
+    }, { threshold: 0.2 })
+    if (cardsRef.current) obs.observe(cardsRef.current)
+    return () => obs.disconnect()
+  }, [])
 
   return (
     <section
@@ -133,6 +151,49 @@ export default function ContactSection() {
                   animation: 'scalePulse 11.82s ease-in-out infinite',
                 }}
               />
+            </div>
+          </div>
+
+          {/* ── Code I live by ── */}
+          <div style={{ position: 'relative', zIndex: 1, marginTop: '28px', paddingTop: '0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)' }}>Code I live by</span>
+              <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+            </div>
+            <div ref={cardsRef} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
+              {PRINCIPLES.map((p, i) => (
+                <div
+                  key={p.title}
+                  style={{
+                    background: `linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)`,
+                    border: '1px solid rgba(255,255,255,0.09)',
+                    borderTop: `2px solid ${p.color}55`,
+                    borderRadius: '14px',
+                    padding: '18px 18px 16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                    opacity: cardsIn ? 1 : 0,
+                    transform: cardsIn ? 'translateY(0)' : 'translateY(18px)',
+                    transition: `opacity 0.5s ease ${i * 0.09}s, transform 0.5s cubic-bezier(0.33,1,0.68,1) ${i * 0.09}s`,
+                  }}
+                >
+                  {/* Icon badge */}
+                  <div style={{
+                    width: '32px', height: '32px', borderRadius: '9px',
+                    background: `${p.color}18`,
+                    border: `1px solid ${p.color}30`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '15px', lineHeight: 1, flexShrink: 0,
+                  }}>
+                    {p.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '12.5px', fontWeight: 650, color: 'rgba(255,255,255,0.82)', letterSpacing: '-0.01em', marginBottom: '5px', lineHeight: 1.2 }}>{p.title}</div>
+                    <p style={{ fontSize: '11px', lineHeight: 1.6, color: 'rgba(255,255,255,0.38)', margin: 0, letterSpacing: '0.01em' }}>{p.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

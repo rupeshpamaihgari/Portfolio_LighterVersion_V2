@@ -2,42 +2,45 @@ import useInView from '../hooks/useInView'
 
 const testimonials = [
   {
-    name: 'Sienna Hewitt',
-    role: 'CEO',
-    company: 'Tech Innovations',
-    text: 'Working with Rupesh has been a game-changer for our app\'s user experience. The attention to detail and strategic thinking brought our vision to life in ways we hadn\'t imagined.',
-    avatar: 'SH',
+    name: 'Arun Purohit',
+    role: 'Co-Founder & Principal Design Officer',
+    company: 'iSootra Designs',
+    relation: 'Managed Rupesh directly · April 2020',
+    text: 'Just a look at his answer sheet convinced me he was a top talent — a unicorn. He mastered UX design fast and scaled superbly by drawing on his motion and animation skills. His contributions across every workflow were top notch. His best work came when we designed a complex heart surgery application.',
+    avatar: 'AP',
     color: '#F4A58A',
   },
   {
-    name: 'Maria Septimus',
-    role: 'Lead Designer',
-    company: 'Creative Studio',
-    text: 'As a fellow UI/UX designer, I\'m truly impressed by the ability to create visually stunning interfaces. The design system delivered is both beautiful and highly functional.',
-    avatar: 'MS',
+    name: 'Vamsi Batchu',
+    role: 'Sr. Product Design Manager',
+    company: 'Rocket',
+    relation: 'Worked on the same team · April 2020',
+    text: 'Rupesh is one of the most hardworking people I have worked with — highly imaginative, motivated, and goal-oriented. He gets things done no matter how hard they are. He has mastered UX Design, Coding, and Game Development, with a wonderful resume of awards from all over the world. He would be the star of any team he joins.',
+    avatar: 'VB',
     color: '#B8D4F8',
   },
   {
-    name: 'Joakim Korsgaard',
-    role: 'CEO',
-    company: 'Tech Innovations',
-    text: 'Their innovative UI designs and seamless development have elevated our product to new heights. The process was collaborative, transparent, and delivered on time.',
-    avatar: 'JK',
+    name: 'Alex Rosen',
+    role: 'Co-Founder / Product',
+    company: 'Sense',
+    relation: 'Worked with Rupesh at Sense',
+    text: 'Rupesh took our recruiting automation from linear workflows to a fully autonomous agent ecosystem — Grace. Watching a hard-to-fill role go from application to hire in 11 hours, with 50K+ manager hours saved at scale, was the proof. He doesn\'t just design features; he redesigns what\'s possible.',
+    avatar: 'AR',
     color: '#B8F4D4',
   },
   {
-    name: 'Giana Kenter',
-    role: 'Founder',
-    company: 'Mobile Dynamics',
-    text: 'Their UI/UX designs not only met but exceeded our expectations. Every interaction feels natural and the visual language perfectly captures our brand identity.',
-    avatar: 'GK',
+    name: 'Deepak Panda',
+    role: 'Director of Product',
+    company: 'Sense',
+    relation: 'Worked with Rupesh at Sense',
+    text: 'Rupesh was the design backbone of our AI transformation at Sense. From reimagining the workflow canvas to architecting the UX for our entire agent ecosystem, he consistently translated ambiguous product bets into experiences customers loved. His work directly contributed to our 96.6% CSAT and $4.6M post-pilot ARR. A rare designer who thinks in systems and ships with precision.',
+    avatar: 'DP',
     color: '#F8E4A0',
   },
 ]
 
-// Duplicate for seamless loop
-const row1 = [...testimonials, ...testimonials]
-const row2 = [...testimonials, ...testimonials]
+// Triplicate for a smooth seamless loop with only 2 cards
+const row1 = [...testimonials, ...testimonials, ...testimonials]
 
 function TestimonialCard({ item }) {
   return (
@@ -52,6 +55,8 @@ function TestimonialCard({ item }) {
         marginRight: '16px',
         userSelect: 'none',
         flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {/* Stars */}
@@ -70,13 +75,14 @@ function TestimonialCard({ item }) {
           fontWeight: 400,
           marginBottom: '20px',
           letterSpacing: '-0.01em',
+          flex: 1,
         }}
       >
         "{item.text}"
       </p>
 
       {/* Author */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: 'auto' }}>
         <div
           style={{
             width: '40px',
@@ -98,9 +104,14 @@ function TestimonialCard({ item }) {
           <div style={{ fontSize: '14px', fontWeight: 600, color: '#111', letterSpacing: '-0.01em' }}>
             {item.name}
           </div>
-          <div style={{ fontSize: '12px', color: '#888', marginTop: '1px' }}>
+          <div style={{ fontSize: '12px', color: '#555', marginTop: '1px', fontWeight: 500 }}>
             {item.role}, {item.company}
           </div>
+          {item.relation && (
+            <div style={{ fontSize: '11px', color: '#aaa', marginTop: '2px' }}>
+              {item.relation}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -135,7 +146,7 @@ export default function TestimonialsSection() {
               marginBottom: '12px',
             }}
           >
-            Testimonials
+            Recommendations
           </p>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
             <h2
@@ -149,9 +160,6 @@ export default function TestimonialsSection() {
             >
               Trusted By Professionals
             </h2>
-            <p style={{ fontSize: '14px', color: '#888', maxWidth: '360px', lineHeight: 1.6, letterSpacing: '-0.01em' }}>
-              Client confidentiality is paramount. These reviews reflect real experiences shared under NDA-protected agreements.
-            </p>
           </div>
         </div>
       </div>
@@ -175,23 +183,6 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
-      {/* Row 2 — scrolls right */}
-      <div
-        className="marquee-wrapper"
-        style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-        }}
-      >
-        <div
-          className="marquee-track animate-marquee-reverse"
-          style={{ paddingTop: '4px' }}
-        >
-          {row2.map((item, i) => (
-            <TestimonialCard key={i} item={item} />
-          ))}
-        </div>
-      </div>
     </section>
   )
 }

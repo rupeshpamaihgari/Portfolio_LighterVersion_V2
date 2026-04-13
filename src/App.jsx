@@ -3,13 +3,10 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AchievementsSection from './components/AchievementsSection'
 import ExperienceSection from './components/ExperienceSection'
-import ProjectsSection from './components/ProjectsSection'
 import ProjectsSection_2 from './components/ProjectsSection_2'
 import TestimonialsSection from './components/TestimonialsSection'
-import DesignProcessSection from './components/DesignProcessSection'
 import AIProcessSection from './components/AIProcessSection'
 import ServicesSection from './components/ServicesSection'
-import ValuesSection from './components/ValuesSection'
 import CompanySection from './components/CompanySection'
 import FAQSection from './components/FAQSection'
 import ContactSection from './components/ContactSection'
@@ -37,12 +34,9 @@ function App() {
         <ServicesSection />
         <AchievementsSection />
         <ExperienceSection />
-        <ProjectsSection onOpenCaseStudy={() => setShowCaseStudy(true)} />
         <ProjectsSection_2 onOpenCaseStudy={() => setShowCaseStudy(true)} />
         <TestimonialsSection />
-        <DesignProcessSection />
         <AIProcessSection />
-        <ValuesSection />
         <CompanySection />
         <FAQSection />
         <ContactSection />
