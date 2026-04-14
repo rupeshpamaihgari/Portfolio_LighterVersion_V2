@@ -1,30 +1,19 @@
 import useInView from '../hooks/useInView'
 
-const quotes = [
-  {
-    text: 'Rupesh completely transformed our approach to design. The quality of work and speed of delivery set a new benchmark for our entire team.',
-    name: 'Nolan Vaccaro',
-    role: 'Director',
-    company: 'Continental',
-    initials: 'NV',
-    color: '#F4A58A',
-  },
-  {
-    text: 'Exceptional problem-solving capabilities combined with a deep understanding of user needs. The ROI on this collaboration was undeniable.',
-    name: 'Carla Dorwart',
-    role: 'CEO',
-    company: 'Levi9',
-    initials: 'CD',
-    color: '#B8D4F8',
-  },
-  {
-    text: 'The design system delivered by Rupesh became the backbone of our product. It scaled beautifully as we grew from 10 to 200+ engineers.',
-    name: 'Justin Rhiel Madsen',
-    role: 'Design Director',
-    company: '3Lateral',
-    initials: 'JM',
-    color: '#B8F4D4',
-  },
+// ── Tool stack data ───────────────────────────────────────────────────────────
+const TOOLS = [
+  { name: 'Claude',        emoji: '🤖', color: '#F4A58A' },
+  { name: 'NotebookLM',    emoji: '📓', color: '#B8D4F8' },
+  { name: 'Lovable',       emoji: '💜', color: '#D4B8F8' },
+  { name: 'Claude Code',   emoji: '⚡', color: '#F8E4A0' },
+  { name: 'Cursor',        emoji: '🖱️',  color: '#c8f4f0' },
+  { name: 'Figma',         emoji: '🎨', color: '#f4c8d4' },
+  { name: 'Figma MCP',     emoji: '🔌', color: '#B8F4D4' },
+  { name: 'Claude Cowork', emoji: '🤝', color: '#e4d4f8' },
+  { name: 'Framer',        emoji: '🖼️',  color: '#F4A58A' },
+  { name: 'Notion',        emoji: '📋', color: '#F8E4A0' },
+  { name: 'Hotjar',        emoji: '🔥', color: '#f4c8d4' },
+  { name: 'Miro',          emoji: '🗺️',  color: '#B8D4F8' },
 ]
 
 export default function CompanySection() {
@@ -34,10 +23,7 @@ export default function CompanySection() {
   return (
     <section
       id="company"
-      style={{
-        paddingTop: '120px',
-        paddingBottom: '120px',
-      }}
+      style={{ paddingTop: '120px', paddingBottom: '120px' }}
     >
       <div
         className="section-container"
@@ -48,158 +34,120 @@ export default function CompanySection() {
           alignItems: 'center',
         }}
       >
-        {/* LEFT — Big stat */}
+        {/* LEFT — Impact stat */}
         <div ref={leftRef} className="reveal">
-          {/* Label */}
-          <p
-            style={{
-              fontSize: '12px',
-              fontWeight: 600,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#999',
-              marginBottom: '20px',
-            }}
-          >
-            Impact
+          {/* Eyebrow */}
+          <p style={{
+            fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em',
+            textTransform: 'uppercase', color: '#999', marginBottom: '20px',
+          }}>
+            Impact of AI Integration
           </p>
 
           {/* Big number */}
-          <div
-            style={{
-              fontSize: 'clamp(80px, 10vw, 130px)',
-              fontWeight: 800,
-              letterSpacing: '-0.04em',
-              lineHeight: 0.9,
-              color: '#111',
-              marginBottom: '12px',
-            }}
-          >
-            99%
+          <div style={{
+            fontSize: 'clamp(72px, 9vw, 120px)',
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
+            lineHeight: 0.9,
+            color: '#111',
+            marginBottom: '12px',
+          }}>
+            8–10 hrs
           </div>
 
           {/* Sub label */}
-          <p
-            style={{
-              fontSize: 'clamp(20px, 2.5vw, 30px)',
-              fontWeight: 600,
-              letterSpacing: '-0.025em',
-              color: '#444',
-              lineHeight: 1.3,
-              marginBottom: '32px',
-              maxWidth: '380px',
-            }}
-          >
-            reduction in hiring costs for design talent
+          <p style={{
+            fontSize: 'clamp(20px, 2.5vw, 28px)',
+            fontWeight: 600,
+            letterSpacing: '-0.025em',
+            color: '#444',
+            lineHeight: 1.3,
+            marginBottom: '32px',
+            maxWidth: '380px',
+          }}>
+            Saved per week
           </p>
 
-          <p
-            style={{
-              fontSize: '14.5px',
-              lineHeight: 1.7,
-              color: '#777',
-              maxWidth: '380px',
-              letterSpacing: '-0.01em',
-            }}
-          >
+          {/* Description */}
+          <p style={{
+            fontSize: '14.5px', lineHeight: 1.7, color: '#777',
+            maxWidth: '380px', letterSpacing: '-0.01em',
+          }}>
             Startups and scale-ups that invest in experienced product design early save significantly on costly redesigns, engineering rework, and failed product launches.
           </p>
 
           {/* Accent bar */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '6px',
-              marginTop: '36px',
-            }}
-          >
+          <div style={{ display: 'flex', gap: '6px', marginTop: '36px' }}>
             {['#F4A58A', '#B8D4F8', '#B8F4D4', '#F8E4A0'].map((color, i) => (
-              <div
-                key={i}
-                style={{
-                  height: '4px',
-                  flex: i === 0 ? '3' : '1',
-                  borderRadius: '2px',
-                  background: color,
-                }}
-              />
+              <div key={i} style={{
+                height: '4px', flex: i === 0 ? '3' : '1',
+                borderRadius: '2px', background: color,
+              }} />
             ))}
           </div>
         </div>
 
-        {/* RIGHT — Quotes */}
-        <div
-          ref={rightRef}
-          className="reveal"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0',
-          }}
-        >
-          {quotes.map((quote, index) => (
-            <div key={quote.name}>
-              {/* Divider */}
-              {index === 0 && (
-                <div style={{ height: '1px', background: 'rgba(0,0,0,0.1)', marginBottom: '28px' }} />
-              )}
+        {/* RIGHT — Tool stack blobs */}
+        <div ref={rightRef} className="reveal">
+          <p style={{
+            fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em',
+            textTransform: 'uppercase', color: '#999', marginBottom: '8px',
+          }}>
+            All tool stack
+          </p>
+          <p style={{
+            fontSize: '14px', color: '#aaa', marginBottom: '28px',
+            letterSpacing: '-0.01em', lineHeight: 1.5,
+          }}>
+            Tools I use across the design workflow
+          </p>
 
+          {/* Blobs */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+            {TOOLS.map((tool) => (
               <div
+                key={tool.name}
                 style={{
-                  paddingBottom: '28px',
-                  transition: 'transform 0.2s ease',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: 'rgba(255,255,255,0.85)',
+                  border: `1.5px solid ${tool.color}88`,
+                  borderRadius: '999px',
+                  padding: '9px 16px 9px 10px',
+                  boxShadow: `0 2px 10px ${tool.color}33`,
+                  backdropFilter: 'blur(4px)',
+                  transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+                  cursor: 'default',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateX(6px)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateX(0)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = `0 6px 18px ${tool.color}55`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = `0 2px 10px ${tool.color}33`
+                }}
               >
-                {/* Quote text */}
-                <p
-                  style={{
-                    fontSize: '14.5px',
-                    lineHeight: 1.7,
-                    color: '#444',
-                    fontWeight: 400,
-                    marginBottom: '16px',
-                    letterSpacing: '-0.01em',
-                  }}
-                >
-                  "{quote.text}"
-                </p>
-
-                {/* Author */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '50%',
-                      background: quote.color,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      color: '#333',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {quote.initials}
-                  </div>
-                  <div>
-                    <span style={{ fontSize: '13.5px', fontWeight: 600, color: '#111', letterSpacing: '-0.01em' }}>
-                      {quote.name}
-                    </span>
-                    <span style={{ fontSize: '12px', color: '#888', marginLeft: '6px' }}>
-                      — {quote.role}, {quote.company}
-                    </span>
-                  </div>
-                </div>
+                {/* Coloured dot */}
+                <span style={{
+                  width: '28px', height: '28px', borderRadius: '50%',
+                  background: tool.color + '44',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '14px', flexShrink: 0,
+                }}>
+                  {tool.emoji}
+                </span>
+                <span style={{
+                  fontSize: '13px', fontWeight: 500,
+                  color: '#333', letterSpacing: '-0.01em', whiteSpace: 'nowrap',
+                }}>
+                  {tool.name}
+                </span>
               </div>
-
-              {/* Divider */}
-              <div style={{ height: '1px', background: 'rgba(0,0,0,0.08)', marginBottom: '28px' }} />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

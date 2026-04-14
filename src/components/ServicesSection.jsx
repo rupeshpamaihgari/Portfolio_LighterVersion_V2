@@ -1,7 +1,36 @@
 import { useState, useEffect, useRef } from 'react'
 import useInView from '../hooks/useInView'
 
+const DOMAIN_TILES = [
+  { name: 'HR Tech',                  icon: '🧑‍💼', color: '#F4A58A', desc: 'AI recruiting & talent platforms' },
+  { name: 'Travel & Transportation',  icon: '✈️',   color: '#B8D4F8', desc: 'Booking & logistics products' },
+  { name: 'Public Sector',            icon: '🏛️',   color: '#B8F4D4', desc: 'Government digital services' },
+  { name: 'Productivity Tools',       icon: '⚡',   color: '#F8E4A0', desc: 'Enterprise & workplace tools' },
+]
+
 const tabs = [
+  {
+    id: 'domains',
+    label: 'Domains',
+    heading: 'Experienced across different domains',
+    subtext: 'From HR automation to public sector infrastructure, I\'ve shipped products that solve real challenges across diverse industries and global user bases.',
+    features: [
+      'HR Tech & Talent Platforms',
+      'Travel & Transportation',
+      'Public Sector & Government',
+      'Productivity & Enterprise Tools',
+      'Gaming & Spatial Computing',
+    ],
+    background: `
+      linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+      linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+      radial-gradient(ellipse at 5% 55%, rgba(200,180,255,0.52) 0%, transparent 55%),
+      radial-gradient(ellipse at 78% 42%, rgba(150,220,200,0.38) 0%, transparent 50%),
+      rgb(234,232,225)
+    `,
+    cardBg: 'linear-gradient(135deg, #D4B8F8 0%, #B8D4F8 50%, #E8F4FF 100%)',
+    cardIcon: '🌍',
+  },
   {
     id: 'product',
     label: 'Product Design',
@@ -196,6 +225,58 @@ function ServiceCard({ tab }) {
   )
 }
 
+function DomainsCard() {
+  return (
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '12px',
+    }}>
+      {DOMAIN_TILES.map((d) => (
+        <div key={d.name} style={{
+          background: 'rgba(255,255,255,0.82)',
+          border: `1.5px solid ${d.color}77`,
+          borderRadius: '20px',
+          padding: '22px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          boxShadow: `0 4px 16px ${d.color}33`,
+          transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+          cursor: 'default',
+        }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)'
+            e.currentTarget.style.boxShadow = `0 10px 28px ${d.color}55`
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)'
+            e.currentTarget.style.boxShadow = `0 4px 16px ${d.color}33`
+          }}
+        >
+          <span style={{
+            width: '40px', height: '40px', borderRadius: '12px',
+            background: d.color + '33',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '20px',
+          }}>
+            {d.icon}
+          </span>
+          <div>
+            <p style={{ fontSize: '13.5px', fontWeight: 650, color: '#111', letterSpacing: '-0.02em', marginBottom: '3px' }}>
+              {d.name}
+            </p>
+            <p style={{ fontSize: '12px', color: '#888', lineHeight: 1.4 }}>
+              {d.desc}
+            </p>
+          </div>
+          <div style={{ height: '3px', width: '24px', borderRadius: '2px', background: d.color }} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function ServicesSection() {
   const [activeTab, setActiveTab] = useState(0)
   const [headVisible, setHeadVisible] = useState(false)
@@ -372,7 +453,9 @@ export default function ServicesSection() {
 
           {/* Right — card */}
           <div>
-            <ServiceCard tab={tab} key={tab.id} />
+            {tab.id === 'domains'
+              ? <DomainsCard key="domains" />
+              : <ServiceCard tab={tab} key={tab.id} />}
           </div>
         </div>
 

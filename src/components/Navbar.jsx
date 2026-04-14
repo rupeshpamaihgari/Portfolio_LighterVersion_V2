@@ -5,7 +5,8 @@ const navLinks = [
   { label: 'Achievements',   href: '#achievements' },
   { label: 'Experience',     href: '#experience' },
   { label: 'Projects',       href: '#projects' },
-  { label: 'AI Process',     href: '#ai-process' },
+  { label: 'AI x Design Process', href: '#ai-process' },
+  { label: 'FAQ',            href: '#questions' },
   { label: 'Contact',        href: '#contact' },
 ]
 
@@ -62,6 +63,11 @@ export default function Navbar() {
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    // Trigger reveal animation for the Questions/FAQ section
+    if (href === '#questions') {
+      // Small delay so scroll starts before animation fires
+      setTimeout(() => window.dispatchEvent(new CustomEvent('faq-reveal')), 400)
     }
   }
 
@@ -139,7 +145,7 @@ export default function Navbar() {
               left: '50%',
               transform: 'translateX(-50%)',
             }}
-            className="hidden lg:flex"
+            className="hidden md:flex"
           >
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -212,14 +218,13 @@ export default function Navbar() {
 
             {/* Hamburger */}
             <button
-              className="lg:hidden"
+              className="md:hidden flex"
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 padding: '8px',
-                display: 'flex',
                 flexDirection: 'column',
                 gap: '5px',
               }}

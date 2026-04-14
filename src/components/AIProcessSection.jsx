@@ -490,8 +490,6 @@ export default function AIProcessSection() {
     }
   }, [onScroll, isMobile])
 
-  const showClosing = progress >= 0.98
-
   // ── Mobile ─────────────────────────────────────────────────────────────
   if (isMobile) {
     return (
@@ -534,15 +532,18 @@ export default function AIProcessSection() {
         position: 'sticky', top: 0, height: '100vh',
         overflow: 'hidden', display: 'flex', flexDirection: 'column',
       }}>
-        {/* Per-phase background tint */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 0,
-          background: phases[Math.min(Math.round(currentPos), PHASE_COUNT - 1)].bgTint,
-          transition: 'background 0.7s ease',
-          pointerEvents: 'none',
-        }} />
+        {/* Per-phase background tint — cross-fade layers */}
+        {phases.map((phase, i) => (
+          <div key={i} style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 0,
+            background: phase.bgTint,
+            opacity: i === Math.min(Math.round(currentPos), PHASE_COUNT - 1) ? 1 : 0,
+            transition: 'opacity 0.75s ease',
+            pointerEvents: 'none',
+          }} />
+        ))}
 
         {/* Section header */}
         <div style={{
@@ -594,40 +595,6 @@ export default function AIProcessSection() {
             <div style={{ flex: '0 0 55%', position: 'relative', overflow: 'hidden' }}>
               <CardDial currentPos={currentPos} hasEntered={hasEntered} entranceComplete={entranceComplete} />
             </div>
-          </div>
-        </div>
-
-        {/* Closing statement — centered, max-width constrained */}
-        <div style={{
-          position: 'absolute',
-          bottom: '32px',
-          left: '50%',
-          transform: showClosing
-            ? 'translateX(-50%) translateY(0)'
-            : 'translateX(-50%) translateY(20px)',
-          width: 'calc(100% - 48px)',
-          maxWidth: '1212px',
-          zIndex: 10,
-          opacity: showClosing ? 1 : 0,
-          transition: 'opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1), transform 0.7s cubic-bezier(0.33, 1, 0.68, 1)',
-          pointerEvents: showClosing ? 'auto' : 'none',
-          background: 'linear-gradient(135deg, #111 0%, #2a2a2a 100%)',
-          borderRadius: '20px',
-          padding: '22px 36px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '32px',
-          boxSizing: 'border-box',
-        }}>
-          <p style={{ fontSize: 'clamp(14px, 1.5vw, 18px)', fontStyle: 'italic', fontWeight: 400, color: 'rgba(255,255,255,0.9)', lineHeight: 1.5, letterSpacing: '-0.02em' }}>
-            "AI didn't replace my design skills. It replaced my{' '}
-            <strong style={{ color: '#F8E4A0', fontStyle: 'normal' }}>busywork</strong>{' '}
-            — so I can spend more time on strategy and user thinking."
-          </p>
-          <div style={{ flexShrink: 0, textAlign: 'right', borderLeft: '1px solid rgba(255,255,255,0.12)', paddingLeft: '32px' }}>
-            <p style={{ fontSize: '28px', fontWeight: 700, color: '#F8E4A0', letterSpacing: '-0.03em', lineHeight: 1 }}>8–10 hrs</p>
-            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', marginTop: '4px', fontWeight: 500 }}>saved per week</p>
           </div>
         </div>
 

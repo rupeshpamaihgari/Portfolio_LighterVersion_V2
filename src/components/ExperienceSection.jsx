@@ -38,6 +38,34 @@ const eras = [
 
 const CARD_COUNT = eras.length
 
+// Per-era gradient backgrounds — same language as ServicesSection / AIProcessSection
+const ERA_GRADIENTS = [
+  // AI & Automation — warm amber/gold
+  `linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+   linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+   radial-gradient(ellipse at 6% 58%, rgba(248,228,160,0.68) 0%, transparent 55%),
+   radial-gradient(ellipse at 78% 38%, rgba(255,200,80,0.32) 0%, transparent 50%),
+   rgb(234,232,225)`,
+  // Social Impact — fresh green
+  `linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+   linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+   radial-gradient(ellipse at 6% 55%, rgba(184,244,212,0.68) 0%, transparent 55%),
+   radial-gradient(ellipse at 73% 42%, rgba(120,220,170,0.32) 0%, transparent 50%),
+   rgb(234,232,225)`,
+  // Global Scale — calm blue
+  `linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+   linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+   radial-gradient(ellipse at 6% 55%, rgba(184,212,248,0.68) 0%, transparent 55%),
+   radial-gradient(ellipse at 70% 65%, rgba(160,175,248,0.32) 0%, transparent 50%),
+   rgb(234,232,225)`,
+  // Gaming & Empathy — warm coral/salmon
+  `linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
+   linear-gradient(to right, transparent 50%, rgb(234,232,225) 92%),
+   radial-gradient(ellipse at 6% 60%, rgba(244,165,138,0.62) 0%, transparent 55%),
+   radial-gradient(ellipse at 76% 40%, rgba(248,190,160,0.36) 0%, transparent 50%),
+   rgb(234,232,225)`,
+]
+
 // Arc parameters — cards travel along a circular arc
 // radius controls how pronounced the curve is
 const ARC_RADIUS = 1200 // px — larger = gentler curve
@@ -328,8 +356,23 @@ export default function ExperienceSection() {
           overflow: 'hidden', display: 'flex', flexDirection: 'column',
         }}
       >
+        {/* Gradient background layers — cross-fade between eras */}
+        {ERA_GRADIENTS.map((gradient, i) => (
+          <div
+            key={i}
+            style={{
+              position: 'absolute', inset: 0,
+              background: gradient,
+              opacity: i === activeIndex ? 1 : 0,
+              transition: 'opacity 0.75s ease',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+        ))}
+
         {/* Header */}
-        <div style={{ padding: '92px 24px 0', maxWidth: '1260px', margin: '0 auto', width: '100%' }}>
+        <div style={{ padding: '92px 24px 0', maxWidth: '1260px', margin: '0 auto', width: '100%', position: 'relative', zIndex: 1 }}>
           <div style={{
             opacity: hasEntered ? 1 : 0,
             transform: hasEntered ? 'translateY(0)' : 'translateY(16px)',
@@ -341,7 +384,7 @@ export default function ExperienceSection() {
         </div>
 
         {/* Arc card area */}
-        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+        <div style={{ flex: 1, position: 'relative', overflow: 'hidden', zIndex: 1 }}>
           {eras.map((era, i) => {
             const offset = i - currentPos // offset from current active position
             const { x, y, rotate } = getArcPosition(offset)

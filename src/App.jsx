@@ -8,7 +8,7 @@ import TestimonialsSection from './components/TestimonialsSection'
 import AIProcessSection from './components/AIProcessSection'
 import ServicesSection from './components/ServicesSection'
 import CompanySection from './components/CompanySection'
-import FAQSection from './components/FAQSection'
+import QuestionsSection from './components/QuestionsSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import CaseStudyPage from './components/CaseStudy/CaseStudyPage'
@@ -38,7 +38,7 @@ function App() {
         <TestimonialsSection />
         <AIProcessSection />
         <CompanySection />
-        <FAQSection />
+        <QuestionsSection />
         <ContactSection />
       </main>
     </div>
