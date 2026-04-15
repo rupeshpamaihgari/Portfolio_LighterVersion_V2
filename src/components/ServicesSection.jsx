@@ -1,13 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import useInView from '../hooks/useInView'
 
-const DOMAIN_TILES = [
-  { name: 'HR Tech',                  icon: '🧑‍💼', color: '#F4A58A', desc: 'AI recruiting & talent platforms' },
-  { name: 'Travel & Transportation',  icon: '✈️',   color: '#B8D4F8', desc: 'Booking & logistics products' },
-  { name: 'Public Sector',            icon: '🏛️',   color: '#B8F4D4', desc: 'Government digital services' },
-  { name: 'Productivity Tools',       icon: '⚡',   color: '#F8E4A0', desc: 'Enterprise & workplace tools' },
-]
-
 const tabs = [
   {
     id: 'domains',
@@ -30,6 +23,11 @@ const tabs = [
     `,
     cardBg: 'linear-gradient(135deg, #D4B8F8 0%, #B8D4F8 50%, #E8F4FF 100%)',
     cardIcon: '🌍',
+    domainRows: [
+      { heading: 'HR Tech',                   chips: ['Contributed to 80% revenue @SenseHQ'],                              color: '#F4A58A' },
+      { heading: 'Travel & Transportation',   chips: ['DigiYatra', 'SaS Cargo', 'Singapore Airport', 'Delta Airlines'],   color: '#B8D4F8' },
+      { heading: 'Gaming & Spatial Computing',chips: ['3x International Awards', '500K+ User Downloads'],                 color: '#B8F4D4' },
+    ],
   },
   {
     id: 'product',
@@ -52,6 +50,9 @@ const tabs = [
     `,
     cardBg: 'linear-gradient(135deg, #F4A58A 0%, #F8D4B8 50%, #FFF5EE 100%)',
     cardIcon: '🎨',
+    domainRows: [
+      { heading: 'Tools Expertise', chips: ['Figma', 'Miro', 'Lovable', 'Claude', 'Cursor', 'NotebookLM', 'Maze', 'ProtoPie'], color: '#F4A58A' },
+    ],
   },
   {
     id: 'ux',
@@ -74,6 +75,9 @@ const tabs = [
     `,
     cardBg: 'linear-gradient(135deg, #B8D4F8 0%, #D4C5F8 50%, #F0ECFF 100%)',
     cardIcon: '🔍',
+    domainRows: [
+      { heading: 'Tools and Expertise', chips: ['Usertesting.com', 'Maze', 'Claude', 'NotebookLM', 'Amplitude', 'Sigma', 'Microsoft Clarity'], color: '#B8D4F8' },
+    ],
   },
   {
     id: 'leadership',
@@ -96,6 +100,10 @@ const tabs = [
     `,
     cardBg: 'linear-gradient(135deg, #FFB8B8 0%, #FFD4A0 50%, #FFF5E8 100%)',
     cardIcon: '⚡',
+    domainStats: [
+      { value: '4',  label: 'Team Size Led' },
+      { value: '3',  label: 'Leadership Exp (yrs)' },
+    ],
   },
   {
     id: 'system',
@@ -118,14 +126,18 @@ const tabs = [
     `,
     cardBg: 'linear-gradient(135deg, #B8F4D4 0%, #B8E8F8 50%, #EDFFF5 100%)',
     cardIcon: '🧩',
+    domainRows: [
+      { heading: 'Contributions', chips: ['Navigation', 'Form Components', 'Chart Visualizations'], color: '#B8F4D4' },
+      { heading: 'Ownership',     chips: ['AI Components', 'Card Components', 'Slots'],             color: '#B8E8F8' },
+    ],
   },
 ]
 
 const stats = [
-  { value: '14', unit: 'Years', label: 'experience' },
-  { value: '91', unit: 'Projects', label: 'completed' },
-  { value: '$100m', unit: 'Startup', label: 'funding' },
-  { value: '10', unit: 'Industries', label: 'served' },
+  { value: '11+', unit: 'Years', label: 'Experience' },
+  { value: '15+', unit: '0→1 SaaS', label: 'Products' },
+  { value: '7',   unit: 'Startup Exp', label: '(years)' },
+  { value: '4',   unit: 'Enterprise Exp', label: '(years)' },
 ]
 
 function ServiceCard({ tab }) {
@@ -161,33 +173,71 @@ function ServiceCard({ tab }) {
         {tab.cardIcon}
       </div>
 
-      {/* Fake UI elements */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        {[90, 70, 55].map((w, i) => (
-          <div
-            key={i}
-            style={{
-              height: '8px',
-              width: `${w}%`,
-              borderRadius: '4px',
-              background: 'rgba(255,255,255,0.6)',
-            }}
-          />
-        ))}
-        <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-          {[40, 32, 48].map((w, i) => (
-            <div
-              key={i}
-              style={{
-                height: '28px',
-                width: `${w}px`,
-                borderRadius: '8px',
-                background: 'rgba(255,255,255,0.5)',
-              }}
-            />
+      {/* Middle content — rows+chips, stat tiles, or placeholder bars */}
+      {tab.domainRows ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', flex: 1 }}>
+          {tab.domainRows.map((row) => (
+            <div key={row.heading}>
+              <p style={{
+                fontSize: '11px', fontWeight: 700, letterSpacing: '0.07em',
+                textTransform: 'uppercase', color: 'rgba(0,0,0,0.45)',
+                marginBottom: '7px',
+              }}>
+                {row.heading}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {row.chips.map((chip) => (
+                  <span key={chip} style={{
+                    background: 'rgba(255,255,255,0.72)',
+                    border: `1px solid ${row.color}99`,
+                    borderRadius: '999px',
+                    padding: '5px 12px',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    color: '#333',
+                    backdropFilter: 'blur(4px)',
+                    WebkitBackdropFilter: 'blur(4px)',
+                  }}>
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
-      </div>
+      ) : tab.domainStats ? (
+        <div style={{ display: 'flex', gap: '10px' }}>
+          {tab.domainStats.map((s) => (
+            <div key={s.label} style={{
+              flex: '1 1 0',
+              background: 'rgba(255,255,255,0.55)',
+              borderRadius: '14px',
+              padding: '16px 12px',
+              textAlign: 'center',
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
+            }}>
+              <p style={{ fontSize: '24px', fontWeight: 750, color: '#111', letterSpacing: '-0.03em', lineHeight: 1, margin: 0 }}>
+                {s.value}
+              </p>
+              <p style={{ fontSize: '11px', color: '#555', marginTop: '5px', fontWeight: 500 }}>
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {[90, 70, 55].map((w, i) => (
+            <div key={i} style={{ height: '8px', width: `${w}%`, borderRadius: '4px', background: 'rgba(255,255,255,0.6)' }} />
+          ))}
+          <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+            {[40, 32, 48].map((w, i) => (
+              <div key={i} style={{ height: '28px', width: `${w}px`, borderRadius: '8px', background: 'rgba(255,255,255,0.5)' }} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Decorative circles */}
       <div style={{
@@ -201,8 +251,8 @@ function ServiceCard({ tab }) {
         background: 'rgba(255,255,255,0.1)',
       }} />
 
-      {/* Label */}
-      <div
+      {/* Label — hidden when custom content is present */}
+      {!tab.domainRows && !tab.domainStats && <div
         style={{
           marginTop: 'auto',
           paddingTop: '24px',
@@ -220,59 +270,7 @@ function ServiceCard({ tab }) {
         >
           {tab.label}
         </span>
-      </div>
-    </div>
-  )
-}
-
-function DomainsCard() {
-  return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '12px',
-    }}>
-      {DOMAIN_TILES.map((d) => (
-        <div key={d.name} style={{
-          background: 'rgba(255,255,255,0.82)',
-          border: `1.5px solid ${d.color}77`,
-          borderRadius: '20px',
-          padding: '22px 20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          boxShadow: `0 4px 16px ${d.color}33`,
-          transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-          cursor: 'default',
-        }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)'
-            e.currentTarget.style.boxShadow = `0 10px 28px ${d.color}55`
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)'
-            e.currentTarget.style.boxShadow = `0 4px 16px ${d.color}33`
-          }}
-        >
-          <span style={{
-            width: '40px', height: '40px', borderRadius: '12px',
-            background: d.color + '33',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '20px',
-          }}>
-            {d.icon}
-          </span>
-          <div>
-            <p style={{ fontSize: '13.5px', fontWeight: 650, color: '#111', letterSpacing: '-0.02em', marginBottom: '3px' }}>
-              {d.name}
-            </p>
-            <p style={{ fontSize: '12px', color: '#888', lineHeight: 1.4 }}>
-              {d.desc}
-            </p>
-          </div>
-          <div style={{ height: '3px', width: '24px', borderRadius: '2px', background: d.color }} />
-        </div>
-      ))}
+      </div>}
     </div>
   )
 }
@@ -453,9 +451,7 @@ export default function ServicesSection() {
 
           {/* Right — card */}
           <div>
-            {tab.id === 'domains'
-              ? <DomainsCard key="domains" />
-              : <ServiceCard tab={tab} key={tab.id} />}
+            <ServiceCard tab={tab} key={tab.id} />
           </div>
         </div>
 

@@ -3,36 +3,66 @@ import useInView from '../hooks/useInView'
 
 const eras = [
   {
-    yearRange: '2021 – Present',
-    title: 'AI & Automation @ SenseHQ',
+    yearRange: '2021 - Present',
+    title: 'Staff Product Designer @ SenseHQ',
+    titleLink: 'https://sensehq.com',
     description:
-      'I joined Sense as a Lead Product Designer and grew into a Staff Product Designer. Over the last 4 years, I led end-to-end design across multiple products. Most recently, I have been part of the transformation of these tools into AI Agents, evolving the Sense platform.',
+      'I joined Sense as a Lead Product Designer and grew into a Staff Product Designer. Over the last 5 years, I led end-to-end design across 10+ products mainly including Automations and AI recruiter agents which contributes to about 80% of Sense\'s revenue.',
+    descriptionRich: (
+      <>
+        I joined Sense as a Lead Product Designer and grew into a Staff Product Designer. Over the last 5 years, I led end-to-end design across{' '}
+        <strong style={{ color: '#111', fontWeight: 650 }}>10+ products</strong> mainly including{' '}
+        <strong style={{ color: '#111', fontWeight: 650 }}>Automations and AI recruiter agents</strong> which contributes to about{' '}
+        <strong style={{ color: '#111', fontWeight: 650 }}>80% of Sense's revenue.</strong>
+      </>
+    ),
     icon: '🤖',
+    logo: '/Sense.png',
     color: '#F8E4A0',
+    metrics: [
+      { value: '80%',  label: 'Reduction in\ntime-to-hire' },
+      { value: '1M+',  label: 'Candidates\nengaged' },
+      { value: '$5M+', label: 'Booked\nARR' },
+    ],
   },
   {
     yearRange: '2019–2021',
-    title: 'Social Impact @ Betterplace',
+    title: 'Sr Product Designer @ Betterplace',
+    titleLink: 'https://betterplace.co.in',
     description:
-      "Joining Betterplace as a Lead Product Designer offered a humbling challenge: designing for India's blue-collar workforce.",
+      "Joined as a founding designer at Betterplace and contributed to core products involving background verification of blue-collared employees, attendance tracking apps, and more.",
     icon: '🤝',
+    logo: '/betterplace.png',
     color: '#B8F4D4',
+    metrics: [
+      { value: '4.4',   label: 'App\nRating' },
+      { value: '100K+', label: 'App\nDownloads' },
+      { value: '$1M+',  label: 'Revenue\nGenerated' },
+    ],
   },
   {
     yearRange: '2015–2019',
-    title: 'Global Scale @ Unisys',
+    title: 'UI/UX Designer @ Unisys',
+    titleLink: 'https://unisys.com',
     description:
-      'I landed my first role as a UX Designer at Unisys. This was my exposure to the global stage. I had the opportunity to work on enterprise products for international clients.',
+      'I landed my first role as a UX Designer at Unisys. This was my exposure to the global stage. I had the opportunity to work on enterprise products for international clients across Public Sector, Travel and Transportation domains.',
     icon: '🌍',
+    logo: '/Unisys_logo_2022.svg',
     color: '#B8D4F8',
+    clientChips: { label: 'Notable Clients', chips: ['SaS Cargo', 'DigiYatra', 'Singapore Airport', 'Delta Airlines'] },
   },
   {
-    yearRange: '2012–2015',
-    title: 'The Spark: Gaming & Empathy',
+    yearRange: '2013',
+    title: 'Games & AR/VR Developer',
     description:
       'My passion for design began before I even graduated. Leading a team of four, I developed games that built the foundation of empathetic, user-centered thinking.',
     icon: '🎮',
     color: '#F4A58A',
+    metrics: [
+      { value: '3+',    label: 'International\nAwards' },
+      { value: '500K+', label: 'Users\nEngaged' },
+      { value: '4',     label: 'Team\nManaged' },
+    ],
   },
 ]
 
@@ -127,28 +157,92 @@ function TimelineCard({ era, isActive, arcX, arcY, arcRotate, entranceComplete }
           rotate: `${-arcRotate}deg`,
         }}
       >
-        {/* Year */}
-        <span style={{ fontSize: '13px', fontWeight: 600, color: '#ccc', letterSpacing: '0.06em', display: 'block', marginBottom: '24px' }}>
-          {era.yearRange}
-        </span>
-
-        {/* Icon */}
-        <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: era.color + '33', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', marginBottom: '24px' }}>
-          {era.icon}
+        {/* Top row: logo left + timeline right */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+          {era.logo ? (
+            <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: '#f5f5f3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px', flexShrink: 0 }}>
+              <img src={era.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            </div>
+          ) : (
+            <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: era.color + '33', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', flexShrink: 0 }}>
+              {era.icon}
+            </div>
+          )}
+          <span style={{ fontSize: '12px', fontWeight: 600, color: '#888', letterSpacing: '0.06em', background: era.color + '44', borderRadius: '999px', padding: '5px 12px' }}>
+            {era.yearRange}
+          </span>
         </div>
 
         {/* Title */}
-        <h3 style={{ fontSize: '26px', fontWeight: 400, letterSpacing: '-0.025em', color: '#111', marginBottom: '16px', lineHeight: 1.3 }}>
-          {era.title}
+        <h3 style={{ fontSize: '24px', fontWeight: 600, letterSpacing: '-0.025em', color: '#111', marginBottom: '12px', lineHeight: 1.3 }}>
+          {era.titleLink ? (
+            <a
+              href={era.titleLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', textDecoration: 'none', borderBottom: '2px solid rgba(0,0,0,0.15)', paddingBottom: '1px' }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderBottomColor = 'rgba(0,0,0,0.5)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderBottomColor = 'rgba(0,0,0,0.15)' }}
+            >
+              {era.title} ↗
+            </a>
+          ) : era.title}
         </h3>
 
         {/* Description */}
-        <p style={{ fontSize: '15px', lineHeight: 1.7, color: '#666', fontWeight: 400, letterSpacing: '-0.01em' }}>
-          {era.description}
+        <p style={{ fontSize: '14px', lineHeight: 1.7, color: '#666', fontWeight: 400, letterSpacing: '-0.01em', marginBottom: era.metrics ? '16px' : '0' }}>
+          {era.descriptionRich ?? era.description}
         </p>
 
+        {/* Client chips */}
+        {era.clientChips && (
+          <div style={{ marginTop: '14px' }}>
+            <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginBottom: '8px' }}>
+              {era.clientChips.label}
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {era.clientChips.chips.map((chip) => (
+                <span key={chip} style={{
+                  background: era.color + '33',
+                  border: `1px solid ${era.color}99`,
+                  borderRadius: '999px',
+                  padding: '5px 12px',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  color: '#333',
+                }}>
+                  {chip}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Metrics row */}
+        {era.metrics && (
+          <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+            {era.metrics.map((m) => (
+              <div key={m.label} style={{
+                flex: '1 1 0',
+                background: era.color + '22',
+                border: `1px solid ${era.color}88`,
+                borderRadius: '12px',
+                padding: '10px 8px',
+                textAlign: 'center',
+              }}>
+                <p style={{ fontSize: '17px', fontWeight: 750, color: '#111', letterSpacing: '-0.03em', lineHeight: 1, margin: 0 }}>
+                  {m.value}
+                </p>
+                <p style={{ fontSize: '10px', color: '#777', marginTop: '4px', fontWeight: 500, lineHeight: 1.3, whiteSpace: 'pre-line' }}>
+                  {m.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Accent line */}
-        <div style={{ height: '3px', borderRadius: '2px', background: era.color, marginTop: '32px', width: '40px' }} />
+        <div style={{ height: '3px', borderRadius: '2px', background: era.color, marginTop: '20px', width: '40px' }} />
       </div>
     </div>
   )
@@ -212,7 +306,7 @@ function TimelineBar({ progress, activeIndex }) {
               textAlign: 'center', minWidth: '60px',
             }}
           >
-            {era.yearRange.split('–')[0].split(' – ')[0].trim()}
+            {era.yearRange}
           </span>
         ))}
       </div>
@@ -241,7 +335,7 @@ function MobileEraCard({ era, delay }) {
   const { ref } = useInView({ rootMargin: '0px 0px -40px 0px' })
   return (
     <div ref={ref} className="reveal" style={{ transitionDelay: `${delay}ms`, background: '#ffffff', borderRadius: '20px', padding: '32px 28px', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column' }}>
-      <span style={{ fontSize: '12px', fontWeight: 600, color: '#ccc', letterSpacing: '0.06em', marginBottom: '20px', display: 'block' }}>{era.yearRange}</span>
+      <span style={{ fontSize: '12px', fontWeight: 600, color: '#888', letterSpacing: '0.06em', marginBottom: '20px', display: 'block' }}>{era.yearRange}</span>
       <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: era.color + '33', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', marginBottom: '20px' }}>{era.icon}</div>
       <h3 style={{ fontSize: '20px', fontWeight: 400, letterSpacing: '-0.02em', color: '#111', marginBottom: '12px' }}>{era.title}</h3>
       <p style={{ fontSize: '14px', lineHeight: 1.65, color: '#666', fontWeight: 400, letterSpacing: '-0.01em', flex: 1 }}>{era.description}</p>

@@ -286,7 +286,7 @@ export default function QuestionsSection() {
             Things people ask me
           </h2>
           <p style={{ fontSize: '15px', lineHeight: 1.65, color: '#777', letterSpacing: '-0.01em', maxWidth: '480px' }}>
-            Common interview and collaboration questions — answered directly. Click any card to reveal the answer.
+            Common collaboration questions — answered directly. Click any card to reveal the answer.
           </p>
         </div>
 

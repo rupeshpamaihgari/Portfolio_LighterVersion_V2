@@ -5,8 +5,10 @@ const phases = [
   {
     number: '01',
     label: 'Research & Discovery',
-    tool: 'Claude / NotebookLM',
-    toolIcon: '🔍',
+    tools: [
+      { logo: '/claude.png',      label: 'Claude' },
+      { logo: '/notebooklm.png',  label: 'NotebookLM' },
+    ],
     what: 'Synthesize user interview notes and spot patterns in minutes. What used to take 3 hours of synthesis now takes 20 minutes.',
     stat: { from: '3 hours', to: '20 min', label: 'of synthesis' },
     color: '#F4A58A',
@@ -20,11 +22,13 @@ const phases = [
   },
   {
     number: '02',
-    label: 'Ideation & Concepts',
-    tool: 'Lovable / Claude Code',
-    toolIcon: '💡',
+    label: 'Ideation & Validation',
+    tools: [
+      { logo: '/lovable.png', label: 'Lovable' },
+      { logo: '/claude.png',  label: 'Claude Code' },
+    ],
     what: "Generate initial UI concepts from a brief. I don't use them as finals — I use them to kill bad ideas faster and explore more directions.",
-    stat: { from: null, to: 'More directions', label: 'explored faster' },
+    stat: { from: '4 hours', to: '1 hour', label: 'of ideation' },
     color: '#B8D4F8',
     bgTint: `
       linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
@@ -37,10 +41,12 @@ const phases = [
   {
     number: '03',
     label: 'Final Designs',
-    tool: 'Cursor + Figma MCP',
-    toolIcon: '🎨',
+    tools: [
+      { logo: '/cursor.png', label: 'Cursor' },
+      { logo: '/figma.png',  label: 'Figma MCP' },
+    ],
     what: 'For simpler designs, ship frontend code directly to developers. Saves 2–3 hours of frontend development effort per handoff.',
-    stat: { from: null, to: '2–3 hrs saved', label: 'per frontend handoff' },
+    stat: { from: null, to: '3–4 hrs saved', label: 'per frontend handoff' },
     color: '#B8F4D4',
     bgTint: `
       linear-gradient(to bottom, rgb(234,232,225) 0%, transparent 18%),
@@ -53,8 +59,9 @@ const phases = [
   {
     number: '04',
     label: 'Documentation & Handoff',
-    tool: 'Claude Cowork',
-    toolIcon: '📋',
+    tools: [
+      { logo: '/claude.png', label: 'Claude Cowork' },
+    ],
     what: 'Design critique, system management, UX writing, accessibility, research synthesis, and developer handoff. My developers say my handoffs have never been clearer.',
     stat: { from: null, to: '8–10 hrs/week', label: 'saved total' },
     color: '#F8E4A0',
@@ -310,20 +317,26 @@ function CardDial({ currentPos, hasEntered, entranceComplete }) {
               transform: `rotate(${-rotZ}deg)`,
               transition: 'box-shadow 0.4s ease, transform 0.12s linear',
             }}>
-              {/* Phase number + tool badge */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+              {/* Phase number + tool badges */}
+              <div style={{ marginBottom: '20px' }}>
                 <span style={{
                   fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em',
                   textTransform: 'uppercase', color: phase.color,
+                  display: 'block', marginBottom: '10px',
                 }}>
                   Phase {phase.number}
                 </span>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  background: phase.color + '22', borderRadius: '999px',
-                  padding: '5px 12px', fontSize: '11px', fontWeight: 600, color: '#444',
-                }}>
-                  <span>{phase.toolIcon}</span><span>{phase.tool}</span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {phase.tools.map((t) => (
+                    <div key={t.label} style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '6px',
+                      background: phase.color + '22', borderRadius: '999px',
+                      padding: '5px 12px 5px 5px', fontSize: '11px', fontWeight: 600, color: '#444',
+                    }}>
+                      <img src={t.logo} alt="" style={{ width: '20px', height: '20px', borderRadius: '50%', objectFit: 'contain', background: '#fff', padding: '2px', flexShrink: 0 }} />
+                      <span>{t.label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -382,16 +395,21 @@ function MobilePhaseCard({ phase, delay }) {
       background: '#ffffff', borderRadius: '24px',
       padding: '32px 28px', boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-        <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: phase.color }}>
+      <div style={{ marginBottom: '16px' }}>
+        <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: phase.color, display: 'block', marginBottom: '10px' }}>
           Phase {phase.number}
         </span>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: '5px',
-          background: phase.color + '22', borderRadius: '999px',
-          padding: '5px 12px', fontSize: '11px', fontWeight: 600, color: '#444',
-        }}>
-          <span>{phase.toolIcon}</span><span>{phase.tool}</span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+          {phase.tools.map((t) => (
+            <div key={t.label} style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px',
+              background: phase.color + '22', borderRadius: '999px',
+              padding: '5px 12px 5px 5px', fontSize: '11px', fontWeight: 600, color: '#444',
+            }}>
+              <img src={t.logo} alt="" style={{ width: '20px', height: '20px', borderRadius: '50%', objectFit: 'contain', background: '#fff', padding: '2px', flexShrink: 0 }} />
+              <span>{t.label}</span>
+            </div>
+          ))}
         </div>
       </div>
       <h3 style={{ fontSize: '20px', fontWeight: 400, letterSpacing: '-0.02em', color: '#111', marginBottom: '12px' }}>
@@ -427,9 +445,6 @@ export default function AIProcessSection() {
   const [entranceComplete, setEntranceComplete] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const { ref: headRef } = useInView()
-  const progressRef = useRef(0)       // always-current progress for snap callback
-  const snapTimerRef = useRef(null)   // debounce timer
-  const isSnappingRef = useRef(false) // prevent snap re-triggering snap
 
   useEffect(() => {
     const mql = window.matchMedia('(max-width: 768px)')
@@ -442,35 +457,18 @@ export default function AIProcessSection() {
   const onScroll = useCallback(() => {
     const section = sectionRef.current
     if (!section || isMobile) return
-    if (isSnappingRef.current) return  // ignore scroll events during programmatic snap
 
-    const rect = section.getBoundingClientRect()
+    const rect      = section.getBoundingClientRect()
     const maxScroll = section.offsetHeight - window.innerHeight
-    const p = Math.max(0, Math.min(1, -rect.top / maxScroll))
+    const p         = Math.max(0, Math.min(1, -rect.top / maxScroll))
 
     if (!hasEntered && rect.top < window.innerHeight * 0.8) {
       setHasEntered(true)
       setTimeout(() => setEntranceComplete(true), 950)
     }
 
-    progressRef.current = p
     setProgress(p)
     setCurrentPos(p * (PHASE_COUNT - 1))
-
-    // Auto-snap: debounce — after 350ms of no scrolling, snap to nearest phase
-    if (snapTimerRef.current) clearTimeout(snapTimerRef.current)
-    snapTimerRef.current = setTimeout(() => {
-      const currentP = progressRef.current
-      const nearestPhase = Math.round(currentP * (PHASE_COUNT - 1))
-      const targetP = nearestPhase / (PHASE_COUNT - 1)
-      // Only snap if we're more than 2% away from the target
-      if (Math.abs(currentP - targetP) < 0.02) return
-      const targetScrollTop = section.offsetTop + targetP * maxScroll
-      isSnappingRef.current = true
-      window.scrollTo({ top: targetScrollTop, behavior: 'smooth' })
-      // Release snap lock after animation completes
-      setTimeout(() => { isSnappingRef.current = false }, 700)
-    }, 350)
   }, [isMobile, hasEntered])
 
   useEffect(() => {
@@ -484,10 +482,7 @@ export default function AIProcessSection() {
     }
     window.addEventListener('scroll', handler, { passive: true })
     handler()
-    return () => {
-      window.removeEventListener('scroll', handler)
-      if (snapTimerRef.current) clearTimeout(snapTimerRef.current)
-    }
+    return () => window.removeEventListener('scroll', handler)
   }, [onScroll, isMobile])
 
   // ── Mobile ─────────────────────────────────────────────────────────────
@@ -496,9 +491,9 @@ export default function AIProcessSection() {
       <section id="ai-process" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
         <div className="section-container">
           <div ref={headRef} className="reveal" style={{ marginBottom: '40px' }}>
-            <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '12px' }}>AI + Design Process</p>
+            <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '12px' }}>AI x Design Process</p>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.1, color: '#111' }}>
-              My Exact AI-Powered Design Stack
+              My AI Powered Design Process
             </h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -563,7 +558,7 @@ export default function AIProcessSection() {
             transform: hasEntered ? 'translateY(0)' : 'translateY(12px)',
             transition: 'opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.33,1,0.68,1) 0.1s',
           }}>
-            AI + Design Process
+            AI x Design Process
           </p>
           <h2 style={{
             fontSize: 'clamp(24px, 2.5vw, 34px)', fontWeight: 400,
@@ -572,7 +567,7 @@ export default function AIProcessSection() {
             transform: hasEntered ? 'translateY(0)' : 'translateY(16px)',
             transition: 'opacity 0.6s ease 0.25s, transform 0.6s cubic-bezier(0.33,1,0.68,1) 0.25s',
           }}>
-            My Exact AI-Powered Design Stack
+            My AI Powered Design Process
           </h2>
         </div>
 

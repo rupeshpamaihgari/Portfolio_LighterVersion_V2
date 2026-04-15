@@ -25,16 +25,16 @@ const PLACEHOLDER_TABS = {
 const AI_AGENTS_METRICS = [
   { value: '30–81%',   label: 'Reduction in time-to-hire' },
   { value: '1M+',      label: 'Candidates engaged per year' },
-  { value: '96.6%',    label: 'CSAT score 2025' },
   { value: '50K+ hrs', label: 'Manager time saved (HCA)' },
   { value: '404K',     label: 'Meetings scheduled YTD' },
   { value: '$4.6M',    label: 'Post-Pilot ARR' },
+  { value: '11.1 hrs', label: 'Fastest Time to fill' },
 ]
 
 const AGENT_PROJECTS = {
-  center:    { name: 'AI Recruiter',    subtitle: 'The Orchestrator',   desc: 'End-to-end autonomous recruiting — coordinates all agents from sourcing to placement, managing the full candidate journey without human intervention.' },
-  senseiq:   { name: 'SenseIQ',         subtitle: 'Intelligence Layer', desc: 'Scores and ranks candidates using behavioural signals, fit analysis, and historical hiring data — surfacing the best matches instantly.' },
-  listbuild: { name: 'List Builder',    subtitle: 'Sourcing Agent',     desc: 'Autonomously builds targeted candidate lists from multiple job boards and talent databases, keeping pipelines full without manual sourcing effort.' },
+  center:    { name: 'AI Recruiter (Orchestrator)', subtitle: 'The Orchestrator',   desc: 'End-to-end autonomous recruiting — coordinates all agents from sourcing to placement, managing the full candidate journey without human intervention.' },
+  senseiq:   { name: 'Sense IQ',        subtitle: 'Intelligence Layer', desc: 'Scores and ranks candidates using behavioural signals, fit analysis, and historical hiring data — surfacing the best matches instantly.' },
+  listbuild: { name: 'Matching Agent',  subtitle: 'Matching Agent',     desc: 'Autonomously builds targeted candidate lists from multiple job boards and talent databases, keeping pipelines full without manual sourcing effort.' },
   data:      { name: 'Data Agent',      subtitle: 'Data Pipeline',      desc: 'Cleans, enriches, and structures raw candidate data for downstream agent consumption — ensuring every agent works from a single source of truth.' },
   voice:     { name: 'Voice Agent',     subtitle: 'Screening Agent',    desc: 'Conducts AI-powered phone screens, transcribes responses, and surfaces key evaluation signals — enabling 24/7 candidate engagement at scale.' },
   screen:    { name: 'Screening Agent', subtitle: 'Evaluation Agent',   desc: 'Runs structured evaluations — achieving 20 qualified evaluations per 100 candidates, consistently outperforming average human recruiter benchmarks.' },
@@ -49,22 +49,23 @@ const toRad  = (deg) => deg * Math.PI / 180
 const restX  = (deg) => CX + ORBIT_R * Math.cos(toRad(deg))
 const restY  = (deg) => CY + ORBIT_R * Math.sin(toRad(deg))
 
+// Pentagon order (72° apart clockwise from top): Sense IQ → Matching → Voice → Screening → Data
 const SATELLITE_NODES = [
-  { id: 'senseiq',   label: 'SenseIQ',     icon: '🧠', angleDeg: 300, tooltipBelow: false,
+  { id: 'senseiq',   label: 'Sense IQ',       icon: '🧠', angleDeg: 270, tooltipBelow: true,  nudgeX: 0,
     color: { light: '#ddeeff', mid: '#B8D4F8', dark: '#7aaee8' },
-    tooltip: 'Scores and ranks candidates using behavioural signals and fit analysis.' },
-  { id: 'listbuild', label: 'List Builder', icon: '📋', angleDeg: 218, tooltipBelow: false,
+    tooltip: 'Foundational chat interface layer with a knowledge base of all Sense products.' },
+  { id: 'listbuild', label: 'Matching Agent',  icon: '🔗', angleDeg: 342, tooltipBelow: false, nudgeX: -32,
     color: { light: '#d4fce8', mid: '#B8F4D4', dark: '#7adcaa' },
-    tooltip: 'Builds targeted candidate lists from multiple job boards autonomously.' },
-  { id: 'data',      label: 'Data Agent',   icon: '⚡', angleDeg: 158, tooltipBelow: true,
-    color: { light: '#fdf2c4', mid: '#F8E4A0', dark: '#e8c84a' },
-    tooltip: 'Cleans and enriches raw candidate data for downstream agent consumption.' },
-  { id: 'voice',     label: 'Voice Agent',  icon: '🎙', angleDeg: 108, tooltipBelow: true,
+    tooltip: 'Runs candidate matching against open jobs to surface the most relevant talent.' },
+  { id: 'voice',     label: 'Voice Agent',     icon: '🎙', angleDeg: 54,  tooltipBelow: false, nudgeX: -20,
     color: { light: '#fdddd4', mid: '#F4A58A', dark: '#e07858' },
-    tooltip: 'Conducts AI-powered phone screens and surfaces key evaluation signals.' },
-  { id: 'screen',    label: 'Screening',    icon: '✅', angleDeg: 28, tooltipBelow: false,
+    tooltip: 'Multichannel agent that calls or chats with matched candidates on behalf of recruiters.' },
+  { id: 'screen',    label: 'Screening Agent', icon: '✅', angleDeg: 126, tooltipBelow: false, nudgeX: 20,
     color: { light: '#ecdeff', mid: '#D4B8F8', dark: '#b080f0' },
-    tooltip: 'Runs structured evaluations — 20 qualified candidates per 100 applicants.' },
+    tooltip: 'Understands resume, job description, and call transcript to screen and score candidates.' },
+  { id: 'data',      label: 'Data Agent',      icon: '📊', angleDeg: 198, tooltipBelow: false, nudgeX: 32,
+    color: { light: '#fdf2c4', mid: '#F8E4A0', dark: '#e8c84a' },
+    tooltip: 'Delivers prescriptive and predictive analytics to recruiters on AI Recruiter performance.' },
 ]
 
 const CENTER_NODE = {
@@ -72,8 +73,8 @@ const CENTER_NODE = {
   tooltip: 'Orchestrates all sub-agents to deliver end-to-end autonomous recruiting.',
 }
 
-// Cyclic tooltip order: SenseIQ → Screening → Voice Agent → Data Agent → List Builder → AI Recruiter
-const CYCLIC_ORDER   = ['senseiq', 'screen', 'voice', 'data', 'listbuild', 'center']
+// Cyclic tooltip order follows pentagon: Sense IQ → Matching → Voice → Screening → Data → AI Recruiter
+const CYCLIC_ORDER   = ['senseiq', 'listbuild', 'voice', 'screen', 'data', 'center']
 const CYCLE_DURATION = 3000   // ms tooltip stays visible
 const CYCLE_OUT_MS   = 280    // ms slide-out animation
 
@@ -105,7 +106,7 @@ const lightBlobStyle = (selected, hovered, color, glowing) => ({
 
 // ── Tooltip component ──────────────────────────────────────────────────────
 // color: { light, mid, dark } for satellites; null = dark theme for center blob
-function NodeTooltip({ text, isExiting, below = false, color = null }) {
+function NodeTooltip({ text, isExiting, below = false, color = null, nudgeX = 0 }) {
   const isDark = color === null
   const bg     = isDark ? '#1c1c1c' : color.light
   const border = isDark ? 'rgba(255,255,255,0.12)' : color.mid
@@ -118,7 +119,7 @@ function NodeTooltip({ text, isExiting, below = false, color = null }) {
       ...(below
         ? { top: 'calc(100% + 14px)', bottom: 'auto' }
         : { bottom: 'calc(100% + 14px)', top: 'auto' }),
-      left: '50%',
+      left: nudgeX === 0 ? '50%' : `calc(50% + ${nudgeX}px)`,
       background: bg,
       border: `1px solid ${border}`,
       borderRadius: '12px',
@@ -139,13 +140,13 @@ function NodeTooltip({ text, isExiting, below = false, color = null }) {
       <p style={{ fontSize: '10px', color: hint, fontWeight: 600, letterSpacing: '0.03em' }}>
         Click to view project details
       </p>
-      {/* Arrow — points toward the blob */}
+      {/* Arrow — points toward the blob, counter-offset to stay centered on blob */}
       <div style={{
         position: 'absolute',
         ...(below
           ? { bottom: '100%', top: 'auto', borderBottom: `7px solid ${bg}`, borderTop: 'none' }
           : { top: '100%', bottom: 'auto', borderTop: `7px solid ${bg}`, borderBottom: 'none' }),
-        left: '50%',
+        left: nudgeX === 0 ? '50%' : `calc(50% - ${nudgeX}px)`,
         transform: 'translateX(-50%)',
         width: 0, height: 0,
         borderLeft: '7px solid transparent',
@@ -168,6 +169,7 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
     }))
   )
   const lineRefs         = useRef([])
+  const edgeRefs         = useRef([])
   const rafRef           = useRef(null)
   const centerElRef      = useRef(null)
   const centerScaleRef   = useRef(1)
@@ -299,6 +301,17 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
           line.setAttribute('y2', node.currentY.toFixed(2))
         }
       })
+      // Update pentagon edges — both endpoints follow their blobs
+      nodesRef.current.forEach((node, i) => {
+        const next = nodesRef.current[(i + 1) % nodesRef.current.length]
+        const edge = edgeRefs.current[i]
+        if (edge) {
+          edge.setAttribute('x1', node.currentX.toFixed(2))
+          edge.setAttribute('y1', node.currentY.toFixed(2))
+          edge.setAttribute('x2', next.currentX.toFixed(2))
+          edge.setAttribute('y2', next.currentY.toFixed(2))
+        }
+      })
       if (!settled) rafRef.current = requestAnimationFrame(tick)
       else rafRef.current = null
     }
@@ -319,10 +332,10 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
       nodesRef.current.forEach(node => {
         const dx = mx - node.restX
         const dy = my - node.restY
-        let tx = node.restX + dx * 0.08
-        let ty = node.restY + dy * 0.08
+        let tx = node.restX + dx * 0.14
+        let ty = node.restY + dy * 0.14
         const dd = Math.sqrt((tx - node.restX) ** 2 + (ty - node.restY) ** 2)
-        if (dd > 22) { const s = 22 / dd; tx = node.restX + (tx - node.restX) * s; ty = node.restY + (ty - node.restY) * s }
+        if (dd > 42) { const s = 42 / dd; tx = node.restX + (tx - node.restX) * s; ty = node.restY + (ty - node.restY) * s }
         node.targetX = tx
         node.targetY = ty
       })
@@ -375,6 +388,7 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
         viewBox="0 0 500 500"
         preserveAspectRatio="xMidYMid meet"
       >
+        {/* Spokes: center → each satellite */}
         {SATELLITE_NODES.map((node, i) => (
           <line
             key={node.id}
@@ -387,6 +401,22 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
             strokeLinecap="round"
           />
         ))}
+        {/* Pentagon edges: consecutive satellite → satellite, refs let RAF update endpoints */}
+        {SATELLITE_NODES.map((node, i) => {
+          const next = SATELLITE_NODES[(i + 1) % SATELLITE_NODES.length]
+          return (
+            <line
+              key={`edge-${node.id}`}
+              ref={el => { edgeRefs.current[i] = el }}
+              x1={restX(node.angleDeg)} y1={restY(node.angleDeg)}
+              x2={restX(next.angleDeg)} y2={restY(next.angleDeg)}
+              stroke="rgba(0,0,0,0.28)"
+              strokeWidth="1.2"
+              strokeDasharray="3 8"
+              strokeLinecap="round"
+            />
+          )
+        })}
       </svg>
 
       {/* Center node */}
@@ -426,7 +456,7 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
       >
         <span style={{ fontSize: '26px', lineHeight: 1, marginBottom: '5px' }}>{CENTER_NODE.icon}</span>
         <span style={{ color: '#fff', fontSize: '10.5px', fontWeight: 700, textAlign: 'center', lineHeight: 1.25, padding: '0 10px', letterSpacing: '0.02em' }}>
-          AI Recruiter
+          AI Recruiter{'\n'}(Orchestrator)
         </span>
         {/* Hover tooltip */}
         {hoveredId === 'center' && <NodeTooltip text={CENTER_NODE.tooltip} isExiting={false} />}
@@ -477,7 +507,8 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
               width: '86px', height: '86px', borderRadius: '50%',
               ...lightBlobStyle(isSelected, isHovered, node.color, !isSelected && (isHovered || cyclicId === node.id || exitingId === node.id)),
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              zIndex: 2, cursor: 'pointer', willChange: 'transform',
+              zIndex: (isHovered || cyclicId === node.id || exitingId === node.id) ? 20 : 2,
+              cursor: 'pointer', willChange: 'transform',
             }}
           >
             <span style={{ fontSize: '20px', lineHeight: 1, marginBottom: '4px' }}>{node.icon}</span>
@@ -485,10 +516,10 @@ function BlobNetwork({ selectedNode, onSelectNode, outerRef }) {
               {node.label}
             </span>
             {/* Hover tooltip */}
-            {isHovered && <NodeTooltip text={node.tooltip} isExiting={false} below={node.tooltipBelow} color={node.color} />}
+            {isHovered && <NodeTooltip text={node.tooltip} isExiting={false} below={node.tooltipBelow} color={node.color} nudgeX={node.nudgeX} />}
             {/* Cyclic tooltip (only if not hovered) */}
-            {!isHovered && cyclicId  === node.id && <NodeTooltip text={node.tooltip} isExiting={false} below={node.tooltipBelow} color={node.color} />}
-            {!isHovered && exitingId === node.id && <NodeTooltip text={node.tooltip} isExiting={true}  below={node.tooltipBelow} color={node.color} />}
+            {!isHovered && cyclicId  === node.id && <NodeTooltip text={node.tooltip} isExiting={false} below={node.tooltipBelow} color={node.color} nudgeX={node.nudgeX} />}
+            {!isHovered && exitingId === node.id && <NodeTooltip text={node.tooltip} isExiting={true}  below={node.tooltipBelow} color={node.color} nudgeX={node.nudgeX} />}
           </div>
         )
       })}
@@ -583,6 +614,247 @@ function AIAgentsTab({ onOpenCaseStudy, sectionRef }) {
         {selectedNode
           ? <DetailPanel nodeId={selectedNode} onBack={() => setSelectedNode(null)} />
           : <OverviewPanel onOpenCaseStudy={onOpenCaseStudy} />}
+      </div>
+    </div>
+  )
+}
+
+// ── Automations tab data ───────────────────────────────────────────────────
+const AUTOMATION_METRICS = [
+  { value: '70%',      label: 'Growth in Candidate response rate' },
+  { value: '97%',      label: 'QoQ workflow growth Q2→Q3 2025' },
+  { value: '1,101',    label: 'Active workflows by Q3 2025' },
+  { value: '199',      label: 'Agencies with active workflows' },
+  { value: '10×',      label: 'Active journeys per customer' },
+  { value: '3×',       label: 'Weekly start capacity per recruiter (Carvana)' },
+]
+
+// ── Automations overview panel (right side) ────────────────────────────────
+function AutomationsOverviewPanel({ onOpenCaseStudy }) {
+  return (
+    <div style={{ animation: 'fadeInUp 0.4s cubic-bezier(0.33,1,0.68,1) forwards' }}>
+      <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '12px' }}>
+        Automations · SenseHQ
+      </p>
+      <h2 style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.1, color: '#111', marginBottom: '16px' }}>
+        Workflow Builder 2.0
+      </h2>
+      <p style={{ fontSize: '15px', lineHeight: 1.7, color: '#555', letterSpacing: '-0.01em', marginBottom: '28px', maxWidth: '460px' }}>
+        Evolved recruiting automation from linear sequences to a visual node-based canvas — the central nervous system where Messaging, Voice, Chatbot, and Scheduling converge into always-on workflows.
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '28px' }}>
+        {AUTOMATION_METRICS.map(m => <MetricCard key={m.label} {...m} />)}
+      </div>
+      <button className="btn-dark" onClick={onOpenCaseStudy} style={{ fontSize: '14px', padding: '12px 28px' }}>
+        Read Full Case Study →
+      </button>
+    </div>
+  )
+}
+
+// ── Workflow illustration data ─────────────────────────────────────────────
+const WORKFLOW_BLOCKS = [
+  { id: 'trigger', badge: 'Trigger',       badgeIcon: '▶',
+    title: 'New Application in ATS',
+    sub:   'When a candidate applies to an open role',
+    color: { light: '#d4fce8', mid: '#B8F4D4', dark: '#7adcaa' } },
+  { id: 'ai',      badge: 'AI Evaluation', badgeIcon: '🧠',
+    title: 'Candidate Scoring',
+    sub:   'Resume · JD match · behavioural signals',
+    color: { light: '#ddeeff', mid: '#B8D4F8', dark: '#7aaee8' } },
+  { id: 'action',  badge: 'Action',        badgeIcon: '⚡',
+    title: 'Send Communications',
+    sub:   'SMS + email to candidate & recruiter',
+    color: { light: '#fdddd4', mid: '#F4A58A', dark: '#e07858' } },
+  { id: 'output',  badge: 'Output',        badgeIcon: '✅',
+    title: 'Pipeline Updated',
+    sub:   'ATS synced · recruiter notified',
+    color: { light: '#fdf2c4', mid: '#F8E4A0', dark: '#e8c84a' } },
+]
+
+const TILT_DEPTHS = [1.0, 0.70, 0.42, 0.18]
+
+// ── ArrowConnector ─────────────────────────────────────────────────────────
+function ArrowConnector() {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', height: '28px', alignItems: 'center' }}>
+      <svg width="16" height="28" viewBox="0 0 16 28" fill="none">
+        <line x1="8" y1="0" x2="8" y2="20"
+              stroke="rgba(0,0,0,0.18)" strokeWidth="1.5"
+              strokeDasharray="3 4" strokeLinecap="round" />
+        <polygon points="8,28 3,19 13,19" fill="rgba(0,0,0,0.18)" />
+      </svg>
+    </div>
+  )
+}
+
+// ── WorkflowIllustration ───────────────────────────────────────────────────
+function WorkflowIllustration({ outerRef }) {
+  const containerRef = useRef(null)
+  const tiltRefs     = useRef([])
+  const rotRef       = useRef({ targetX: 0, targetY: 0, currentX: 0, currentY: 0 })
+  const rafRef       = useRef(null)
+  const [entered,   setEntered]   = useState(false)
+  const [animDone,  setAnimDone]  = useState(false)
+
+  // IntersectionObserver — trigger entry animation on scroll-into-view
+  useEffect(() => {
+    const el  = containerRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        obs.disconnect()
+        setEntered(true)
+        const t = setTimeout(() => setAnimDone(true), 1300)
+        return () => clearTimeout(t)
+      }
+    }, { threshold: 0.30 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  // RAF tilt loop
+  const startRaf = useCallback(() => {
+    if (rafRef.current) return
+    const tick = () => {
+      const r = rotRef.current
+      r.currentX += (r.targetX - r.currentX) * 0.10
+      r.currentY += (r.targetY - r.currentY) * 0.10
+
+      tiltRefs.current.forEach((el, i) => {
+        if (!el) return
+        const depth = TILT_DEPTHS[i] ?? 1
+        el.style.transform =
+          `perspective(700px) rotateX(${(r.currentX * depth).toFixed(3)}deg) rotateY(${(r.currentY * depth).toFixed(3)}deg)`
+      })
+
+      const doneX = Math.abs(r.targetX - r.currentX) < 0.01
+      const doneY = Math.abs(r.targetY - r.currentY) < 0.01
+      if (doneX && doneY) {
+        rafRef.current = null
+      } else {
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+    rafRef.current = requestAnimationFrame(tick)
+  }, [])
+
+  // Mouse tracking on the outer section ref
+  useEffect(() => {
+    const outer = outerRef?.current
+    if (!outer) return
+
+    const onMove = (e) => {
+      const rect = outer.getBoundingClientRect()
+      const cx   = rect.left + rect.width  / 2
+      const cy   = rect.top  + rect.height / 2
+      const dx   = e.clientX - cx
+      const dy   = e.clientY - cy
+      rotRef.current.targetY =  (dx / (rect.width  / 2)) * 26
+      rotRef.current.targetX = -(dy / (rect.height / 2)) * 16
+      startRaf()
+    }
+    const onLeave = () => {
+      rotRef.current.targetX = 0
+      rotRef.current.targetY = 0
+      startRaf()
+    }
+
+    outer.addEventListener('mousemove', onMove)
+    outer.addEventListener('mouseleave', onLeave)
+    return () => {
+      outer.removeEventListener('mousemove', onMove)
+      outer.removeEventListener('mouseleave', onLeave)
+      if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null }
+    }
+  }, [outerRef, startRaf])
+
+  return (
+    <div
+      ref={containerRef}
+      className="hidden md:flex"
+      style={{
+        width: '420px', flexShrink: 0,
+        flexDirection: 'column', justifyContent: 'center',
+        padding: '24px 28px',
+        background: 'rgba(255,255,255,0.35)',
+        borderRadius: '24px',
+        border: '1px solid rgba(0,0,0,0.06)',
+      }}
+    >
+      {WORKFLOW_BLOCKS.map((block, i) => {
+        const { color } = block
+        const delay = 0.1 + i * 0.15
+
+        // Entry style: before entered → hidden + shifted; after entered → visible
+        // After animDone, let the tilt wrapper fully own transforms
+        const entryStyle = animDone
+          ? { opacity: 1 }
+          : entered
+            ? {
+                opacity: 1,
+                transform: 'translateY(0) scale(1)',
+                transition: `transform 0.65s cubic-bezier(0.34,1.4,0.64,1) ${delay}s, opacity 0.5s ease ${delay}s`,
+              }
+            : {
+                opacity: 0,
+                transform: 'translateY(16px) scale(0.92)',
+                transition: `transform 0.65s cubic-bezier(0.34,1.4,0.64,1) ${delay}s, opacity 0.5s ease ${delay}s`,
+              }
+
+        return (
+          <div key={block.id}>
+            {/* tilt wrapper — RAF owns transform */}
+            <div ref={el => { tiltRefs.current[i] = el }}>
+              {/* entry wrapper — CSS transition owns opacity + translateY */}
+              <div style={{
+                ...entryStyle,
+                background: '#fff',
+                borderRadius: '20px',
+                padding: '16px 20px',
+                border: `1.5px solid ${color.dark}33`,
+                boxShadow: `0 4px 20px ${color.mid}44`,
+              }}>
+                {/* Badge row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                  <span style={{
+                    background: color.light, color: color.dark,
+                    borderRadius: '999px', padding: '3px 10px',
+                    fontSize: '11px', fontWeight: 700,
+                  }}>
+                    {block.badgeIcon} {block.badge}
+                  </span>
+                </div>
+                {/* Title */}
+                <div style={{ fontSize: '14px', fontWeight: 600, color: '#111', marginBottom: '4px' }}>
+                  {block.title}
+                </div>
+                {/* Sub */}
+                <div style={{ fontSize: '11.5px', color: '#888', lineHeight: 1.5 }}>
+                  {block.sub}
+                </div>
+                {/* Accent line */}
+                <div style={{ height: '2px', width: '32px', borderRadius: '2px', background: color.mid, marginTop: '12px' }} />
+              </div>
+            </div>
+            {/* Arrow connector between blocks */}
+            {i < WORKFLOW_BLOCKS.length - 1 && <ArrowConnector />}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+// ── Automations tab (left illustration + right panel) ──────────────────────
+function AutomationsTab({ onOpenCaseStudy, sectionRef }) {
+  return (
+    <div style={{ display: 'flex', gap: '48px', alignItems: 'center' }} className="flex-col md:flex-row">
+      {/* Left — workflow illustration */}
+      <WorkflowIllustration outerRef={sectionRef} />
+      {/* Right — overview panel */}
+      <div style={{ flex: '1 1 0', minWidth: 0 }}>
+        <AutomationsOverviewPanel onOpenCaseStudy={onOpenCaseStudy} />
       </div>
     </div>
   )
@@ -692,6 +964,8 @@ export default function ProjectsSection_2({ onOpenCaseStudy }) {
           <div key={currentTabId} style={{ animation: 'fadeInUp 0.35s cubic-bezier(0.33,1,0.68,1) forwards' }}>
             {currentTabId === 'ai-agents'
               ? <AIAgentsTab onOpenCaseStudy={onOpenCaseStudy} sectionRef={sectionRef} />
+              : currentTabId === 'automations'
+              ? <AutomationsTab onOpenCaseStudy={onOpenCaseStudy} sectionRef={sectionRef} />
               : <PlaceholderTab tabId={currentTabId} />}
           </div>
         </div>

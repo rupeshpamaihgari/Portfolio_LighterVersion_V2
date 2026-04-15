@@ -53,7 +53,7 @@ export default function CompanySection() {
             color: '#111',
             marginBottom: '12px',
           }}>
-            8–10 hrs
+            12 hrs
           </div>
 
           {/* Sub label */}
@@ -74,7 +74,7 @@ export default function CompanySection() {
             fontSize: '14.5px', lineHeight: 1.7, color: '#777',
             maxWidth: '380px', letterSpacing: '-0.01em',
           }}>
-            Startups and scale-ups that invest in experienced product design early save significantly on costly redesigns, engineering rework, and failed product launches.
+            Across research synthesis, ideation, frontend handoff, and documentation — AI tools compress hours of repetitive work into minutes, freeing up 12 hours every week for deeper thinking and better design decisions.
           </p>
 
           {/* Accent bar */}
