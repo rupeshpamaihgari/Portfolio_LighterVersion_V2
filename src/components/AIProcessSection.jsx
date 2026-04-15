@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import useInView from '../hooks/useInView'
+import { asset } from '../utils/asset'
 
 const phases = [
   {
     number: '01',
     label: 'Research & Discovery',
     tools: [
-      { logo: '/claude.png',      label: 'Claude' },
-      { logo: '/notebooklm.png',  label: 'NotebookLM' },
+      { logo: asset('/claude.png'),      label: 'Claude' },
+      { logo: asset('/notebooklm.png'),  label: 'NotebookLM' },
     ],
     what: 'Synthesize user interview notes and spot patterns in minutes. What used to take 3 hours of synthesis now takes 20 minutes.',
     stat: { from: '3 hours', to: '20 min', label: 'of synthesis' },
@@ -24,8 +25,8 @@ const phases = [
     number: '02',
     label: 'Ideation & Validation',
     tools: [
-      { logo: '/lovable.png', label: 'Lovable' },
-      { logo: '/claude.png',  label: 'Claude Code' },
+      { logo: asset('/lovable.png'), label: 'Lovable' },
+      { logo: asset('/claude.png'),  label: 'Claude Code' },
     ],
     what: "Generate initial UI concepts from a brief. I don't use them as finals — I use them to kill bad ideas faster and explore more directions.",
     stat: { from: '4 hours', to: '1 hour', label: 'of ideation' },
@@ -42,8 +43,8 @@ const phases = [
     number: '03',
     label: 'Final Designs',
     tools: [
-      { logo: '/cursor.png', label: 'Cursor' },
-      { logo: '/figma.png',  label: 'Figma MCP' },
+      { logo: asset('/cursor.png'), label: 'Cursor' },
+      { logo: asset('/figma.png'),  label: 'Figma MCP' },
     ],
     what: 'For simpler designs, ship frontend code directly to developers. Saves 2–3 hours of frontend development effort per handoff.',
     stat: { from: null, to: '3–4 hrs saved', label: 'per frontend handoff' },
@@ -60,7 +61,7 @@ const phases = [
     number: '04',
     label: 'Documentation & Handoff',
     tools: [
-      { logo: '/claude.png', label: 'Claude Cowork' },
+      { logo: asset('/claude.png'), label: 'Claude Cowork' },
     ],
     what: 'Design critique, system management, UX writing, accessibility, research synthesis, and developer handoff. My developers say my handoffs have never been clearer.',
     stat: { from: null, to: '8–10 hrs/week', label: 'saved total' },

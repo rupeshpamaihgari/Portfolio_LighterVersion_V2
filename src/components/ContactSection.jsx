@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import useInView from '../hooks/useInView'
+import { asset } from '../utils/asset'
 
 const cardStyle = {
   background: 'rgba(255,255,255,0.05)',
@@ -142,7 +143,7 @@ export default function ContactSection() {
             {/* ── RIGHT — illustration ── */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="/ContactSection.png"
+                src={asset('/ContactSection.png')}
                 alt="Contact illustration"
                 style={{
                   width: '100%',

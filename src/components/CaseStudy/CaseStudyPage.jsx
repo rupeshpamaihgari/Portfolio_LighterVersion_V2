@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import CaseStudyAccordion from './CaseStudyAccordion'
 import CaseStudyCallout from './CaseStudyCallout'
 import { CaseStudyImage, CaseStudyVideo, CaseStudyScrollableImage } from './CaseStudyMedia'
+import { asset } from '../../utils/asset'
 
 /* ─────────────────────────────────────────────────────────────
    Shared typography helpers
@@ -359,21 +360,21 @@ function IH({ children }) {
 function PersonaTable() {
   const personas = [
     {
-      avatar: '/illustrations/case-study/avatar1.png',
+      avatar: asset('/illustrations/case-study/avatar1.png'),
       name: 'The Recruiter (End User)',
       role: '"The Busy Bee"',
       need: 'Wants to eliminate data entry and scheduling busy work. They want the AI to "show up to work with interviews already scheduled" on their calendar.',
       accent: '#111',
     },
     {
-      avatar: '/illustrations/case-study/avatar2.png',
+      avatar: asset('/illustrations/case-study/avatar2.png'),
       name: 'The Ops Manager (The Builder)',
       role: '"The Architect"',
       need: 'Needs a scalable, visual canvas to orchestrate millions of touchpoints without creating "spaghetti logic" or managing hundreds of duplicate workflows.',
       accent: '#555',
     },
     {
-      avatar: '/illustrations/case-study/avatar3.png',
+      avatar: asset('/illustrations/case-study/avatar3.png'),
       name: 'The Candidate (The Recipient)',
       role: '"The Talent"',
       need: 'Expects a frictionless experience. Whether texting or talking to an AI, they want instant responses and no repetition of data they have already provided.',
@@ -630,10 +631,10 @@ function Step1() {
           <p style={T.body}>Before diving into the evolution, it's important to understand the breadth of problems Sense solves. The platform covers four main pillars:</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px', marginTop: '16px' }}>
             {[
-              { img: '/illustrations/case-study/Sourcing.png', title: 'Sourcing & Attraction', desc: 'Reactivating dormant candidate databases, referral automation, and chatbot screening.' },
-              { img: '/illustrations/case-study/Candidate_Engagement.png', title: 'Candidate Engagement', desc: 'Post-application acknowledgments, interview reminders, and status updates to prevent ghosting.' },
-              { img: '/illustrations/case-study/Efficiency.png', title: 'Recruiter Efficiency', desc: 'Automated interview scheduling, candidate scoring, and bulk messaging at scale.' },
-              { img: '/illustrations/case-study/Employee Engagement.png', title: 'Employee Engagement', desc: 'Onboarding workflows, NPS surveys, and assignment-end redeployment.' },
+              { img: asset('/illustrations/case-study/Sourcing.png'), title: 'Sourcing & Attraction', desc: 'Reactivating dormant candidate databases, referral automation, and chatbot screening.' },
+              { img: asset('/illustrations/case-study/Candidate_Engagement.png'), title: 'Candidate Engagement', desc: 'Post-application acknowledgments, interview reminders, and status updates to prevent ghosting.' },
+              { img: asset('/illustrations/case-study/Efficiency.png'), title: 'Recruiter Efficiency', desc: 'Automated interview scheduling, candidate scoring, and bulk messaging at scale.' },
+              { img: asset('/illustrations/case-study/Employee Engagement.png'), title: 'Employee Engagement', desc: 'Onboarding workflows, NPS surveys, and assignment-end redeployment.' },
             ].map((c, i) => (
               <InfoCard key={i} title={c.title}>
                 {c.desc}
@@ -653,7 +654,7 @@ function Step1() {
             <h3 style={T.h3}>The Goal</h3>
             <p style={T.body}>Design a system that detects a new job, identifies the best matches, screens them via Voice/Chat, and submits qualified profiles to the recruiter — zero human intervention required.</p>
           </div>
-          <CaseStudyImage src="/illustrations/case-study/Auto-Submissoin.png" alt="Auto-submission flow diagram" style={{ margin: 0 }} />
+          <CaseStudyImage src={asset('/illustrations/case-study/Auto-Submissoin.png')} alt="Auto-submission flow diagram" style={{ margin: 0 }} />
         </div>
       ),
     },
@@ -751,7 +752,7 @@ function Step1() {
         <p style={T.body}>
           <IH>About this Project:</IH> This case study documents my journey as a product designer in the overall evolution of Sense products to AI Agents — from disconnected point solutions to a fully autonomous AI Recruiter.
         </p>
-        <CaseStudyImage src="/illustrations/case-study/Step_1_HeroImage.png" alt="Sense Platform Overview" />
+        <CaseStudyImage src={asset('/illustrations/case-study/Step_1_HeroImage.png')} alt="Sense Platform Overview" />
       </Section>
 
       <Section>
@@ -763,9 +764,9 @@ function Step1() {
         <p style={T.body}>
           As Staff Product Designer for the Workflow Builder, I established a rigorous collaboration framework early on to ensure we were solving the right problems before a single pixel was pushed.
         </p>
-        <CaseStudyImage src="/illustrations/case-study/collaboration.png" alt="Cross-functional collaboration framework" />
+        <CaseStudyImage src={asset('/illustrations/case-study/collaboration.png')} alt="Cross-functional collaboration framework" />
         <p style={T.body}>This is how my typical busy week looked like…</p>
-        <CaseStudyImage src="/illustrations/case-study/Collaboration_Calendar.png" alt="Typical collaboration calendar" />
+        <CaseStudyImage src={asset('/illustrations/case-study/Collaboration_Calendar.png')} alt="Typical collaboration calendar" />
         <p style={T.body}>
           Although the calendar looks chaotic, we follow a framework to achieve efficiency in design: <IH>Research → Define → Validate ⟷ Design ⟷ Prototype → Build → QA test → Launch.</IH>
         </p>
@@ -782,7 +783,7 @@ function Step2() {
         <>
           <p style={T.body}><IH>What it did:</IH> A tool to create conversational interfaces for screening candidates or gathering feedback.</p>
           <p style={T.body}><IH>The UX Friction:</IH> It was rigid — limited logic (no nested branches), no "Text Piping" to personalise questions, and no validation for emails or phone numbers.</p>
-          <CaseStudyScrollableImage src="/illustrations/case-study/phase1/Chatbot_1.png" alt="Chatbot Builder 1.0" />
+          <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase1/Chatbot_1.png')} alt="Chatbot Builder 1.0" />
         </>
       ),
     },
@@ -792,7 +793,7 @@ function Step2() {
         <>
           <p style={T.body}><IH>What it did:</IH> The engine for defining who to contact. It allowed users to filter candidates based on ATS data.</p>
           <p style={T.body}><IH>The UX Friction:</IH> It was "Tightly Coupled." Lists were built inside a specific journey rather than existing as independent, reusable assets. No Boolean power, and users struggled to differentiate static vs. dynamic "Smart Lists".</p>
-          <CaseStudyScrollableImage src="/illustrations/case-study/phase1/Lists_1.png" alt="List Builder 1.0" />
+          <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase1/Lists_1.png')} alt="List Builder 1.0" />
         </>
       ),
     },
@@ -802,7 +803,7 @@ function Step2() {
         <>
           <p style={T.body}><IH>What it did:</IH> A console for 1:1 texting or Mass SMS blasts (Broadcasts).</p>
           <p style={T.body}><IH>The UX Friction:</IH> It was an isolated island. Data from a text conversation didn't easily trigger a follow-up journey — it was disconnected from the broader automation strategy.</p>
-          <CaseStudyScrollableImage src="/illustrations/case-study/phase1/Messaging_1.png" alt="Messaging interface" />
+          <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase1/Messaging_1.png')} alt="Messaging interface" />
         </>
       ),
     },
@@ -823,7 +824,7 @@ function Step2() {
         <p style={T.body}><IH>What it did:</IH> The primary automation engine. It allowed recruiters to send linear sequences of emails or SMS based on a trigger (e.g., "Candidate Applied").</p>
         <p style={T.body}><IH>The UX Friction:</IH> It was "Context Blind." A journey was merely a list of events with no native branching logic.</p>
         <p style={T.body}><IH>The "Clutter" Problem:</IH> Because assets weren't reusable, customers had to create hundreds of duplicate touchpoints. Cloning entire workflows resulted in massive, unmanageable systems.</p>
-        <CaseStudyScrollableImage src="/illustrations/case-study/phase1/Journeys_1.png" alt="Journeys 1.0 interface" />
+        <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase1/Journeys_1.png')} alt="Journeys 1.0 interface" />
       </Section>
 
       <Section>
@@ -874,7 +875,7 @@ function Step3() {
       title: 'Understanding the Nodes',
       content: (
         <>
-          <CaseStudyScrollableImage src="/illustrations/case-study/phase2/NodePanel.png" alt="Node panel" />
+          <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase2/NodePanel.png')} alt="Node panel" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px', marginTop: '16px' }}>
             <InfoCard title='Action Nodes (The "Doers")'>Modular nodes for SMS, Email, WhatsApp, and Voice — mix communication channels within a single flow.</InfoCard>
             <InfoCard title='Logical Nodes (The "Brains")'>Split, Filter, Foreach, and Delay nodes for conditional branching, audience filtering, batch processing, and time-based control.</InfoCard>
@@ -892,13 +893,13 @@ function Step3() {
       content: (
         <>
           <p style={T.body}>Despite the architectural success of Workflows, the UX hit a "complexity ceiling" that prevented full democratisation of the tool:</p>
-          <LimitationItem title='1. The "Boolean Burden" (Complexity)' imgSrc="/illustrations/case-study/phase2/booleanBurden.png" imgAlt="Boolean Burden" index={0}>
+          <LimitationItem title='1. The "Boolean Burden" (Complexity)' imgSrc={asset('/illustrations/case-study/phase2/booleanBurden.png')} imgAlt="Boolean Burden" index={0}>
             <p style={T.body}>Creating a precise "Job Match" list required manually constructing complex Boolean strings (e.g., <em>"(Location = SF OR NY) AND (Skills = Java) AND NOT (Status = Placed)"</em>). This alienated average recruiters.</p>
           </LimitationItem>
-          <LimitationItem title='2. "Dumb" Logic (Lack of Intelligence)' imgSrc="/illustrations/case-study/phase2/DumbLogic.png" imgAlt="Dumb Logic" index={1}>
+          <LimitationItem title='2. "Dumb" Logic (Lack of Intelligence)' imgSrc={asset('/illustrations/case-study/phase2/DumbLogic.png')} imgAlt="Dumb Logic" index={1}>
             <p style={T.body}>The logic was rigid. A candidate either matched a keyword or they didn't. The system lacked semantic intelligence to understand that a "React Developer" is also a good match for a "Frontend Engineer" role.</p>
           </LimitationItem>
-          <LimitationItem title='3. Data Blind Spots' imgSrc="/illustrations/case-study/phase2/Blind.png" imgAlt="Data Blind Spots" index={2}>
+          <LimitationItem title='3. Data Blind Spots' imgSrc={asset('/illustrations/case-study/phase2/Blind.png')} imgAlt="Data Blind Spots" index={2}>
             <p style={T.body}>Users struggled to analyse the performance of complex workflows. The dashboard only provided static charts — there was a disconnect between execution (Workflows) and insights (Analytics).</p>
           </LimitationItem>
           <CaseStudyCallout>
@@ -917,7 +918,7 @@ function Step3() {
         <p style={T.body}>
           To solve the fragmentation of Phase 1, we needed a central nervous system. We led the design of <IH>Workflows (Journey Builder 2.0)</IH>, moving the product from linear, disconnected lists to a visual <IH>Node-Based Canvas</IH>. This became the operating system where all Sense products (Messaging, Voice, Chatbot, Scheduling) converged.
         </p>
-        <CaseStudyImage src="/illustrations/case-study/phase2/Workflow_Integrations.png" alt="Workflow integrations unified architecture" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase2/Workflow_Integrations.png')} alt="Workflow integrations unified architecture" />
       </Section>
 
       <Section>
@@ -943,7 +944,7 @@ function Step3() {
           <LI><IH>Screening Node:</IH> Triggers an SMS Chatbot or Email to gauge interest.</LI>
           <LI><IH>Writeback Node:</IH> If the candidate responds positively, this node automatically updates the ATS field to "Submitted" — completing the objective without human hands.</LI>
         </OL>
-        <CaseStudyScrollableImage src="/illustrations/case-study/phase2/AutoSubmissionFull.png" alt="Auto-Submission workflow Phase 2" />
+        <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase2/AutoSubmissionFull.png')} alt="Auto-Submission workflow Phase 2" />
       </Section>
 
       <Section>
@@ -984,13 +985,13 @@ function Step4() {
       content: (
         <>
           <p style={T.body}>While Phase 3 made recruiters faster, it did not remove them from the process. Three critical limitations necessitated Phase 4:</p>
-          <LimitationItem title='1. Assistive vs. Autonomous (The "Human Bottleneck")' imgSrc="/illustrations/case-study/phase3/Human Bottleneck.png" imgAlt="Human Bottleneck" index={0}>
+          <LimitationItem title='1. Assistive vs. Autonomous (The "Human Bottleneck")' imgSrc={asset('/illustrations/case-study/phase3/Human Bottleneck.png')} imgAlt="Human Bottleneck" index={0}>
             <p style={T.body}>Ask AI could <em>write</em> the email, and AI Listers could <em>find</em> the candidates, but a human still had to push the button to launch the campaign. Speed to Lead was still limited by how fast a recruiter could log in and approve.</p>
           </LimitationItem>
-          <LimitationItem title='2. The "Execution Gap" (No Sensory Capability)' imgSrc="/illustrations/case-study/phase3/Execution gap.png" imgAlt="Execution Gap" index={1}>
+          <LimitationItem title='2. The "Execution Gap" (No Sensory Capability)' imgSrc={asset('/illustrations/case-study/phase3/Execution gap.png')} imgAlt="Execution Gap" index={1}>
             <p style={T.body}>The AI was text-based and passive. If a candidate replied saying "I'm interested but I cost $100/hr," the Phase 3 system couldn't negotiate or verify that rate via a phone call. It lacked Voice and Judgment capabilities.</p>
           </LimitationItem>
-          <LimitationItem title='3. Disconnected Brains' imgSrc="/illustrations/case-study/phase3/DisconnectedBrains.png" imgAlt="Disconnected Brains" index={2}>
+          <LimitationItem title='3. Disconnected Brains' imgSrc={asset('/illustrations/case-study/phase3/DisconnectedBrains.png')} imgAlt="Disconnected Brains" index={2}>
             <p style={T.body}>Jarvis knew the data ("Open rates are low"), and Ask AI knew the content ("Here is a better subject line"), but they were disconnected. The recruiter still had to act as middleware between insight and action.</p>
           </LimitationItem>
           <CaseStudyCallout>
@@ -1059,7 +1060,7 @@ function Step5() {
         <p style={T.body}>
           The goal was to move from <em>automation</em> (doing what you are told) to <em>agency</em> (making decisions). This phase introduced the <IH>Agentic World</IH> — transitioning from linear workflows to a dynamic ecosystem of specialised agents.
         </p>
-        <CaseStudyImage src="/illustrations/case-study/phase4/FullyAutonomous flow.png" alt="Fully Autonomous Flow diagram" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/FullyAutonomous flow.png')} alt="Fully Autonomous Flow diagram" />
       </Section>
 
       <Section>
@@ -1077,7 +1078,7 @@ function Step5() {
       <Section>
         <h3 style={T.h3}>Step 2: The Orchestrator — "Grace" (AI Recruiter)</h3>
         <p style={T.body}>With the sub-agents built, we needed a manager. We introduced <IH>Grace (The AI Recruiter)</IH> as the central orchestrator that commands this virtual workforce.</p>
-        <CaseStudyImage src="/illustrations/case-study/phase4/HeroImage.png" alt="Grace AI Recruiter" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/HeroImage.png')} alt="Grace AI Recruiter" />
         <p style={T.body}><IH>The Concept:</IH> "One Recruiter with the Power of a Team." Grace doesn't just do the work — she delegates it.</p>
 
         <h4 style={T.h4}>Discover Agent (The Sourcer)</h4>
@@ -1086,7 +1087,7 @@ function Step5() {
           <LI>Processes candidates in batches and features "Goal-based Exit" logic — stops searching once enough qualified candidates are found.</LI>
           <LI>Supports advanced filters like Zip Code Radius for remote jobs.</LI>
         </UL>
-        <CaseStudyImage src="/illustrations/case-study/phase4/discover.png" alt="Discover Agent" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/discover.png')} alt="Discover Agent" />
 
         <h4 style={T.h4}>Voice Agent (The Screener)</h4>
         <UL>
@@ -1094,7 +1095,7 @@ function Step5() {
           <LI>Dynamically analyses the transcript to determine call status (Consented, Hung Up, Voicemail), scheduling up to 3 retries with configurable delays.</LI>
           <LI>Dynamic Question Module (DQM) reads the Job Description to auto-generate role-specific questions.</LI>
         </UL>
-        <CaseStudyImage src="/illustrations/case-study/phase4/Evaluation.png" alt="Voice Agent" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/Evaluation.png')} alt="Voice Agent" />
 
         <h4 style={T.h4}>Evaluation Agent (The Judge)</h4>
         <UL>
@@ -1102,7 +1103,7 @@ function Step5() {
           <LI>Supports three modes: Resume only, Voice Transcript only, or holistic Resume + Voice analysis.</LI>
           <LI>If the score meets the threshold (e.g., 8/10), triggers an Object Writeback to automatically create the submission record in the ATS — no human data entry required.</LI>
         </UL>
-        <CaseStudyImage src="/illustrations/case-study/phase4/Evaluation Summary.png" alt="Evaluation Agent" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/Evaluation Summary.png')} alt="Evaluation Agent" />
       </Section>
 
       <Section>
@@ -1144,7 +1145,7 @@ function Step6() {
         <p style={T.body}>
           By evolving <IH>Auto-Submission</IH> from a manual task to an <IH>agentic workflow</IH>, we achieved measurable results across <IH>speed</IH>, <IH>scale</IH>, and <IH>candidate experience</IH>.
         </p>
-        <CaseStudyImage src="/illustrations/case-study/phase4/Summary.png" alt="Summary of outcomes and impact" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/Summary.png')} alt="Summary of outcomes and impact" />
       </Section>
 
       <Section>
@@ -1203,7 +1204,7 @@ function Step6() {
         <p style={T.body}>
           This case study documents the foundation for Sense's vision of "True Agentic AIR" (Humanized Grace) by 2026. We have successfully moved from <IH>automation (efficiency)</IH> to <IH>orchestration (intelligence)</IH>. The systems we designed — the interplay between Workflow infrastructure and specialised sub-agents like Voice and Jarvis — have paved the way for a future where AI handles the entire operational lifecycle, allowing human recruiters to focus entirely on building relationships.
         </p>
-        <CaseStudyImage src="/illustrations/case-study/phase4/Future.png" alt="Future vision of agentic AI" />
+        <CaseStudyImage src={asset('/illustrations/case-study/phase4/Future.png')} alt="Future vision of agentic AI" />
       </Section>
     </>
   )

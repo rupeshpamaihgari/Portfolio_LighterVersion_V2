@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import ToolsMarquee from './ToolsMarquee'
+import { asset } from '../utils/asset'
 
 export default function Hero() {
   const containerRef = useRef(null)
@@ -230,7 +231,7 @@ export default function Hero() {
             className="hidden lg:block"
           >
             <video
-              src="/HeroImageVideo.mp4"
+              src={asset('/HeroImageVideo.mp4')}
               autoPlay
               loop
               muted

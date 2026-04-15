@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import useInView from '../hooks/useInView'
+import { asset } from '../utils/asset'
 
 const achievements = [
   {
@@ -104,7 +105,7 @@ function AchievementCard({ item, trackRef }) {
       {/* Award image — centered near top */}
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
         <img
-          src="/award-symbol.png"
+          src={asset('/award-symbol.png')}
           alt="award"
           style={{ width: '90px', height: '90px', objectFit: 'contain' }}
         />
@@ -256,7 +257,7 @@ export default function AchievementsSection() {
             className="hidden lg:block"
           >
             <video
-              src="/Achievements.mp4"
+              src={asset('/Achievements.mp4')}
               autoPlay
               loop
               muted

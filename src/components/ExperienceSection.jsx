@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import useInView from '../hooks/useInView'
+import { asset } from '../utils/asset'
 
 const eras = [
   {
@@ -17,7 +18,7 @@ const eras = [
       </>
     ),
     icon: '🤖',
-    logo: '/Sense.png',
+    logo: asset('/Sense.png'),
     color: '#F8E4A0',
     metrics: [
       { value: '80%',  label: 'Reduction in\ntime-to-hire' },
@@ -32,7 +33,7 @@ const eras = [
     description:
       "Joined as a founding designer at Betterplace and contributed to core products involving background verification of blue-collared employees, attendance tracking apps, and more.",
     icon: '🤝',
-    logo: '/betterplace.png',
+    logo: asset('/betterplace.png'),
     color: '#B8F4D4',
     metrics: [
       { value: '4.4',   label: 'App\nRating' },
@@ -47,7 +48,7 @@ const eras = [
     description:
       'I landed my first role as a UX Designer at Unisys. This was my exposure to the global stage. I had the opportunity to work on enterprise products for international clients across Public Sector, Travel and Transportation domains.',
     icon: '🌍',
-    logo: '/Unisys_logo_2022.svg',
+    logo: asset('/Unisys_logo_2022.svg'),
     color: '#B8D4F8',
     clientChips: { label: 'Notable Clients', chips: ['SaS Cargo', 'DigiYatra', 'Singapore Airport', 'Delta Airlines'] },
   },
