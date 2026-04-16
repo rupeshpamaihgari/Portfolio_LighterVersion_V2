@@ -860,6 +860,134 @@ function AutomationsTab({ onOpenCaseStudy, sectionRef }) {
   )
 }
 
+// ── Mobile tab ─────────────────────────────────────────────────────────────
+const MOBILE_PROJECTS = [
+  {
+    title: 'Attendance Mobile App',
+    subtitle: 'Betterplace · 2019–2021',
+    thumb: 'https://rupeshpamaihgari.github.io/Portfolio-2026/Betterplace_Thumbnails/Attendance_Mobile.png',
+    driveUrl: 'https://drive.google.com/file/d/1UN6BaK7dSt8rmJYjToqBcL2AKPWkUI8y/view?usp=sharing',
+    tag: 'Mobile App',
+  },
+  {
+    title: 'Attendance Admin Portal',
+    subtitle: 'Betterplace · 2019–2021',
+    thumb: 'https://rupeshpamaihgari.github.io/Portfolio-2026/Betterplace_Thumbnails/Attendance_Admin.png',
+    driveUrl: 'https://drive.google.com/file/d/15sQIwlmsFu4vE2eL0k2qlx88zra7964r/view?usp=sharing',
+    tag: 'Web Portal',
+  },
+  {
+    title: 'Jobs Application',
+    subtitle: 'Betterplace · 2019–2021',
+    thumb: 'https://rupeshpamaihgari.github.io/Portfolio-2026/Betterplace_Thumbnails/Jobs%20App.png',
+    driveUrl: 'https://drive.google.com/file/d/1yP_ZKInS5wyR9sSHFiFICL2eZ_piUHel/view?usp=sharing',
+    tag: 'Mobile App',
+  },
+]
+
+function MobileTab() {
+  return (
+    <div style={{ paddingTop: '8px', paddingBottom: '16px' }}>
+      {/* Header */}
+      <div style={{ marginBottom: '32px' }}>
+        <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '8px' }}>
+          Betterplace · Blue-collar workforce
+        </p>
+        <h3 style={{ fontSize: 'clamp(22px, 2.5vw, 32px)', fontWeight: 600, letterSpacing: '-0.025em', color: '#111', marginBottom: '10px' }}>
+          Mobile
+        </h3>
+        <p style={{ fontSize: '15px', lineHeight: 1.7, color: '#666', maxWidth: '480px' }}>
+          Native-feeling apps for India's blue-collar workforce — attendance tracking, job applications, and admin tooling.
+        </p>
+      </div>
+
+      {/* Thumbnail grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        {MOBILE_PROJECTS.map((project) => (
+          <a
+            key={project.title}
+            href={project.driveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none', display: 'block' }}
+            onMouseEnter={e => {
+              e.currentTarget.querySelector('.thumb-wrap').style.transform = 'translateY(-4px)'
+              e.currentTarget.querySelector('.thumb-wrap').style.boxShadow = '0 12px 36px rgba(0,0,0,0.13)'
+              e.currentTarget.querySelector('.drive-hint').style.opacity = '1'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.querySelector('.thumb-wrap').style.transform = 'translateY(0)'
+              e.currentTarget.querySelector('.thumb-wrap').style.boxShadow = '0 2px 16px rgba(0,0,0,0.07)'
+              e.currentTarget.querySelector('.drive-hint').style.opacity = '0'
+            }}
+          >
+            {/* Thumbnail */}
+            <div
+              className="thumb-wrap"
+              style={{
+                borderRadius: '16px',
+                overflow: 'hidden',
+                background: 'rgba(255,255,255,0.7)',
+                border: '1px solid rgba(0,0,0,0.07)',
+                boxShadow: '0 2px 16px rgba(0,0,0,0.07)',
+                transition: 'transform 0.22s ease, box-shadow 0.22s ease',
+                position: 'relative',
+                aspectRatio: '4/3',
+              }}
+            >
+              <img
+                src={project.thumb}
+                alt={project.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+              {/* Drive hint overlay */}
+              <div
+                className="drive-hint"
+                style={{
+                  position: 'absolute', inset: 0,
+                  background: 'rgba(0,0,0,0.45)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  opacity: 0,
+                  transition: 'opacity 0.2s ease',
+                  borderRadius: '16px',
+                }}
+              >
+                <span style={{
+                  background: 'rgba(255,255,255,0.95)',
+                  color: '#111',
+                  fontSize: '12px', fontWeight: 600,
+                  borderRadius: '999px',
+                  padding: '8px 18px',
+                  letterSpacing: '-0.01em',
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                }}>
+                  View on Drive ↗
+                </span>
+              </div>
+            </div>
+
+            {/* Card meta */}
+            <div style={{ padding: '12px 4px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#111', letterSpacing: '-0.01em' }}>
+                  {project.title}
+                </span>
+                <span style={{
+                  fontSize: '10px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
+                  color: '#888', background: 'rgba(0,0,0,0.05)', borderRadius: '999px', padding: '3px 8px',
+                }}>
+                  {project.tag}
+                </span>
+              </div>
+              <p style={{ fontSize: '12px', color: '#aaa', margin: 0 }}>{project.subtitle}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ── Placeholder tab ────────────────────────────────────────────────────────
 function PlaceholderTab({ tabId }) {
   const data    = PLACEHOLDER_TABS[tabId]
@@ -966,6 +1094,8 @@ export default function ProjectsSection_2({ onOpenCaseStudy }) {
               ? <AIAgentsTab onOpenCaseStudy={onOpenCaseStudy} sectionRef={sectionRef} />
               : currentTabId === 'automations'
               ? <AutomationsTab onOpenCaseStudy={onOpenCaseStudy} sectionRef={sectionRef} />
+              : currentTabId === 'mobile'
+              ? <MobileTab />
               : <PlaceholderTab tabId={currentTabId} />}
           </div>
         </div>
