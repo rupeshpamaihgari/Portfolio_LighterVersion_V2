@@ -988,6 +988,205 @@ function MobileTab() {
   )
 }
 
+// ── AR/VR tab ──────────────────────────────────────────────────────────────
+const ARVR_PROJECTS = [
+  {
+    id: 'hololens',
+    title: 'Hololens — Automated Home Designer',
+    tag: 'HoloLens · Mixed Reality',
+    description:
+      'A HoloLens experience that lets you design interior spaces in the air — placing furniture at true scale and seeing a room evolve in seconds. It also opens a clear path to upsell: integrating with furniture makers so the pieces you try can become the pieces you buy.',
+    videoUrl: 'https://drive.google.com/file/d/1MmX8obDVQmi8dNixBg1dRsWQG8Z0F47_/preview',
+    videoType: 'drive',
+    color: { mid: '#B8D4F8', dark: '#7aaee8' },
+  },
+  {
+    id: 'bayer',
+    title: "Bayer's Digital Label",
+    tag: 'Mobile · Computer Vision',
+    description:
+      'An intelligent mobile assistant for farmers — built to scan crops, identify diseases, and read product labels on the spot. It can also speak and listen in local languages, making expert guidance feel accessible in the field.',
+    videoUrl: 'https://www.youtube.com/embed/l6kLjIw0_Gs',
+    videoType: 'youtube',
+    color: { mid: '#B8F4D4', dark: '#7adcaa' },
+  },
+  {
+    id: 'alina',
+    title: 'Alina — Intelligent Assistant',
+    tag: 'Smart Home · AI Assistant',
+    description:
+      'A simple AI assistant for smart homes — built to monitor IoT-connected devices, spot issues early, and guide users through quick troubleshooting. The goal was calm, human help when something breaks.',
+    videoUrl: 'https://www.youtube.com/embed/6I6ZcsgxCLU',
+    videoType: 'youtube',
+    color: { mid: '#D4B8F8', dark: '#b080f0' },
+  },
+  {
+    id: 'accudrive',
+    title: 'Accudrive — Driver Assistant',
+    tag: 'XR · Driver Safety',
+    description:
+      'Inspired by my "Reality Virtually" work on safer roads, Accudrive explored how XR can coach better driving in the moment. It blends monitoring, feedback, and simulation to make training feel real — without real-world risk.',
+    videoUrl: 'https://www.youtube.com/embed/K1FFypjD7PM',
+    videoType: 'youtube',
+    color: { mid: '#F4A58A', dark: '#e07858' },
+  },
+  {
+    id: 'wheres-my-way',
+    title: 'Where Is My Way — Game',
+    tag: 'Game Design · Hackathon',
+    description:
+      "My game-dev roots still show up here — this project grew from the same competitive energy that helped me win HackerEarth's first Game Development Hackathon. I build playful worlds with serious intent: craft, emotion, and sharp UX choices.",
+    videoUrl: 'https://www.youtube.com/embed/-eWyRrsDbRo',
+    videoType: 'youtube',
+    color: { mid: '#F8E4A0', dark: '#e8c84a' },
+  },
+]
+
+function ARVRTab() {
+  const [activeId, setActiveId]             = useState(ARVR_PROJECTS[0].id)
+  const [hasInteracted, setHasInteracted]   = useState(false)
+  const active = ARVR_PROJECTS.find(p => p.id === activeId)
+
+  // Build the iframe URL — autoplay only after user clicks a project
+  const videoSrc = (() => {
+    const sep = active.videoUrl.includes('?') ? '&' : '?'
+    if (!hasInteracted) return active.videoUrl
+    return active.videoType === 'youtube'
+      ? `${active.videoUrl}${sep}autoplay=1&rel=0`
+      : `${active.videoUrl}${sep}autoplay=1`
+  })()
+
+  const handleSelect = (id) => {
+    if (id === activeId) return
+    setHasInteracted(true)
+    setActiveId(id)
+  }
+
+  return (
+    <div style={{ paddingTop: '8px', paddingBottom: '16px' }}>
+      {/* Header */}
+      <div style={{ marginBottom: '28px' }}>
+        <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '8px' }}>
+          Spatial computing · Hackathons · Prototypes
+        </p>
+        <h3 style={{ fontSize: 'clamp(22px, 2.5vw, 32px)', fontWeight: 600, letterSpacing: '-0.025em', color: '#111', marginBottom: '10px' }}>
+          AR / VR
+        </h3>
+        <p style={{ fontSize: '15px', lineHeight: 1.7, color: '#666', maxWidth: '520px' }}>
+          Where storytelling becomes something you can step into — immersive experiences that blend craft, curiosity, and real-world problem solving.
+        </p>
+      </div>
+
+      {/* Main layout: video left, project list right */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.35fr) minmax(0, 1fr)', gap: '28px', alignItems: 'start' }}>
+        {/* ── Video player ── */}
+        <div
+          style={{
+            aspectRatio: '16 / 9',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            background: '#111',
+            boxShadow: `0 10px 32px ${active.color.mid}55, 0 2px 12px rgba(0,0,0,0.08)`,
+            border: `1.5px solid ${active.color.dark}33`,
+            position: 'relative',
+            transition: 'box-shadow 0.35s ease, border-color 0.35s ease',
+          }}
+        >
+          <iframe
+            key={active.id}
+            src={videoSrc}
+            title={active.title}
+            style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+          />
+        </div>
+
+        {/* ── Project list ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {ARVR_PROJECTS.map((p) => {
+            const isActive = p.id === activeId
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => handleSelect(p.id)}
+                onMouseEnter={e => {
+                  if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.95)'
+                }}
+                onMouseLeave={e => {
+                  if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.55)'
+                }}
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  display: 'block',
+                  background: isActive ? '#fff' : 'rgba(255,255,255,0.55)',
+                  border: `1.5px solid ${isActive ? p.color.dark + '55' : 'rgba(0,0,0,0.06)'}`,
+                  borderRadius: '14px',
+                  padding: '14px 16px',
+                  cursor: 'pointer',
+                  boxShadow: isActive
+                    ? `0 6px 18px ${p.color.mid}55`
+                    : '0 1px 4px rgba(0,0,0,0.04)',
+                  transition: 'background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease',
+                }}
+              >
+                {/* Title row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: isActive ? '6px' : '2px' }}>
+                  {/* Coloured play/indicator */}
+                  <span style={{
+                    width: '22px', height: '22px', borderRadius: '50%',
+                    background: isActive ? p.color.dark : p.color.mid + '55',
+                    color: isActive ? '#fff' : p.color.dark,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '10px', flexShrink: 0,
+                    transition: 'background 0.22s ease, color 0.22s ease',
+                  }}>
+                    ▶
+                  </span>
+                  <span style={{
+                    fontSize: '13.5px', fontWeight: isActive ? 650 : 550,
+                    color: '#111', letterSpacing: '-0.015em', lineHeight: 1.3,
+                  }}>
+                    {p.title}
+                  </span>
+                </div>
+
+                {/* Tag row — always visible but subtle */}
+                <p style={{
+                  fontSize: '11px', color: '#999', margin: '0 0 0 32px',
+                  letterSpacing: '0.02em',
+                }}>
+                  {p.tag}
+                </p>
+
+                {/* Expanding description */}
+                <div
+                  style={{
+                    maxHeight: isActive ? '200px' : '0',
+                    overflow: 'hidden',
+                    transition: 'max-height 0.35s cubic-bezier(0.33,1,0.68,1), margin-top 0.25s ease',
+                    marginTop: isActive ? '8px' : '0',
+                    marginLeft: '32px',
+                  }}
+                >
+                  <p style={{
+                    fontSize: '12.5px', lineHeight: 1.6, color: '#666',
+                    margin: 0, letterSpacing: '-0.005em',
+                  }}>
+                    {p.description}
+                  </p>
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Placeholder tab ────────────────────────────────────────────────────────
 function PlaceholderTab({ tabId }) {
   const data    = PLACEHOLDER_TABS[tabId]
@@ -1096,6 +1295,8 @@ export default function ProjectsSection_2({ onOpenCaseStudy }) {
               ? <AutomationsTab onOpenCaseStudy={onOpenCaseStudy} sectionRef={sectionRef} />
               : currentTabId === 'mobile'
               ? <MobileTab />
+              : currentTabId === 'arvr'
+              ? <ARVRTab />
               : <PlaceholderTab tabId={currentTabId} />}
           </div>
         </div>
