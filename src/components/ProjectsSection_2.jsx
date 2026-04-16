@@ -1047,13 +1047,15 @@ function ARVRTab() {
   const [hasInteracted, setHasInteracted]   = useState(false)
   const active = ARVR_PROJECTS.find(p => p.id === activeId)
 
-  // Build the iframe URL — autoplay only after user clicks a project
+  // Build the iframe URL — always muted by default; autoplay only after user clicks a project
   const videoSrc = (() => {
     const sep = active.videoUrl.includes('?') ? '&' : '?'
-    if (!hasInteracted) return active.videoUrl
-    return active.videoType === 'youtube'
-      ? `${active.videoUrl}${sep}autoplay=1&rel=0`
-      : `${active.videoUrl}${sep}autoplay=1`
+    if (active.videoType === 'youtube') {
+      const base = `${active.videoUrl}${sep}mute=1&rel=0`
+      return hasInteracted ? `${base}&autoplay=1` : base
+    }
+    // Google Drive preview: browsers already mute autoplay; just pass autoplay after interaction
+    return hasInteracted ? `${active.videoUrl}${sep}autoplay=1` : active.videoUrl
   })()
 
   const handleSelect = (id) => {
