@@ -1189,6 +1189,62 @@ function ARVRTab() {
   )
 }
 
+// ── Design System tab ─────────────────────────────────────────────────────
+const DESIGN_SYSTEM_METRICS = [
+  { value: '130+',    label: 'Components, tokens & utilities' },
+  { value: '9',       label: 'Design token categories' },
+  { value: '17+',     label: 'Active contributors' },
+  { value: 'WCAG AA', label: 'Accessibility compliance' },
+  { value: 'v0.6',    label: 'Current version · actively shipped' },
+  { value: '10',      label: 'AI-native prompt components' },
+]
+
+function DesignSystemTab() {
+  return (
+    <div style={{ display: 'flex', gap: '48px', alignItems: 'center' }} className="flex-col md:flex-row">
+      {/* Left — image placeholder */}
+      <div
+        className="hidden md:flex"
+        style={{
+          width: '420px', flexShrink: 0,
+          aspectRatio: '4 / 5',
+          borderRadius: '24px',
+          background: 'rgba(255,255,255,0.35)',
+          border: '1.5px dashed rgba(0,0,0,0.10)',
+          alignItems: 'center', justifyContent: 'center',
+        }}
+      >
+        <p style={{ fontSize: '13px', color: '#ccc', fontWeight: 500 }}>Image coming soon</p>
+      </div>
+
+      {/* Right — overview */}
+      <div style={{ flex: '1 1 0', minWidth: 0, animation: 'fadeInUp 0.4s cubic-bezier(0.33,1,0.68,1) forwards' }}>
+        <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '12px' }}>
+          Design System · SenseHQ
+        </p>
+        <h2 style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.1, color: '#111', marginBottom: '16px' }}>
+          Genesis
+        </h2>
+        <p style={{ fontSize: '15px', lineHeight: 1.7, color: '#555', letterSpacing: '-0.01em', marginBottom: '28px', maxWidth: '460px' }}>
+          Sense's foundational design system — the single source of truth for UI across the entire platform. From design tokens to AI-native components, Genesis ensures every product speaks the same design and interaction language, regardless of who builds it.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '28px' }}>
+          {DESIGN_SYSTEM_METRICS.map(m => <MetricCard key={m.label} {...m} />)}
+        </div>
+        <a
+          href="https://spaced-out.github.io/ui-design-system/?path=/docs/introduction--docs"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-dark"
+          style={{ fontSize: '14px', padding: '12px 28px', display: 'inline-block', textDecoration: 'none' }}
+        >
+          View Storybook →
+        </a>
+      </div>
+    </div>
+  )
+}
+
 // ── Placeholder tab ────────────────────────────────────────────────────────
 function PlaceholderTab({ tabId }) {
   const data    = PLACEHOLDER_TABS[tabId]
@@ -1299,6 +1355,8 @@ export default function ProjectsSection_2({ onOpenCaseStudy }) {
               ? <MobileTab />
               : currentTabId === 'arvr'
               ? <ARVRTab />
+              : currentTabId === 'design-system'
+              ? <DesignSystemTab />
               : <PlaceholderTab tabId={currentTabId} />}
           </div>
         </div>
