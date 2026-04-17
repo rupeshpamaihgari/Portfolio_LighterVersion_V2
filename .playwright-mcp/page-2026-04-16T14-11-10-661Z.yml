@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "About me" [ref=e4]:
+        - /url: "#intro"
+      - link "Achievements" [ref=e5]:
+        - /url: "#achievements"
+      - link "Experience" [ref=e6]:
+        - /url: "#experience"
+      - link "Projects" [ref=e7]:
+        - /url: "#projects"
+      - link "Design Process" [ref=e8]:
+        - /url: "#design-process"
+      - link "Contact" [ref=e9]:
+        - /url: "#contact"
+      - link "Resume" [ref=e10]:
+        - /url: https://drive.google.com/file/d/1KYs4Cow6IVj9G5wGh_EP0jkjD-6-cwfu/view?usp=sharing
+  - generic [ref=e12]:
+    - generic [ref=e13]:
+      - img "TV Frame"
+    - generic [ref=e21]:
+      - heading "Hi, Welcome to my story." [level=1] [ref=e22]
+      - heading "I'm Rupesh Pamaihgari" [level=2] [ref=e23]
+      - heading "Staff Product Designer @ Sense | AR/VR/XR Developer" [level=3] [ref=e24]
+      - paragraph [ref=e25]: I bridge the gap between complex code and human experience. With over 10 years of experience, I specialize in productizing AI Agents and SaaS tools from 0 → 1.
+      - paragraph [ref=e26]: I have led the end-to-end design of 10+ complex platforms, crafting every detail from research to release.
+  - generic:
+    - generic: ↓
+    - paragraph: Scroll

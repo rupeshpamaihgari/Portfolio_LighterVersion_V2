@@ -1,0 +1,36 @@
+- generic [ref=e3]:
+  - navigation "Global" [ref=e6]:
+    - generic [ref=e10]:
+      - generic [ref=e12]:
+        - link "Skip to canvas" [ref=e13] [cursor=pointer]:
+          - /url: "#storybook-preview-wrapper"
+        - link "Genesis" [ref=e15] [cursor=pointer]:
+          - /url: ./
+          - img "Genesis"
+        - switch "Settings" [ref=e16] [cursor=pointer]:
+          - img [ref=e17]
+      - generic [ref=e20]: Search for components
+      - combobox "Search for components" [ref=e22]:
+        - generic:
+          - img
+        - searchbox "Search for components" [ref=e23]
+        - code:
+          - generic: ⌘
+          - text: K
+  - main [ref=e47]:
+    - region "Toolbar" [ref=e48]:
+      - heading "Toolbar" [level=2] [ref=e49]
+      - toolbar [ref=e50]:
+        - switch "Outline tool" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+        - button "Enter full screen" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+    - region "Main preview area" [ref=e59]:
+      - heading "Main preview area" [level=2] [ref=e60]
+      - generic [ref=e61]:
+        - progressbar "Content is loading..." [ref=e63]
+        - generic [ref=e64]:
+          - link "Skip to sidebar" [ref=e65] [cursor=pointer]:
+            - /url: "#model-context-protocol-mcp--docs"
+          - iframe [ref=e66]:
+            
