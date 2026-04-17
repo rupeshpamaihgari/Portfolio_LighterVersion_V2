@@ -1191,7 +1191,7 @@ function ARVRTab() {
 
 // ── Design System tab ─────────────────────────────────────────────────────
 const DESIGN_SYSTEM_METRICS = [
-  { value: '130+',    label: 'Components, tokens & utilities' },
+  { value: '20+',     label: 'Contributed Components' },
   { value: '9',       label: 'Design token categories' },
   { value: '17+',     label: 'Active contributors' },
   { value: 'WCAG AA', label: 'Accessibility compliance' },
