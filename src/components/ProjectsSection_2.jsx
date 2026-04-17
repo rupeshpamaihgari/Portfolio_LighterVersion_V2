@@ -1199,8 +1199,8 @@ const DESIGN_SYSTEM_METRICS = [
 ]
 
 const GENESIS_IMAGES = [
-  'alert', 'button', 'buttontab', 'checkbox', 'chip',
-  'currency', 'dropdown', 'icons', 'input', 'slider', 'stepper', 'toggle',
+  'alert', 'avatar', 'bars', 'buttons', 'buttontabs',
+  'checkbox', 'currency', 'dropdown', 'radio', 'slider', 'stepper', 'toggle', 'token1',
 ]
 
 function DesignSystemTab() {
@@ -1256,7 +1256,7 @@ function DesignSystemTab() {
               }}
             >
               <img
-                src={asset(`/genesis/${name}.svg`)}
+                src={asset(`/genesis/${name}.png`)}
                 alt={name}
                 style={{ width: '100%', display: 'block' }}
               />
