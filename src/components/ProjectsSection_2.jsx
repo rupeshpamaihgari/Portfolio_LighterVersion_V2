@@ -1193,9 +1193,7 @@ function ARVRTab() {
 const DESIGN_SYSTEM_METRICS = [
   { value: '30+',     label: 'Contributed Components' },
   { value: '15',      label: 'Components Owned' },
-  { value: '17+',     label: 'Active contributors' },
   { value: 'WCAG AA', label: 'Accessibility compliance' },
-  { value: 'v0.6',    label: 'Current version · actively shipped' },
   { value: '10',      label: 'AI-native prompt components' },
 ]
 
