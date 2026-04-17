@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import useInView from '../hooks/useInView'
-import { asset } from '../utils/asset'
 
 // ── Tab definitions ────────────────────────────────────────────────────────
 const CATEGORY_TABS = [
@@ -1198,71 +1197,22 @@ const DESIGN_SYSTEM_METRICS = [
   { value: '10',      label: 'AI-native prompt components' },
 ]
 
-const GENESIS_IMAGES = [
-  'alert', 'avatar', 'bars', 'buttons', 'buttontabs',
-  'checkbox', 'currency', 'dropdown', 'radio', 'slider', 'stepper', 'toggle', 'token1',
-]
-
 function DesignSystemTab() {
-  // Duplicate list so the loop scrolls seamlessly
-  const items = [...GENESIS_IMAGES, ...GENESIS_IMAGES]
-
   return (
     <div style={{ display: 'flex', gap: '48px', alignItems: 'center' }} className="flex-col md:flex-row">
-      {/* Left — component marquee */}
+      {/* Left — image placeholder */}
       <div
-        className="hidden md:block"
+        className="hidden md:flex"
         style={{
-          width: '300px', flexShrink: 0,
-          height: '500px',
+          width: '420px', flexShrink: 0,
+          aspectRatio: '4 / 5',
           borderRadius: '24px',
           background: 'rgba(255,255,255,0.35)',
-          border: '1px solid rgba(0,0,0,0.06)',
-          overflow: 'hidden',
-          position: 'relative',
+          border: '1.5px dashed rgba(0,0,0,0.10)',
+          alignItems: 'center', justifyContent: 'center',
         }}
       >
-        {/* Top fade */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: '60px', zIndex: 2,
-          background: 'linear-gradient(to bottom, rgba(234,232,225,0.9) 0%, transparent 100%)',
-          pointerEvents: 'none',
-        }} />
-        {/* Bottom fade */}
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '60px', zIndex: 2,
-          background: 'linear-gradient(to top, rgba(234,232,225,0.9) 0%, transparent 100%)',
-          pointerEvents: 'none',
-        }} />
-
-        {/* Scrolling track */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
-          padding: '20px',
-          animation: 'genesisScroll 18s linear infinite',
-        }}>
-          {items.map((name, i) => (
-            <div
-              key={`${name}-${i}`}
-              style={{
-                borderRadius: '16px',
-                background: '#fff',
-                border: '1px solid rgba(0,0,0,0.06)',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-                overflow: 'hidden',
-                flexShrink: 0,
-              }}
-            >
-              <img
-                src={asset(`/genesis/${name}.png`)}
-                alt={name}
-                style={{ width: '100%', display: 'block' }}
-              />
-            </div>
-          ))}
-        </div>
+        <p style={{ fontSize: '13px', color: '#ccc', fontWeight: 500 }}>Image coming soon</p>
       </div>
 
       {/* Right — overview */}
@@ -1327,10 +1277,6 @@ export default function ProjectsSection_2({ onOpenCaseStudy }) {
   return (
     <>
       <style>{`
-        @keyframes genesisScroll {
-          0%   { transform: translateY(0); }
-          100% { transform: translateY(calc(-50% - 10px)); }
-        }
         @keyframes slideInRight {
           from { opacity: 0; transform: translateX(24px); }
           to   { opacity: 1; transform: translateX(0); }
