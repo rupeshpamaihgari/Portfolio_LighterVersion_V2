@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import useInView from '../hooks/useInView'
+import { asset } from '../utils/asset'
 
 // ── Tab definitions ────────────────────────────────────────────────────────
 const CATEGORY_TABS = [
