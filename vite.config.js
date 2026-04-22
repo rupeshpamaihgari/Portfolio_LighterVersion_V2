@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Portfolio_LighterVersion_V2/',
+  base: '/Portfolio-2026/',
 })
