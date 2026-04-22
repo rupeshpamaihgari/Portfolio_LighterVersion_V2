@@ -5,61 +5,72 @@ import { CaseStudyImage, CaseStudyVideo, CaseStudyScrollableImage } from './Case
 import { asset } from '../../utils/asset'
 
 /* ─────────────────────────────────────────────────────────────
+   Portfolio accent palette
+───────────────────────────────────────────────────────────── */
+const PALETTE = ['#F4A58A', '#B8D4F8', '#B8F4D4', '#F8E4A0', '#D4B8F8', '#c8f4f0', '#f4c8d4', '#e4d4f8']
+
+/* ─────────────────────────────────────────────────────────────
    Shared typography helpers
 ───────────────────────────────────────────────────────────── */
 const T = {
   kicker: {
-    fontSize: '11px',
+    fontSize: '12px',
     fontWeight: 600,
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     color: '#999',
     marginBottom: '10px',
     display: 'block',
+    fontFamily: "'Nunito', sans-serif",
   },
   h1: {
     fontSize: 'clamp(32px, 5vw, 56px)',
-    fontWeight: 700,
+    fontWeight: 800,
     letterSpacing: '-0.035em',
     lineHeight: 1.08,
     color: '#111',
     marginBottom: '18px',
+    fontFamily: "'Fredoka', sans-serif",
   },
   h2: {
-    fontSize: 'clamp(24px, 3vw, 36px)',
-    fontWeight: 650,
+    fontSize: 'clamp(22px, 3vw, 34px)',
+    fontWeight: 700,
     letterSpacing: '-0.025em',
     lineHeight: 1.15,
     color: '#111',
     marginBottom: '20px',
     marginTop: '48px',
+    fontFamily: "'Fredoka', sans-serif",
   },
   h3: {
     fontSize: '18px',
-    fontWeight: 650,
+    fontWeight: 700,
     letterSpacing: '-0.015em',
     color: '#111',
     marginBottom: '12px',
     marginTop: '32px',
+    fontFamily: "'Nunito', sans-serif",
   },
   h4: {
-    fontSize: '14px',
+    fontSize: '12px',
     fontWeight: 600,
-    letterSpacing: '0.04em',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: '#777',
+    color: '#999',
     marginBottom: '10px',
     marginTop: '28px',
+    fontFamily: "'Nunito', sans-serif",
   },
   body: {
-    fontSize: '15px',
-    lineHeight: 1.75,
-    color: '#555',
+    fontSize: '14.5px',
+    lineHeight: 1.7,
+    color: '#777',
     marginBottom: '16px',
+    fontFamily: "'Nunito', sans-serif",
   },
   inlineHeading: {
-    fontWeight: 650,
-    color: '#222',
+    fontWeight: 700,
+    color: '#333',
   },
 }
 
@@ -76,19 +87,19 @@ const STEPS = [
 ]
 
 /* ─────────────────────────────────────────────────────────────
-   Accent-line H2 wrapper
+   Accent-line H2 wrapper — colored bar from palette
 ───────────────────────────────────────────────────────────── */
-function AccentH2({ children, style = {} }) {
+function AccentH2({ children, color = PALETTE[0], style = {} }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', ...style }}>
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', ...style }}>
       <div
         style={{
           width: '3px',
-          height: '40px',
-          background: 'linear-gradient(to bottom, #111, #888)',
+          minHeight: '36px',
+          background: color,
           borderRadius: '2px',
           flexShrink: 0,
-          marginTop: '4px',
+          marginTop: '6px',
         }}
       />
       <h2 style={{ ...T.h2, marginTop: 0 }}>{children}</h2>
@@ -97,7 +108,7 @@ function AccentH2({ children, style = {} }) {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Stepper — sleek horizontal progress bar
+   Stepper — pill-tab style matching portfolio nav
 ───────────────────────────────────────────────────────────── */
 function Stepper({ current, onChange }) {
   return (
@@ -109,7 +120,7 @@ function Stepper({ current, onChange }) {
         background: 'rgba(234,232,225,0.88)',
         backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(0,0,0,0.06)',
-        padding: '0 32px',
+        padding: '10px 24px',
       }}
     >
       <div
@@ -118,89 +129,62 @@ function Stepper({ current, onChange }) {
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
+          gap: '4px',
           overflowX: 'auto',
           scrollbarWidth: 'none',
-          gap: '0',
-          padding: '18px 0',
+          background: 'rgba(0,0,0,0.04)',
+          borderRadius: '20px',
+          padding: '4px',
         }}
       >
         {STEPS.map((step, i) => {
           const isActive = current === i + 1
           const isCompleted = i + 1 < current
+          const accent = PALETTE[i % PALETTE.length]
           return (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-              <button
-                onClick={() => onChange(i + 1)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '4px 8px',
-                  opacity: isActive ? 1 : isCompleted ? 0.8 : 0.4,
-                  transition: 'opacity 0.3s ease',
-                }}
-              >
-                <div
-                  style={{
-                    width: '26px',
-                    height: '26px',
-                    borderRadius: '50%',
-                    background: isActive
-                      ? '#111'
-                      : isCompleted
-                        ? '#111'
-                        : 'transparent',
-                    border: `2px solid ${isActive || isCompleted ? '#111' : '#bbb'}`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '10px',
-                    fontWeight: 700,
-                    color: isActive || isCompleted ? '#fff' : '#888',
-                    transition: 'all 0.3s ease',
-                    boxShadow: isActive ? '0 0 12px rgba(17,17,17,0.25)' : 'none',
-                    flexShrink: 0,
-                  }}
-                >
-                  {isCompleted ? (
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  ) : (
-                    i + 1
-                  )}
-                </div>
+            <button
+              key={i}
+              onClick={() => onChange(i + 1)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 14px',
+                borderRadius: '16px',
+                background: isActive ? '#111' : 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: isActive ? '#fff' : isCompleted ? '#444' : '#888',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                letterSpacing: '-0.01em',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                transition: 'all 0.25s ease',
+                fontFamily: "'Nunito', sans-serif",
+              }}
+            >
+              {isActive && (
                 <span
                   style={{
-                    fontSize: '10px',
-                    fontWeight: 600,
-                    color: isActive ? '#111' : isCompleted ? '#555' : '#999',
-                    whiteSpace: 'nowrap',
-                    letterSpacing: '0.01em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {step.label}
-                </span>
-              </button>
-              {i < STEPS.length - 1 && (
-                <div
-                  style={{
-                    width: '28px',
-                    height: '2px',
-                    borderRadius: '1px',
-                    background: isCompleted
-                      ? '#111'
-                      : 'linear-gradient(to right, #ddd, #e8e8e8)',
-                    transition: 'background 0.4s ease',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: accent,
                     flexShrink: 0,
                   }}
                 />
               )}
-            </div>
+              {isCompleted && (
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5L4.5 7.5L8 2.5" stroke="#666" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+              {!isActive && !isCompleted && (
+                <span style={{ fontSize: '9px', fontWeight: 700, color: '#bbb', minWidth: '10px', textAlign: 'center' }}>{i + 1}</span>
+              )}
+              {step.label}
+            </button>
           )
         })}
       </div>
@@ -223,14 +207,14 @@ function StepNav({ current, total, onChange }) {
         alignItems: 'center',
         marginTop: '72px',
         paddingTop: '36px',
-        borderTop: '1px solid #e5e3dc',
+        borderTop: '1px solid rgba(0,0,0,0.06)',
       }}
     >
       {current > 1 ? (
         <button
           onClick={() => onChange(current - 1)}
           className="btn-light cs-nav-btn"
-          style={{ gap: '8px', padding: '11px 24px', fontSize: '13.5px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+          style={{ gap: '8px', padding: '11px 24px', fontSize: '13.5px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', fontFamily: "'Nunito', sans-serif" }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8L10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -245,7 +229,7 @@ function StepNav({ current, total, onChange }) {
         <button
           onClick={() => onChange(current + 1)}
           className="btn-dark cs-nav-btn-next"
-          style={{ gap: '8px', padding: '12px 28px', fontSize: '13.5px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}
+          style={{ gap: '8px', padding: '12px 28px', fontSize: '13.5px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', fontFamily: "'Nunito', sans-serif" }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             Next
@@ -261,20 +245,22 @@ function StepNav({ current, total, onChange }) {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Metric card — gradient value, accent top border
+   Metric card — colored top bar from palette
 ───────────────────────────────────────────────────────────── */
-function MetricCard({ value, label }) {
+function MetricCard({ value, label, colorIndex = 0 }) {
+  const accent = PALETTE[colorIndex % PALETTE.length]
   return (
     <div
       style={{
         background: '#fff',
         borderRadius: '16px',
-        padding: '28px 24px',
+        padding: '20px 22px',
         textAlign: 'center',
-        border: '1.5px solid #ebebeb',
-        borderTop: 'none',
+        border: '1px solid rgba(0,0,0,0.05)',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
         position: 'relative',
         overflow: 'hidden',
+        fontFamily: "'Nunito', sans-serif",
       }}
     >
       <div
@@ -284,43 +270,46 @@ function MetricCard({ value, label }) {
           left: 0,
           right: 0,
           height: '3px',
-          background: 'linear-gradient(90deg, #111 0%, #666 50%, #bbb 100%)',
+          background: accent,
+          borderRadius: '16px 16px 0 0',
         }}
       />
       <div
         style={{
-          fontSize: 'clamp(28px, 4vw, 42px)',
-          fontWeight: 700,
+          fontSize: 'clamp(22px, 4vw, 36px)',
+          fontWeight: 800,
           letterSpacing: '-0.03em',
-          background: 'linear-gradient(135deg, #111 0%, #555 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          marginBottom: '8px',
+          color: '#111',
+          lineHeight: 1,
+          marginBottom: '6px',
         }}
       >
         {value}
       </div>
-      <div style={{ fontSize: '13px', color: '#777', fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: '12px', color: '#888', fontWeight: 500, lineHeight: 1.4 }}>{label}</div>
     </div>
   )
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Info card — hover lift, frosted border
+   Info card — colored top bar, hover lift
 ───────────────────────────────────────────────────────────── */
-function InfoCard({ title, children }) {
+function InfoCard({ title, children, accent = PALETTE[0] }) {
   return (
     <div
       className="cs-info-card"
       style={{
-        background: 'rgba(255,255,255,0.8)',
+        background: 'rgba(255,255,255,0.85)',
         backdropFilter: 'blur(8px)',
         borderRadius: '16px',
         padding: '24px',
-        border: '1.5px solid rgba(235,235,235,0.8)',
+        border: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         cursor: 'default',
+        position: 'relative',
+        overflow: 'hidden',
+        fontFamily: "'Nunito', sans-serif",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-3px)'
@@ -328,21 +317,31 @@ function InfoCard({ title, children }) {
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = 'none'
+        e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)'
       }}
     >
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '2px',
+          background: accent,
+        }}
+      />
       <h3
         style={{
-          fontSize: '15px',
-          fontWeight: 650,
+          fontSize: '14px',
+          fontWeight: 700,
           color: '#111',
-          marginBottom: '10px',
+          marginBottom: '8px',
           letterSpacing: '-0.01em',
         }}
       >
         {title}
       </h3>
-      <p style={{ fontSize: '14px', lineHeight: 1.7, color: '#666', margin: 0 }}>{children}</p>
+      <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: '#777', margin: 0 }}>{children}</p>
     </div>
   )
 }
@@ -364,21 +363,21 @@ function PersonaTable() {
       name: 'The Recruiter (End User)',
       role: '"The Busy Bee"',
       need: 'Wants to eliminate data entry and scheduling busy work. They want the AI to "show up to work with interviews already scheduled" on their calendar.',
-      accent: '#111',
+      accent: PALETTE[0],
     },
     {
       avatar: asset('/illustrations/case-study/avatar2.png'),
       name: 'The Ops Manager (The Builder)',
       role: '"The Architect"',
       need: 'Needs a scalable, visual canvas to orchestrate millions of touchpoints without creating "spaghetti logic" or managing hundreds of duplicate workflows.',
-      accent: '#555',
+      accent: PALETTE[1],
     },
     {
       avatar: asset('/illustrations/case-study/avatar3.png'),
       name: 'The Candidate (The Recipient)',
       role: '"The Talent"',
       need: 'Expects a frictionless experience. Whether texting or talking to an AI, they want instant responses and no repetition of data they have already provided.',
-      accent: '#888',
+      accent: PALETTE[2],
     },
   ]
 
@@ -393,26 +392,28 @@ function PersonaTable() {
             background: '#fff',
             borderRadius: '16px',
             padding: '20px',
-            border: '1.5px solid #ebebeb',
-            borderLeft: `4px solid ${p.accent}`,
+            border: '1px solid rgba(0,0,0,0.06)',
+            borderLeft: `3px solid ${p.accent}`,
             alignItems: 'flex-start',
+            boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
             transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+            fontFamily: "'Nunito', sans-serif",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)'
-            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.06)'
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.07)'
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)'
-            e.currentTarget.style.boxShadow = 'none'
+            e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)'
           }}
         >
           <img
             src={p.avatar}
             alt={p.name}
             style={{
-              width: '56px',
-              height: '56px',
+              width: '52px',
+              height: '52px',
               borderRadius: '50%',
               objectFit: 'cover',
               flexShrink: 0,
@@ -422,16 +423,16 @@ function PersonaTable() {
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', gap: '32px', marginBottom: '10px', flexWrap: 'wrap' }}>
               <div>
-                <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '3px' }}>Persona</div>
-                <div style={{ fontSize: '14px', fontWeight: 650, color: '#111' }}>{p.name}</div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>Persona</div>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: '#111' }}>{p.name}</div>
               </div>
               <div>
-                <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '3px' }}>Role</div>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>Role</div>
                 <div style={{ fontSize: '14px', fontWeight: 500, color: '#555' }}>{p.role}</div>
               </div>
             </div>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '4px' }}>Core Need</div>
-            <p style={{ fontSize: '14px', lineHeight: 1.65, color: '#555', margin: 0 }}>{p.need}</p>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Core Need</div>
+            <p style={{ fontSize: '14px', lineHeight: 1.65, color: '#777', margin: 0 }}>{p.need}</p>
           </div>
         </div>
       ))}
@@ -453,23 +454,23 @@ const USER_FLOWS = [
   { label: 'Candidate Matching', video: 'https://drive.google.com/file/d/1N_xpWlc5pTSyvazTjMsfmyivDm49Gg3L/preview?rm=minimal', description: 'Leverage AI-powered candidate matching to automatically identify the best-fit candidates for job requirements. The system analyzes skills, experience, and qualifications to rank matches.' },
   { label: 'Candidate Evaluation', video: 'https://drive.google.com/file/d/1ZWhNx9XQYABi-__HaEob4FLn3aIJ7Fv4/preview?rm=minimal', description: 'Evaluate candidates through automated screening processes. This node can run assessments, score qualifications, and filter candidates based on predefined evaluation criteria.' },
   { label: 'Database Update', video: 'https://drive.google.com/file/d/16Yj1x6PZE8kKMMkLDs1hBWDZ6lFN6yMF/preview?rm=minimal', description: 'Automatically update your database and CRM with candidate information and workflow progress. Keep all systems synchronized without manual data entry, ensuring accurate records across platforms.' },
-  { label: 'Activate', video: 'https://drive.google.com/file/d/1Z0b4kDb0WUcneuoDoISFx2lzBd0DQ6TN/preview?rm=minimal', description: 'Activate your completed workflow to start the automation process. Once activated, the workflow will begin processing candidates according to the configured nodes and logic paths.' },
+  { label: 'Activate', video: 'https://drive.google.com/file/d/1Z0b4kDb0WUcneuoDoISFx2lBd0DQ6TN/preview?rm=minimal', description: 'Activate your completed workflow to start the automation process. Once activated, the workflow will begin processing candidates according to the configured nodes and logic paths.' },
 ]
 
 function UserFlowsSelector() {
   const [active, setActive] = useState(0)
 
   return (
-    <div>
-      <p style={{ fontSize: '13px', color: '#999', fontWeight: 500, marginBottom: '16px', fontStyle: 'italic' }}>
-        Select a flow below to play the video
+    <div style={{ fontFamily: "'Nunito', sans-serif" }}>
+      <p style={{ fontSize: '12px', color: '#999', fontWeight: 600, marginBottom: '14px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+        Select a flow to play
       </p>
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           gap: '6px',
-          marginBottom: '24px',
+          marginBottom: '20px',
           alignItems: 'center',
         }}
       >
@@ -478,29 +479,29 @@ function UserFlowsSelector() {
             <button
               onClick={() => setActive(i)}
               style={{
-                padding: '8px 16px',
+                padding: '7px 14px',
                 borderRadius: '999px',
-                fontSize: '12.5px',
-                fontWeight: 500,
-                border: `1.5px solid ${active === i ? '#111' : '#ddd'}`,
-                background: active === i ? '#111' : 'transparent',
+                fontSize: '12px',
+                fontWeight: 600,
+                border: `1.5px solid ${active === i ? '#111' : 'rgba(0,0,0,0.08)'}`,
+                background: active === i ? '#111' : 'rgba(255,255,255,0.7)',
                 color: active === i ? '#fff' : '#555',
                 cursor: 'pointer',
                 transition: 'all 0.25s ease',
                 letterSpacing: '-0.01em',
-                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
+                fontFamily: "'Nunito', sans-serif",
               }}
             >
               {active === i && (
                 <span
                   style={{
-                    width: '6px',
-                    height: '6px',
+                    width: '5px',
+                    height: '5px',
                     borderRadius: '50%',
-                    background: '#fff',
+                    background: PALETTE[i % PALETTE.length],
                     animation: 'caseStudyPulse 2s ease-in-out infinite',
                     flexShrink: 0,
                   }}
@@ -509,7 +510,7 @@ function UserFlowsSelector() {
               {flow.label}
             </button>
             {i < USER_FLOWS.length - 1 && (
-              <svg width="16" height="8" viewBox="0 0 16 8" fill="none" style={{ margin: '0 -2px', flexShrink: 0, opacity: 0.3 }}>
+              <svg width="16" height="8" viewBox="0 0 16 8" fill="none" style={{ margin: '0 -2px', flexShrink: 0, opacity: 0.2 }}>
                 <path d="M0 4H12M12 4L9 1M12 4L9 7" stroke="#999" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             )}
@@ -522,12 +523,13 @@ function UserFlowsSelector() {
           background: 'rgba(255,255,255,0.8)',
           backdropFilter: 'blur(8px)',
           borderRadius: '14px',
-          padding: '18px 22px',
-          border: '1.5px solid #ebebeb',
+          padding: '16px 20px',
+          border: '1px solid rgba(0,0,0,0.06)',
           marginTop: '-8px',
+          borderLeft: `3px solid ${PALETTE[active % PALETTE.length]}`,
         }}
       >
-        <p style={{ fontSize: '14px', lineHeight: 1.7, color: '#555', margin: 0 }}>
+        <p style={{ fontSize: '14px', lineHeight: 1.7, color: '#777', margin: 0, fontFamily: "'Nunito', sans-serif" }}>
           {USER_FLOWS[active].description}
         </p>
       </div>
@@ -536,7 +538,7 @@ function UserFlowsSelector() {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Limitation item — numbered badge, staggered layout
+   Limitation item — alternating layout
 ───────────────────────────────────────────────────────────── */
 function LimitationItem({ title, children, imgSrc, imgAlt, index = 0 }) {
   const isEven = index % 2 === 0
@@ -547,12 +549,14 @@ function LimitationItem({ title, children, imgSrc, imgAlt, index = 0 }) {
         gridTemplateColumns: '1fr 1fr',
         gap: '28px',
         alignItems: 'start',
-        marginBottom: '32px',
-        padding: '28px',
+        marginBottom: '16px',
+        padding: '24px',
         background: '#fff',
         borderRadius: '18px',
-        border: '1.5px solid #ebebeb',
+        border: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
         direction: isEven ? 'ltr' : 'rtl',
+        fontFamily: "'Nunito', sans-serif",
       }}
       className="limitation-item"
     >
@@ -598,7 +602,7 @@ function OL({ children }) {
 }
 function LI({ children }) {
   return (
-    <li style={{ fontSize: '14.5px', lineHeight: 1.7, color: '#555' }}>{children}</li>
+    <li style={{ fontSize: '14.5px', lineHeight: 1.7, color: '#777', fontFamily: "'Nunito', sans-serif" }}>{children}</li>
   )
 }
 
@@ -636,7 +640,7 @@ function Step1() {
               { img: asset('/illustrations/case-study/Efficiency.png'), title: 'Recruiter Efficiency', desc: 'Automated interview scheduling, candidate scoring, and bulk messaging at scale.' },
               { img: asset('/illustrations/case-study/Employee Engagement.png'), title: 'Employee Engagement', desc: 'Onboarding workflows, NPS surveys, and assignment-end redeployment.' },
             ].map((c, i) => (
-              <InfoCard key={i} title={c.title}>
+              <InfoCard key={i} title={c.title} accent={PALETTE[i % PALETTE.length]}>
                 {c.desc}
               </InfoCard>
             ))}
@@ -692,14 +696,14 @@ function Step1() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <span className="cs-hero-anim cs-hero-anim-1" style={{ ...T.kicker, color: 'rgba(255,255,255,0.4)' }}>Case Study</span>
           <h1 className="cs-hero-anim cs-hero-anim-2" style={{ ...T.h1, color: '#fff', marginBottom: '16px' }}>Evolution of AI Automation Agent</h1>
-          <p className="cs-hero-anim cs-hero-anim-3" style={{ fontSize: '17px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: '36px', maxWidth: '560px' }}>
+          <p className="cs-hero-anim cs-hero-anim-3" style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, marginBottom: '36px', maxWidth: '540px', fontFamily: "'Nunito', sans-serif" }}>
             A journey from siloed tools to autonomous AI teammates in talent acquisition.
           </p>
-          <div className="cs-hero-anim cs-hero-anim-4" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+          <div className="cs-hero-anim cs-hero-anim-4" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             {[
-              { label: 'Role', value: 'Lead Product Designer' },
-              { label: 'Timeline', value: '2021 – Present' },
-              { label: 'Company', value: 'Sense.com' },
+              { label: 'Role', value: 'Lead Product Designer', color: PALETTE[0] },
+              { label: 'Timeline', value: '2021 – Present', color: PALETTE[1] },
+              { label: 'Company', value: 'Sense.com', color: PALETTE[2] },
             ].map((m, i) => (
               <div
                 key={i}
@@ -712,11 +716,13 @@ function Step1() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
+                  fontFamily: "'Nunito', sans-serif",
                 }}
               >
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: m.color, flexShrink: 0 }} />
                 <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'rgba(255,255,255,0.35)' }}>{m.label}</span>
                 <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.12)' }} />
-                <span style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>{m.value}</span>
+                <span style={{ fontSize: '13.5px', fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>{m.value}</span>
               </div>
             ))}
           </div>
@@ -737,7 +743,7 @@ function Step1() {
             opacity: 0.4,
           }}
         >
-          <span style={{ fontSize: '10px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 500 }}>Scroll</span>
+          <span style={{ fontSize: '10px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 500, fontFamily: "'Nunito', sans-serif" }}>Scroll</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ animation: 'caseStudyBounce 2s ease-in-out infinite' }}>
             <path d="M4 6L8 10L12 6" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -745,7 +751,7 @@ function Step1() {
       </div>
 
       <Section>
-        <AccentH2>Project Context</AccentH2>
+        <AccentH2 color={PALETTE[0]}>Project Context</AccentH2>
         <p style={T.body}>
           <IH>About Sense:</IH> Sense is an enterprise Talent Engagement Platform used by staffing agencies to accelerate hiring. It operates as a System of Engagement that syncs bi-directionally with an Applicant Tracking System (ATS), automating communication across the entire talent lifecycle.
         </p>
@@ -760,7 +766,7 @@ function Step1() {
       </Section>
 
       <Section>
-        <AccentH2>My Role & Cross-Functional Collaboration</AccentH2>
+        <AccentH2 color={PALETTE[1]}>My Role & Cross-Functional Collaboration</AccentH2>
         <p style={T.body}>
           As Staff Product Designer for the Workflow Builder, I established a rigorous collaboration framework early on to ensure we were solving the right problems before a single pixel was pushed.
         </p>
@@ -812,7 +818,7 @@ function Step2() {
   return (
     <>
       <Section>
-        <AccentH2>Phase 1: The Era of Siloed Products (Journeys 1.0)</AccentH2>
+        <AccentH2 color={PALETTE[1]}>Phase 1: The Era of Siloed Products (Journeys 1.0)</AccentH2>
         <h3 style={T.h3}>The Context (2021)</h3>
         <p style={T.body}>
           When I joined Sense, the ecosystem was defined by Engage 1.0. While the platform offered powerful capabilities, they operated as "point solutions" — separate tools that solved specific problems but lacked a unified "central nervous system" to pass data between them.
@@ -877,10 +883,10 @@ function Step3() {
         <>
           <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase2/NodePanel.png')} alt="Node panel" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px', marginTop: '16px' }}>
-            <InfoCard title='Action Nodes (The "Doers")'>Modular nodes for SMS, Email, WhatsApp, and Voice — mix communication channels within a single flow.</InfoCard>
-            <InfoCard title='Logical Nodes (The "Brains")'>Split, Filter, Foreach, and Delay nodes for conditional branching, audience filtering, batch processing, and time-based control.</InfoCard>
-            <InfoCard title='ATS Integrations'>Nodes to update database stages in CRM and write notes to ATS — keeping everything in sync without leaving Sense.</InfoCard>
-            <InfoCard title='Smart Nodes'>Voiceflow, Smart Schedule, Candidate Matching, and Job Matching — AI-powered nodes that take intelligent decisions at runtime.</InfoCard>
+            <InfoCard title='Action Nodes (The "Doers")' accent={PALETTE[0]}>Modular nodes for SMS, Email, WhatsApp, and Voice — mix communication channels within a single flow.</InfoCard>
+            <InfoCard title='Logical Nodes (The "Brains")' accent={PALETTE[1]}>Split, Filter, Foreach, and Delay nodes for conditional branching, audience filtering, batch processing, and time-based control.</InfoCard>
+            <InfoCard title='ATS Integrations' accent={PALETTE[2]}>Nodes to update database stages in CRM and write notes to ATS — keeping everything in sync without leaving Sense.</InfoCard>
+            <InfoCard title='Smart Nodes' accent={PALETTE[3]}>Voiceflow, Smart Schedule, Candidate Matching, and Job Matching — AI-powered nodes that take intelligent decisions at runtime.</InfoCard>
           </div>
         </>
       ),
@@ -913,7 +919,7 @@ function Step3() {
   return (
     <>
       <Section>
-        <AccentH2>Phase 2: The Unification — Workflow Builder 2.0</AccentH2>
+        <AccentH2 color={PALETTE[2]}>Phase 2: The Unification — Workflow Builder 2.0</AccentH2>
         <h3 style={T.h3}>The Pivot</h3>
         <p style={T.body}>
           To solve the fragmentation of Phase 1, we needed a central nervous system. We led the design of <IH>Workflows (Journey Builder 2.0)</IH>, moving the product from linear, disconnected lists to a visual <IH>Node-Based Canvas</IH>. This became the operating system where all Sense products (Messaging, Voice, Chatbot, Scheduling) converged.
@@ -944,16 +950,18 @@ function Step3() {
           <LI><IH>Screening Node:</IH> Triggers an SMS Chatbot or Email to gauge interest.</LI>
           <LI><IH>Writeback Node:</IH> If the candidate responds positively, this node automatically updates the ATS field to "Submitted" — completing the objective without human hands.</LI>
         </OL>
-        <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase2/AutoSubmissionFull.png')} alt="Auto-Submission workflow Phase 2" />
+        <CaseStudyScrollableImage src={asset('/illustrations/case-study/phase2/AutoSubmissionFull.png')} alt="Auto-Submission workflow Phase 2" pan />
       </Section>
 
       <Section>
         <h3 style={T.h3}>Impact & Metrics of Phase 2</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px', marginTop: '16px', marginBottom: '24px' }}>
-          <MetricCard value="10M/day" label="Automations capacity (up from 1M)" />
-          <MetricCard value="8s" label="Trigger latency (down from 40s)" />
-          <MetricCard value="9s" label="Communication latency (down from 72s)" />
-          <MetricCard value="97%" label="QoQ workflow growth Q2→Q3 2025" />
+          {[
+            { value: '10M/day', label: 'Automations capacity (up from 1M)' },
+            { value: '8s', label: 'Trigger latency (down from 40s)' },
+            { value: '9s', label: 'Communication latency (down from 72s)' },
+            { value: '97%', label: 'QoQ workflow growth Q2→Q3 2025' },
+          ].map((m, i) => <MetricCard key={i} value={m.value} label={m.label} colorIndex={i + 1} />)}
         </div>
 
         <h4 style={T.h4}>Adoption & Usage Velocity</h4>
@@ -1005,7 +1013,7 @@ function Step4() {
   return (
     <>
       <Section>
-        <AccentH2>Phase 3: The Intelligence Layer — Ask AI, Jarvis & AI Listers</AccentH2>
+        <AccentH2 color={PALETTE[3]}>Phase 3: The Intelligence Layer — Ask AI, Jarvis & AI Listers</AccentH2>
         <h3 style={T.h3}>The Pivot</h3>
         <p style={T.body}>
           By Phase 2, we had successfully built the "central nervous system" (Workflows) that could handle 10 million automations a day. However, users were hitting a cognitive ceiling — tools were powerful but complex. Users struggled to define <em>who</em> to target and <em>how</em> to interpret success.
@@ -1055,7 +1063,7 @@ function Step5() {
   return (
     <>
       <Section>
-        <AccentH2>Phase 4: The Agentic Shift — AI Recruiter & Voice Agents</AccentH2>
+        <AccentH2 color={PALETTE[4]}>Phase 4: The Agentic Shift — AI Recruiter & Voice Agents</AccentH2>
         <h3 style={T.h3}>The Final Evolution</h3>
         <p style={T.body}>
           The goal was to move from <em>automation</em> (doing what you are told) to <em>agency</em> (making decisions). This phase introduced the <IH>Agentic World</IH> — transitioning from linear workflows to a dynamic ecosystem of specialised agents.
@@ -1121,10 +1129,12 @@ function Step5() {
       <Section>
         <h3 style={T.h3}>Phase 4 Outcomes & Impact</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px', marginBottom: '24px' }}>
-          <MetricCard value="11.1 hrs" label="Time to fill a hard role (BGSF)" />
-          <MetricCard value="20/100" label="Qualified evaluations per candidates" />
-          <MetricCard value="60%" label="Cold calls lasting over 8 minutes" />
-          <MetricCard value="$5M" label="Booked ARR tracked" />
+          {[
+            { value: '11.1 hrs', label: 'Time to fill a hard role (BGSF)' },
+            { value: '20/100', label: 'Qualified evaluations per candidates' },
+            { value: '60%', label: 'Cold calls lasting over 8 minutes' },
+            { value: '$5M', label: 'Booked ARR tracked' },
+          ].map((m, i) => <MetricCard key={i} value={m.value} label={m.label} colorIndex={i + 4} />)}
         </div>
         <UL>
           <LI><IH>Unprecedented Speed:</IH> For client BGSF, the AI Recruiter placed a hard-to-fill role in just <strong>11.1 hours</strong>. The system achieved a <strong>2-minute engagement time</strong> after application and completed screening within <strong>7 minutes</strong>.</LI>
@@ -1141,7 +1151,7 @@ function Step6() {
   return (
     <>
       <Section>
-        <AccentH2>Outcomes & Impact</AccentH2>
+        <AccentH2 color={PALETTE[5]}>Outcomes & Impact</AccentH2>
         <p style={T.body}>
           By evolving <IH>Auto-Submission</IH> from a manual task to an <IH>agentic workflow</IH>, we achieved measurable results across <IH>speed</IH>, <IH>scale</IH>, and <IH>candidate experience</IH>.
         </p>
@@ -1158,17 +1168,19 @@ function Step6() {
             { title: 'Referral Velocity', desc: 'Drove 107 referrals in just 45 days for Dietitians On Demand, proving the system can generate its own pipeline.' },
             { title: 'Capacity Multiplier', desc: 'Carvana achieved a 3× increase in weekly start capacity per recruiter by utilising the full automation suite.' },
             { title: 'Enterprise Adoption', desc: 'The AI Recruiter product line has tracked toward $4.6M in Post-Pilot ARR.' },
-          ].map((c, i) => <InfoCard key={i} title={c.title}>{c.desc}</InfoCard>)}
+          ].map((c, i) => <InfoCard key={i} title={c.title} accent={PALETTE[i % PALETTE.length]}>{c.desc}</InfoCard>)}
         </div>
       </Section>
 
       <Section>
         <h3 style={T.h3}>General Business ROI</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '16px' }}>
-          <MetricCard value="30–81%" label="Reduction in Time-to-Hire" />
-          <MetricCard value="30%" label="Increase in recruiter productivity" />
-          <MetricCard value="1M+" label="Candidates engaged per year" />
-          <MetricCard value="96.6%" label="CSAT score in 2025" />
+          {[
+            { value: '30–81%', label: 'Reduction in Time-to-Hire' },
+            { value: '30%', label: 'Increase in recruiter productivity' },
+            { value: '1M+', label: 'Candidates engaged per year' },
+            { value: '96.6%', label: 'CSAT score in 2025' },
+          ].map((m, i) => <MetricCard key={i} value={m.value} label={m.label} colorIndex={i} />)}
         </div>
       </Section>
 
@@ -1180,12 +1192,12 @@ function Step6() {
             { title: 'Quality Benchmark', desc: '20 qualified evaluations per 100 candidates — outperforming the average human recruiter.' },
             { title: 'Funnel Optimisation', desc: 'In one live example: 12,821 matches → 3,699 contacted → 127 screened → 15 influenced placements.' },
             { title: 'Scheduling Scale', desc: '404,507 meetings scheduled YTD — a 175% increase year-over-year.' },
-          ].map((c, i) => <InfoCard key={i} title={c.title}>{c.desc}</InfoCard>)}
+          ].map((c, i) => <InfoCard key={i} title={c.title} accent={PALETTE[(i + 2) % PALETTE.length]}>{c.desc}</InfoCard>)}
         </div>
       </Section>
 
       <Section>
-        <AccentH2>Conclusion: From Tools to Teammates</AccentH2>
+        <AccentH2 color={PALETTE[0]}>Conclusion: From Tools to Teammates</AccentH2>
         <p style={T.body}>
           The evolution of the Sense platform from <IH>Journeys 1.0</IH> to the <IH>AI Recruiter</IH> represents a fundamental paradigm shift in product design: moving from building tools that users operate to designing digital teammates that operate themselves.
         </p>
@@ -1240,7 +1252,7 @@ export default function CaseStudyPage({ onClose }) {
         zIndex: 1000,
         background: 'rgb(234,232,225)',
         overflowY: 'auto',
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'Nunito', sans-serif",
       }}
       ref={contentRef}
     >
@@ -1275,10 +1287,11 @@ export default function CaseStudyPage({ onClose }) {
             borderRadius: '999px',
             padding: '8px 18px',
             fontSize: '13px',
-            fontWeight: 500,
+            fontWeight: 600,
             color: '#333',
             cursor: 'pointer',
             transition: 'all 0.25s ease',
+            fontFamily: "'Nunito', sans-serif",
           }}
           onMouseEnter={(e) => { e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#111' }}
           onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.5)'; e.currentTarget.style.color = '#333'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)' }}
@@ -1287,11 +1300,11 @@ export default function CaseStudyPage({ onClose }) {
           Back to Portfolio
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#999', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '11px', fontWeight: 700, color: '#999', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: "'Nunito', sans-serif" }}>
             Case Study
           </span>
           <span style={{ width: '1px', height: '12px', background: '#ddd' }} />
-          <span style={{ fontSize: '11px', fontWeight: 500, color: '#777', letterSpacing: '0.02em' }}>
+          <span style={{ fontSize: '12px', fontWeight: 600, color: '#555', fontFamily: "'Nunito', sans-serif" }}>
             {STEPS[step - 1].label}
           </span>
         </div>
