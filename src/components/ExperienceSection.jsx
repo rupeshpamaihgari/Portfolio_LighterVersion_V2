@@ -130,8 +130,9 @@ function TimelineCard({ era, isActive, arcX, arcY, arcRotate, entranceComplete }
         top: '50%',
         transform: `translate(calc(-50% + ${arcX}px), calc(-50% + ${arcY}px)) rotate(${arcRotate}deg)`,
         transition: entranceComplete
-          ? 'transform 0.1s linear, opacity 0.4s ease'
+          ? 'opacity 0.4s ease'
           : 'transform 0.8s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.8s ease',
+        willChange: 'transform',
         opacity: isActive ? 1 : 0.2,
         zIndex: isActive ? 10 : 1,
         pointerEvents: isActive ? 'auto' : 'none',

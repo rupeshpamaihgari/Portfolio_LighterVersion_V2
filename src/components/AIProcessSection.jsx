@@ -287,7 +287,7 @@ function CardDial({ currentPos, hasEntered, entranceComplete }) {
         const entranceScale = hasEntered ? scale : 0.85
         const staggerDelay = entranceComplete ? 0 : 0.25 + i * 0.1
         const transition = entranceComplete
-          ? 'transform 0.12s linear, opacity 0.15s ease'
+          ? 'opacity 0.15s ease'
           : `transform 0.9s cubic-bezier(0.33, 1, 0.68, 1) ${staggerDelay}s, opacity 0.7s ease ${staggerDelay}s`
 
         return (
@@ -316,7 +316,7 @@ function CardDial({ currentPos, hasEntered, entranceComplete }) {
                 ? '0 24px 64px rgba(0,0,0,0.11)'
                 : '0 4px 20px rgba(0,0,0,0.05)',
               transform: `rotate(${-rotZ}deg)`,
-              transition: 'box-shadow 0.4s ease, transform 0.12s linear',
+              transition: 'box-shadow 0.4s ease',
             }}>
               {/* Phase number + tool badges */}
               <div style={{ marginBottom: '20px' }}>
