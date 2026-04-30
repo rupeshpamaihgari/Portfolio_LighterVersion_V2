@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AchievementsSection from './components/AchievementsSection'
@@ -12,9 +12,31 @@ import QuestionsSection from './components/QuestionsSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import CaseStudyPage from './components/CaseStudy/CaseStudyPage'
+import AIAgentsCasePage from './components/CaseStudy/AIAgentsCasePage'
+
+function getPage() {
+  const hash = window.location.hash.replace(/^#\/?/, '')
+  return hash || ''
+}
 
 function App() {
+  const [page, setPage] = useState(getPage)
   const [showCaseStudy, setShowCaseStudy] = useState(false)
+
+  useEffect(() => {
+    const handler = () => setPage(getPage())
+    window.addEventListener('hashchange', handler)
+    return () => window.removeEventListener('hashchange', handler)
+  }, [])
+
+  const navigate = (path) => {
+    window.location.hash = path ? `/${path}` : '/'
+    window.scrollTo({ top: 0 })
+  }
+
+  if (page === 'AiAgents') {
+    return <AIAgentsCasePage onBack={() => navigate('')} />
+  }
 
   if (showCaseStudy) {
     return <CaseStudyPage onClose={() => setShowCaseStudy(false)} />
